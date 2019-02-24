@@ -20,6 +20,8 @@ import twitterImage from './twitter_ext.jpg';
 import twitterInsetImage from './twitter_ext.jpg';
 import visionImage from './vision_ext.png';
 import visionInsetImage from './vision_ext.png';
+import textClassifyImage from './text_ext.png';
+import textClassifyInsetImage from './text_ext.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -46,6 +48,26 @@ export default [
                 defaultMessage="Vision Training"
                 description="Description for 'Vision' extension"
                 id="gui.extension.vision.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Text"
+                description="Name for 'Text' extension"
+                id="gui.extension.text.name"
+            />
+        ),
+        extensionId: 'text',
+        iconURL: textClassifyImage,
+        insetIconURL: textClassifyInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Use Text in your projects"
+                description="Description for 'Text' extension"
+                id="gui.extension.text.description"
             />
         ),
         featured: true
