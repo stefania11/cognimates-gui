@@ -20,6 +20,8 @@ import twitterImage from './twitter_ext.jpg';
 import twitterInsetImage from './twitter_ext.jpg';
 import visionImage from './vision_ext.png';
 import visionInsetImage from './vision_ext.png';
+import cozmoImage from './cozmo_ext.png';
+import cozmoInsetImage from './cozmo-small.jpg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -46,6 +48,26 @@ export default [
                 defaultMessage="Vision Training"
                 description="Description for 'Vision' extension"
                 id="gui.extension.vision.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Cozmo"
+                description="Name for 'Cozmo' extension"
+                id="gui.extension.cozmo.name"
+            />
+        ),
+        extensionId: 'cozmo',
+        iconURL: cozmoImage,
+        insetIconURL: cozmoInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Cozmo Robot"
+                description="Program and control Cozmo"
+                id="gui.extension.cozmo.description"
             />
         ),
         featured: true
