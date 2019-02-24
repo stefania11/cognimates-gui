@@ -20,7 +20,7 @@ import twitterImage from './twitter_ext.jpg';
 import twitterInsetImage from './twitter_ext.jpg';
 import visionImage from './vision_ext.png';
 import visionInsetImage from './vision_ext.png';
-import cozmoImage from './cozmo_ext.png';
+import cozmoImage from './cozmo-ext.png';
 import cozmoInsetImage from './cozmo-small.jpg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
