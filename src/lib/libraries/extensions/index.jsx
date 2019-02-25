@@ -16,6 +16,8 @@ import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
+import ergoImage from './Ergo_extension.png';
+import ergoInsetImage from './Ergo_extension.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -233,5 +235,25 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
 
-    }
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Ergo"
+                description="Name for the 'Ergo' extension"
+                id="gui.extension.ergo.name"
+            />
+        ),
+        extensionId: 'ergo',
+        iconURL: ergoImage,
+        insetIconURL: ergoInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play with Poppy Ergo Jr. and more!"
+                description="Description for the 'Ergo' extension"
+                id="gui.extension.ergo.description"
+            />
+        ),
+        featured: true
+    },
 ];
