@@ -423,14 +423,14 @@ class MenuBar extends React.Component {
                             })}
                             onMouseUp={this.props.onClickEdit}
                         >
-                            <div className={classNames(styles.editMenu)}>
+                            {/* <div className={classNames(styles.editMenu)}>
                                 <FormattedMessage
                                     defaultMessage="Edit"
                                     description="Text for edit dropdown menu"
                                     id="gui.menuBar.edit"
                                 />
-                            </div>
-                            <MenuBarMenu
+                            </div> */}
+                            {/* <MenuBarMenu
                                 className={classNames(styles.menuBarMenu)}
                                 open={this.props.editMenuOpen}
                                 place={this.props.isRtl ? 'left' : 'right'}
@@ -463,7 +463,7 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     )}</TurboMode>
                                 </MenuSection>
-                            </MenuBarMenu>
+                            </MenuBarMenu> */}
                         </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
