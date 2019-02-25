@@ -16,6 +16,8 @@ import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
+import alexaImage from './Alexa_extension.png';
+import alexaInsetImage from './Alexa_extension.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -233,5 +235,25 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
 
-    }
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Alexa"
+                description="Name for the 'Alexa' extension"
+                id="gui.extension.alexa.name"
+            />
+        ),
+        extensionId: 'alexa',
+        iconURL: alexaImage,
+        insetIconURL: alexaInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play with alexa and teach her new things."
+                description="Description for the 'Alexa' extension"
+                id="gui.extension.alexa.description"
+            />
+        ),
+        featured: true
+    },
 ];
