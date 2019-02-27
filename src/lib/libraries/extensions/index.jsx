@@ -22,7 +22,8 @@ import visionImage from './vision_ext.png';
 import visionInsetImage from './vision_ext.png';
 import textClassifyImage from './text_ext.png';
 import textClassifyInsetImage from './text_ext.png';
-
+import sentimentImage from './sentiment_ext.png';
+import sentimentInsetImage from './sentiment-small.svg';
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3PeripheralImage from './peripheral-connection/ev3/ev3-hub-illustration.svg';
@@ -50,7 +51,29 @@ export default [
                 id="gui.extension.vision.description"
             />
         ),
-        featured: true
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Sentiment"
+                description="Name for 'Sentiment' extension"
+                id="gui.extension.sentiment.name"
+            />
+        ),
+        extensionId: 'sentiment',
+        iconURL: sentimentImage,
+        insetIconURL: sentimentInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Detect feelings"
+                description="Description for 'Sentiment' extension"
+                id="gui.extension.sentiment.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
     },
     {
         name: (
@@ -90,7 +113,8 @@ export default [
               id="gui.extension.twitter.description"
           />
       ),
-      featured: true
+      featured: true,
+      internetConnectionRequired: true
   },
   {
         name: (
