@@ -24,6 +24,8 @@ import textClassifyInsetImage from './text_ext.png';
 import sentimentImage from './sentiment_ext.png';
 import sentimentInsetImage from './sentiment-small.svg';
 import alexaImage from './Alexa_extension.png';
+import ergoImage from './Ergo_extension.png';
+import ergoInsetImage from './Ergo_extension.png';
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
@@ -339,6 +341,19 @@ export default [
                 defaultMessage="Play with alexa and teach her new things."
                 description="Description for the 'Alexa' extension"
                 id="gui.extension.alexa.description"
+                defaultMessage="Ergo"
+                description="Name for the 'Ergo' extension"
+                id="gui.extension.ergo.name"
+            />
+        ),
+        extensionId: 'ergo',
+        iconURL: ergoImage,
+        insetIconURL: ergoInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play with Poppy Ergo Jr. and more!"
+                description="Description for the 'Ergo' extension"
+                id="gui.extension.ergo.description"
             />
         ),
         featured: true
