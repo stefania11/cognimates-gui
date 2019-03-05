@@ -26,6 +26,9 @@ import sentimentInsetImage from './sentiment-small.svg';
 import alexaImage from './Alexa_extension.png';
 import ergoImage from './Ergo_extension.png';
 import ergoInsetImage from './Ergo_extension.png';
+import cozmoImage from './cozmo-ext.png';
+import cozmoInsetImage from './cozmo-small.jpg';
+
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
@@ -92,6 +95,26 @@ export default [
                 defaultMessage="Use Text in your projects"
                 description="Description for 'Text' extension"
                 id="gui.extension.text.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Cozmo"
+                description="Name for 'Cozmo' extension"
+                id="gui.extension.cozmo.name"
+            />
+        ),
+        extensionId: 'cozmo',
+        iconURL: cozmoImage,
+        insetIconURL: cozmoInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Cozmo Robot"
+                description="Program and control Cozmo"
+                id="gui.extension.cozmo.description"
             />
         ),
         featured: true
