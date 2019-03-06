@@ -28,7 +28,8 @@ import ergoImage from './Ergo_extension.png';
 import ergoInsetImage from './Ergo_extension.png';
 import cozmoImage from './cozmo-ext.png';
 import cozmoInsetImage from './cozmo-small.jpg';
-
+import speechImage from './speech-ext.jpg';
+import speechInsetImage from './speech-inset.png';
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
@@ -381,4 +382,25 @@ export default [
         ),
         featured: true
     },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Speech to Text"
+                description="Name for 'Spech to text' extension"
+                id="gui.extension.speech.name"
+            />
+        ),
+        extensionId: 'speech',
+        iconURL: speechImage,
+        insetIconURL: speechInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Speech to Text"
+                description="Description for 'Speech to text' extension"
+                id="gui.extension.speech.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
+    }
 ];
