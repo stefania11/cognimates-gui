@@ -22,6 +22,8 @@ import visionImage from './vision_ext.png';
 import visionInsetImage from './vision_ext.png';
 import sentimentImage from './sentiment_ext.png';
 import sentimentInsetImage from './sentiment-small.svg';
+import speechImage from './sentiment_ext.png';
+import speechInsetImage from './sentiment-small.svg';
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3PeripheralImage from './peripheral-connection/ev3/ev3-hub-illustration.svg';
@@ -301,5 +303,26 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
 
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Speech to Text"
+                description="Name for 'Spech to text' extension"
+                id="gui.extension.speech.name"
+            />
+        ),
+        extensionId: 'speech',
+        iconURL: speechImage,
+        insetIconURL: speechInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Speech to Text"
+                description="Description for 'Speech to text' extension"
+                id="gui.extension.speech.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
     }
 ];
