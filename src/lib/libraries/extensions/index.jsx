@@ -368,7 +368,7 @@ export default [
                 defaultMessage="Play with alexa and teach her new things."
                 description="Description for the 'Alexa' extension"
                 id="gui.extension.alexa.description"
-                defaultMessage="Ergo"
+                defaultMessage="Play with Alexa!"
                 description="Name for the 'Ergo' extension"
                 id="gui.extension.ergo.name"
             />
