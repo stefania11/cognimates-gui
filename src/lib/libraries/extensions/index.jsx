@@ -369,8 +369,6 @@ export default [
                 description="Description for the 'Alexa' extension"
                 id="gui.extension.alexa.description"
                 defaultMessage="Play with Alexa!"
-                description="Name for the 'Ergo' extension"
-                id="gui.extension.ergo.name"
             />
         ),
         featured: true
