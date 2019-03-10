@@ -376,6 +376,13 @@ export default [
         featured: true
     },
     {
+        name: (
+            <FormattedMessage
+                defaultMessage="Ergo"
+                description="Name for the 'Ergo' extension"
+                id="gui.extension.ergo.name"
+            />
+        ),
         extensionId: 'ergo',
         iconURL: ergoImage,
         insetIconURL: ergoInsetImage,
