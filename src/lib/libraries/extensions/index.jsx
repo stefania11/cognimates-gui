@@ -39,6 +39,8 @@ import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
 import wedoPeripheralImage from './peripheral-connection/wedo/wedo-illustration.svg';
 import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
+import wemoMenuImage from './wemo_ext.png';
+import wemoButtonImage from './wemo_ext.png';
 
 export default [
     {
@@ -409,6 +411,27 @@ export default [
                 defaultMessage="Speech to Text"
                 description="Description for 'Speech to text' extension"
                 id="gui.extension.speech.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Wemo"
+                description="Name for 'Wemo' extension"
+                id="gui.extension.wemo.name"
+            />
+        ),
+        extensionId: 'wemo',
+        iconURL: wemoMenuImage,
+        insetIconURL: wemoButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Turn things on and off with Wemo!"
+                description="Description for 'Wemo' extension"
+                id="gui.extension.wemo.description"
             />
         ),
         featured: true,
