@@ -555,7 +555,7 @@ class MenuBar extends React.Component {
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
-                <div className={styles.accountInfoGroup}>
+                {/* <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
@@ -563,7 +563,6 @@ class MenuBar extends React.Component {
                     </div>
                     {this.props.sessionExists ? (
                         this.props.username ? (
-                            // ************ user is logged in ************
                             <React.Fragment>
                                 <a href="/mystuff/">
                                     <div
@@ -594,8 +593,6 @@ class MenuBar extends React.Component {
                                 />
                             </React.Fragment>
                         ) : (
-                            // ********* user not logged in, but a session exists
-                            // ********* so they can choose to log in
                             <React.Fragment>
                                 <div
                                     className={classNames(
@@ -635,7 +632,6 @@ class MenuBar extends React.Component {
                             </React.Fragment>
                         )
                     ) : (
-                        // ******** no login session is available, so don't show login stuff
                         <React.Fragment>
                             <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
                                 <a
@@ -700,7 +696,7 @@ class MenuBar extends React.Component {
                             ) : []}
                         </React.Fragment>
                     )}
-                </div>
+                </div> */}
             </Box>
         );
     }
