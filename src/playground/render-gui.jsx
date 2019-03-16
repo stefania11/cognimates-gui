@@ -9,7 +9,7 @@ import TitledHOC from '../lib/titled-hoc.jsx';
 import log from '../lib/log.js';
 
 const onClickLogo = () => {
-    window.location = 'https://scratch.mit.edu';
+    window.location = 'https://mitmedialab.github.io/cognimates-website/about/';
 };
 
 const handleTelemetryModalCancel = () => {
