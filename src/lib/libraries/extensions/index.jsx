@@ -32,6 +32,8 @@ import cozmoImage from './cozmo-ext.png';
 import cozmoInsetImage from './cozmo-small.jpg';
 import speechImage from './speech-ext.jpg';
 import speechInsetImage from './speech-inset.png';
+import museImage from './Muse.png';
+import museInsetImage from './muse_inset.png';
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3PeripheralImage from './peripheral-connection/ev3/ev3-small.svg';
@@ -409,6 +411,27 @@ export default [
                 defaultMessage="Speech to Text"
                 description="Description for 'Speech to text' extension"
                 id="gui.extension.speech.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Muse"
+                description="Name for 'Muse' extension"
+                id="gui.extension.speech.muse"
+            />
+        ),
+        extensionId: 'muse',
+        iconURL: museImage,
+        insetIconURL: museInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Muse"
+                description="Description for 'Muse' extension"
+                id="gui.extension.muse.description"
             />
         ),
         featured: true,
