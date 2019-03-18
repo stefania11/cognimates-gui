@@ -1,7 +1,22 @@
 [
     {
+        "name": "Robo",
+        "md5": "843f9076ff93005615a8f4ead4661f8e.png",
+        "type": "costume",
+        "tags": [
+            "people",
+            "person",
+            "drawing"
+        ],
+        "info": [
+            31,
+            100,
+            1
+        ]
+    },
+    {
         "name": "Abby-a",
-        "md5": "afab2d2141e9811bd89e385e9628cb5f.svg",
+        "md5": "843f9076ff93005615a8f4ead4661f8e.png",
         "type": "costume",
         "tags": [
             "people",
