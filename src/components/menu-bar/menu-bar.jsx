@@ -466,8 +466,8 @@ class MenuBar extends React.Component {
                             </MenuBarMenu> */}
                         </div>
                     </div>
-                    <Divider className={classNames(styles.divider)} />
-                    <div
+                    {/* <Divider className={classNames(styles.divider)} /> */}
+                    {/* <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onClick={this.props.onOpenTipLibrary}
@@ -477,8 +477,8 @@ class MenuBar extends React.Component {
                             src={helpIcon}
                         />
                         <FormattedMessage {...ariaMessages.tutorials} />
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
+                    </div> */}
+                    {/* <Divider className={classNames(styles.divider)} /> */}
                     {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
@@ -500,7 +500,7 @@ class MenuBar extends React.Component {
                             username={this.props.authorUsername}
                         />
                     ) : null)}
-                    <div className={classNames(styles.menuBarItem)}>
+                    {/* <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
@@ -509,11 +509,10 @@ class MenuBar extends React.Component {
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
-                                                // /* eslint-disable react/jsx-no-bind */
+              
                                                 onClick={() => {
                                                     this.handleClickShare(waitForUpdate);
                                                 }}
-                                                /* eslint-enable react/jsx-no-bind */
                                             />
                                         )
                                     }
@@ -527,8 +526,8 @@ class MenuBar extends React.Component {
                             ) : []
                         )}
                         {this.props.canRemix ? remixButton : []}
-                    </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
+                    </div> */}
+                    {/* <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
@@ -536,11 +535,11 @@ class MenuBar extends React.Component {
                                         waitForUpdate => (
                                             <CommunityButton
                                                 className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
+                                                
                                                 onClick={() => {
                                                     this.handleClickSeeCommunity(waitForUpdate);
                                                 }}
-                                                /* eslint-enable react/jsx-no-bind */
+                                                
                                             />
                                         )
                                     }
@@ -551,12 +550,12 @@ class MenuBar extends React.Component {
                                 <CommunityButton className={styles.menuBarButton} />
                             </MenuBarItemTooltip>
                         ) : [])}
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
-                <div className={styles.accountInfoGroup}>
+                {/* <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
@@ -564,7 +563,6 @@ class MenuBar extends React.Component {
                     </div>
                     {this.props.sessionExists ? (
                         this.props.username ? (
-                            // ************ user is logged in ************
                             <React.Fragment>
                                 <a href="/mystuff/">
                                     <div
@@ -595,8 +593,6 @@ class MenuBar extends React.Component {
                                 />
                             </React.Fragment>
                         ) : (
-                            // ********* user not logged in, but a session exists
-                            // ********* so they can choose to log in
                             <React.Fragment>
                                 <div
                                     className={classNames(
@@ -636,7 +632,6 @@ class MenuBar extends React.Component {
                             </React.Fragment>
                         )
                     ) : (
-                        // ******** no login session is available, so don't show login stuff
                         <React.Fragment>
                             <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
                                 <a
@@ -701,7 +696,7 @@ class MenuBar extends React.Component {
                             ) : []}
                         </React.Fragment>
                     )}
-                </div>
+                </div> */}
             </Box>
         );
     }
