@@ -1,11 +1,11 @@
 [
     {
-        "name": "Abby",
-        "md5": "843f9076ff93005615a8f4ead4661f8e.png",
+        "name": "Nary",
+        "md5": "bffe4b07e13c950527dcb5a0f7b25a11.png",
         "type": "sprite",
         "tags": [
-            "people",
-            "person",
+            "monster",
+            "feeling",
             "drawing"
         ],
         "info": [
@@ -14,7 +14,7 @@
             1
         ],
         "json": {
-            "objName": "Abby",
+            "objName": "Nary",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -27,33 +27,33 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "abby-a",
+                    "costumeName": "nary-happy",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "afab2d2141e9811bd89e385e9628cb5f.svg",
+                    "baseLayerMD5": "bffe4b07e13c950527dcb5a0f7b25a11.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 31,
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-b",
+                    "costumeName": "nary-angry",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "1e0116c7c2e5e80c679d0b33f1f5cfb7.svg",
+                    "baseLayerMD5": "957b1d6f50fe7c8b878d3a47dcf44429.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 31,
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-c",
+                    "costumeName": "nary-thinking",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b6e23922f23b49ddc6f62f675e77417c.svg",
+                    "baseLayerMD5": "ea1ffd157e52424cbfe75c8bb86f4e9b.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 32,
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-d",
+                    "costumeName": "nary-glasses",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "2d05d4da65e7b5009a491d8153d37253.svg",
+                    "baseLayerMD5": "0140f7f79ea0e8412618dc1bf46f1b7a.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 32,
                     "rotationCenterY": 101
@@ -71,20 +71,21 @@
         }
     },
     {
-        "name": "Amon",
-        "md5": "60f720956ab1840431dcf0616ce98f14.png",
+        "name": "Baby Nary",
+        "md5": "805a5f9b22681633f9cd6efe7d54400f.png",
         "type": "sprite",
         "tags": [
             "people",
-            "dance"
+            "person",
+            "drawing"
         ],
         "info": [
             0,
-            1,
+            4,
             1
         ],
         "json": {
-            "objName": "Amon",
+            "objName": "Baby Nary",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -97,9 +98,55 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "amon",
+                    "costumeName": "baby-nary",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "60f720956ab1840431dcf0616ce98f14.png",
+                    "baseLayerMD5": "805a5f9b22681633f9cd6efe7d54400f.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Jade",
+        "md5": "6933102a28113739c8e37d45d442f045.png",
+        "type": "sprite",
+        "tags": [
+            "dragon",
+            "green"
+        ],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Jade",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "jade",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6933102a28113739c8e37d45d442f045.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 174,
                     "rotationCenterY": 162
@@ -117,17 +164,14 @@
         }
     },
     {
-        "name": "Andie",
-        "md5": "419ff5a76adbb4b076c072f68267fdeb.svg",
+        "name": "iBall",
+        "md5": "ed6d1e75931d3fcb767fe82394a0e887.png",
         "type": "sprite",
         "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "wheelchair",
-            "handicap",
-            "handicapable",
-            "alex eben meyer"
+            "vision",
+            "monster",
+            "creature",
+            "cognimate"
         ],
         "info": [
             0,
@@ -135,7 +179,7 @@
             1
         ],
         "json": {
-            "objName": "Andie",
+            "objName": "iBall",
             "sounds": [
                 {
                     "soundName": "basketball bounce",
@@ -148,33 +192,33 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "andie-a",
+                    "costumeName": "iBall",
                     "baseLayerID": 0,
-                    "baseLayerMD5": "419ff5a76adbb4b076c072f68267fdeb.svg",
+                    "baseLayerMD5": "ed6d1e75931d3fcb767fe82394a0e887.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 86,
                     "rotationCenterY": 81
                 },
                 {
-                    "costumeName": "andie-b",
+                    "costumeName": "iBall-camera",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "a6a766912b4e43064ee3f389c72925b4.svg",
+                    "baseLayerMD5": "a5a0acd9d82037e5b54a32c6fbc12d7c.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 46,
                     "rotationCenterY": 106
                 },
                 {
-                    "costumeName": "andie-c",
+                    "costumeName": "iBall-defensive",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fac1025857d2c28391cb31f39a80df54.svg",
+                    "baseLayerMD5": "ff7d1f4dda73fbacc2f355abff59c012.png/",
                     "bitmapResolution": 1,
                     "rotationCenterX": 52,
                     "rotationCenterY": 65
                 },
                 {
-                    "costumeName": "andie-d",
+                    "costumeName": "iBall-angry",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7af50835e05d43e5e07cd2d641e7401e.svg",
+                    "baseLayerMD5": "181a7114c0946b262f6177e25c513f27.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 87,
                     "rotationCenterY": 72
@@ -192,12 +236,13 @@
         }
     },
     {
-        "name": "Anina Dance",
-        "md5": "84c5e22b4303c7c1fb707125706c9aaa.png",
+        "name": "Iris",
+        "md5": "52eb21ac89dc44523e1fc69b1e753617.png",
         "type": "sprite",
         "tags": [
-            "people",
-            "dance"
+            "eye",
+            "cognimate",
+            "vision"
         ],
         "info": [
             0,
@@ -205,10 +250,10 @@
             2
         ],
         "json": {
-            "objName": "Anina Dance",
+            "objName": "Iris",
             "sounds": [
                 {
-                    "soundName": "dance celebrate",
+                    "soundName": "dance",
                     "soundID": -1,
                     "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
                     "sampleCount": 176401,
@@ -226,108 +271,12 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "anina stance",
+                    "costumeName": "iris-spider",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "84c5e22b4303c7c1fb707125706c9aaa.png",
+                    "baseLayerMD5": "52eb21ac89dc44523e1fc69b1e753617.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 76,
                     "rotationCenterY": 252
-                },
-                {
-                    "costumeName": "anina top stand",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "db6c03113f71b91f22a9f3351f90e5bf.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 74,
-                    "rotationCenterY": 280
-                },
-                {
-                    "costumeName": "anina top R step",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "2d208a34e74fdce9dab9d4c585dcfa2b.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 248,
-                    "rotationCenterY": 272
-                },
-                {
-                    "costumeName": "anina top L step",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "ed90e8b7a05c1552194af597ac0637cd.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 228,
-                    "rotationCenterY": 274
-                },
-                {
-                    "costumeName": "anina top freeze",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "b7693bd6250d4411ee622b67f8025924.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 110,
-                    "rotationCenterY": 268
-                },
-                {
-                    "costumeName": "anina R cross",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "3948aad16f8169c013c956dd152a09a6.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 126,
-                    "rotationCenterY": 268
-                },
-                {
-                    "costumeName": "anina pop front",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4931a363e3e4efa20230f6ff2991c6b4.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 68,
-                    "rotationCenterY": 270
-                },
-                {
-                    "costumeName": "anina pop down",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "e3698b76cb0864df2fbaba80e6bd8067.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 74,
-                    "rotationCenterY": 156
-                },
-                {
-                    "costumeName": "anina pop left",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "d86bb27b4f8d7b70c39c96f29c6943b4.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 238,
-                    "rotationCenterY": 266
-                },
-                {
-                    "costumeName": "anina pop right",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "7bb9c790b02231e1272701167c26b17a.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 66,
-                    "rotationCenterY": 268
-                },
-                {
-                    "costumeName": "anina pop L arm",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "62c50c90535b64f2ae130a5c680ddcb4.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 68,
-                    "rotationCenterY": 274
-                },
-                {
-                    "costumeName": "anina pop stand",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "105f4f3d260dcb8bea02ea9ee5d18cf4.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 276
-                },
-                {
-                    "costumeName": "anina pop R arm",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "ca27e001a263ee6b5852508f39d021db.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 88,
-                    "rotationCenterY": 272
                 }
             ],
             "currentCostumeIndex": 0,
@@ -342,14 +291,15 @@
         }
     },
     {
-        "name": "Apple",
-        "md5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
+        "name": "Minor Tom",
+        "md5": "96583e0e8aec9a7b247afd591c052eca.png",
         "type": "sprite",
         "tags": [
-            "food",
-            "red",
-            "crunchy",
-            "fruit"
+            "bear",
+            "space",
+            "cognimate",
+            "speech",
+            "text"
         ],
         "info": [
             0,
@@ -357,7 +307,7 @@
             1
         ],
         "json": {
-            "objName": "Apple",
+            "objName": "Minor Tom",
             "sounds": [
                 {
                     "soundName": "Chomp",
@@ -370,9 +320,9 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "apple",
+                    "costumeName": "mini-tom",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
+                    "baseLayerMD5": "96583e0e8aec9a7b247afd591c052eca.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 31,
                     "rotationCenterY": 31
