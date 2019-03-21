@@ -14,6 +14,13 @@ import {
     projectError
 } from '../reducers/project-state';
 
+import {
+  isExtensionUrlProvided,
+  setExtensionLoading,
+  setExtensionLoaded,
+  extensionLoadingStates
+} from '../reducers/extension-loader';
+
 /*
  * Higher Order Component to manage events emitted by the VM
  * @param {React.Component} WrappedComponent component to manage VM events for
@@ -49,6 +56,10 @@ const vmManagerHOC = function (WrappedComponent) {
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
             }
+            if (this.props.extensionURLProvided && this.props.extensionLoadingState == extensionLoadingStates.EXTENSION_NOT_LOADED) {
+                this.props.onSetExtensionLoading();
+                this.loadExtension(this.props.extensionUrl);
+            }
         }
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
@@ -73,9 +84,23 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.props.onError(e);
                 });
         }
+        loadExtension (url) {
+            return this.props.vm.loadExtensionFromURL(url)
+              .then(() => {
+                  this.props.onSetExtensionLoaded();
+              })
+              .catch( e => {
+                  this.props.onError(e);
+              });
+        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                extensionURLProvided,
+                extensionUrl,
+                extensionLoadingState,
+                onSetExtensionLoading,
+                onSetExtensionLoaded,
                 fontsLoaded,
                 loadingState,
                 isStarted,
@@ -99,6 +124,11 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        extensionURLProvided: PropTypes.bool,
+        extensionUrl: PropTypes.string,
+        extensionLoadingState: PropTypes.string,
+        onSetExtensionLoading: PropTypes.func,
+        onSetExtensionLoaded: PropTypes.func,
         canSave: PropTypes.bool,
         cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
@@ -114,8 +144,15 @@ const vmManagerHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
+    VMManager.defaultProps = {
+        extensionURLProvided: false,
+        extensionUrl: ''
+    }
+
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
+        const extensionUrl = state.scratchGui.extensionLoader.extensionUrl;
+        const extensionLoadingState = state.scratchGui.extensionLoader.extensionLoadingState;
         return {
             fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
@@ -123,7 +160,10 @@ const vmManagerHOC = function (WrappedComponent) {
             projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState,
             isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-            isStarted: state.scratchGui.vmStatus.started
+            isStarted: state.scratchGui.vmStatus.started,
+            extensionURLProvided: isExtensionUrlProvided(extensionUrl),
+            extensionUrl: extensionUrl,
+            extensionLoadingState: extensionLoadingState
         };
     };
 
@@ -131,7 +171,9 @@ const vmManagerHOC = function (WrappedComponent) {
         onError: error => dispatch(projectError(error)),
         onLoadedProject: (loadingState, canSave) =>
             dispatch(onLoadedProject(loadingState, canSave, true)),
-        onSetProjectUnchanged: () => dispatch(setProjectUnchanged())
+        onSetProjectUnchanged: () => dispatch(setProjectUnchanged()),
+        onSetExtensionLoading: () => dispatch(setExtensionLoading()),
+        onSetExtensionLoaded: () => dispatch(setExtensionLoaded())
     });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.
