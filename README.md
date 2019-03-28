@@ -24,4 +24,4 @@ npm start
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
 
 
-Cognimates GUI is building on Scratch Gui: a set of React components that comprise the interface for creating and running Scratch 3.0 projects [Scratch Gui](https://github.com/LLK/scratch-gui/)provided as open source library by Lifelong Kindergarten Group.
+Cognimates GUI is building on Scratch Gui: a set of React components that comprise the interface for creating and running Scratch 3.0 projects [Scratch Gui](https://github.com/LLK/scratch-gui/) provided as open source library by Lifelong Kindergarten Group.
