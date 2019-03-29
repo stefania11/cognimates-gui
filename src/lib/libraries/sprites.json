@@ -1,5 +1,42 @@
 [
     {
+        "name": "Dragon Boy",
+        "md5": "aba6b84d24ea0bb081809632d7eca4bd.png",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "cognimate"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Dragon Boy",
+            "costumes": [
+                {
+                    "costumeName": "dragon-boy",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "aba6b84d24ea0bb081809632d7eca4bd.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Nary",
         "md5": "bffe4b07e13c950527dcb5a0f7b25a11.png",
         "type": "sprite",
@@ -15,16 +52,6 @@
         ],
         "json": {
             "objName": "Nary",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
             "costumes": [
                 {
                     "costumeName": "nary-happy",
@@ -86,16 +113,6 @@
         ],
         "json": {
             "objName": "Baby Nary",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
             "costumes": [
                 {
                     "costumeName": "baby-nary",
@@ -618,6 +635,228 @@
             "currentCostumeIndex": 0,
             "scratchX": -20,
             "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Babacool",
+        "md5": "91a2e188d12afd7ec915163f3a5bf62f.svg",
+        "type": "sprite",
+        "tags": [
+            "Babacool",
+            "cognimates",
+            "monster"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Babacool",
+            "costumes": [
+                {
+                    "costumeName": "babacool",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "91a2e188d12afd7ec915163f3a5bf62f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Sheep",
+        "md5": "b2a929464666c58e6b213351200fc00f.svg",
+        "type": "sprite",
+        "tags": [
+            "sheep",
+            "animals",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Sheep",
+            "costumes": [
+                {
+                    "costumeName": "sheep",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b2a929464666c58e6b213351200fc00f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Puffin",
+        "md5": "3c20499a13a7cc5120fb17874bd080be.svg",
+        "type": "sprite",
+        "tags": [
+            "puffin",
+            "animals",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Puffin",
+            "costumes": [
+                {
+                    "costumeName": "puffin",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3c20499a13a7cc5120fb17874bd080be.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Sloth",
+        "md5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.svg",
+        "type": "sprite",
+        "tags": [
+            "sloth",
+            "animals",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Sloth",
+            "costumes": [
+                {
+                    "costumeName": "sloth",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Kiwi bird",
+        "md5": "452a56ec19c06be90cd122299b132541.svg",
+        "type": "sprite",
+        "tags": [
+            "kiwi",
+            "animals",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Kiwi bird",
+            "costumes": [
+                {
+                    "costumeName": "kiwi",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "452a56ec19c06be90cd122299b132541.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Pug",
+        "md5": "12ee943835965e4acb6310f5022ac09a.svg",
+        "type": "sprite",
+        "tags": [
+            "pug",
+            "animals",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Pug",
+            "costumes": [
+                {
+                    "costumeName": "pug",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "12ee943835965e4acb6310f5022ac09a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
