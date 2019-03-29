@@ -512,7 +512,7 @@
     },
     {
         "name": "Hertz",
-        "md5": "d2a7c5aaee5e59560c489e5e2a241c64.svg",
+        "md5": "7ef2036610ec9bef7a0a4b9167161b21.png",
         "type": "sprite",
         "tags": [
             "monster",
@@ -521,7 +521,7 @@
         ],
         "info": [
             0,
-            2,
+            4,
             1
         ],
         "json": {
@@ -530,7 +530,7 @@
                 {
                     "costumeName": "hertz-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7ef2036610ec9bef7a0a4b9167161b21.svg",
+                    "baseLayerMD5": "7ef2036610ec9bef7a0a4b9167161b21.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 39,
                     "rotationCenterY": 94
@@ -538,7 +538,7 @@
                 {
                     "costumeName": "hertz-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d2a7c5aaee5e59560c489e5e2a241c64.svg",
+                    "baseLayerMD5": "d2a7c5aaee5e59560c489e5e2a241c64.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 39,
                     "rotationCenterY": 94
@@ -645,7 +645,7 @@
     },
     {
         "name": "Babacool",
-        "md5": "91a2e188d12afd7ec915163f3a5bf62f.svg",
+        "md5": "91a2e188d12afd7ec915163f3a5bf62f.png",
         "type": "sprite",
         "tags": [
             "Babacool",
@@ -663,7 +663,7 @@
                 {
                     "costumeName": "babacool",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "91a2e188d12afd7ec915163f3a5bf62f.svg",
+                    "baseLayerMD5": "91a2e188d12afd7ec915163f3a5bf62f.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
@@ -682,7 +682,7 @@
     },
     {
         "name": "Sheep",
-        "md5": "b2a929464666c58e6b213351200fc00f.svg",
+        "md5": "b2a929464666c58e6b213351200fc00f.png",
         "type": "sprite",
         "tags": [
             "sheep",
@@ -700,7 +700,7 @@
                 {
                     "costumeName": "sheep",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b2a929464666c58e6b213351200fc00f.svg",
+                    "baseLayerMD5": "b2a929464666c58e6b213351200fc00f.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
@@ -719,7 +719,7 @@
     },
     {
         "name": "Puffin",
-        "md5": "3c20499a13a7cc5120fb17874bd080be.svg",
+        "md5": "3c20499a13a7cc5120fb17874bd080be.png",
         "type": "sprite",
         "tags": [
             "puffin",
@@ -737,7 +737,7 @@
                 {
                     "costumeName": "puffin",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "3c20499a13a7cc5120fb17874bd080be.svg",
+                    "baseLayerMD5": "3c20499a13a7cc5120fb17874bd080be.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
@@ -756,7 +756,7 @@
     },
     {
         "name": "Sloth",
-        "md5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.svg",
+        "md5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.png",
         "type": "sprite",
         "tags": [
             "sloth",
@@ -774,7 +774,7 @@
                 {
                     "costumeName": "sloth",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.svg",
+                    "baseLayerMD5": "fe16bfdbf2bc9537f0e311ac93b6ee0d.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
@@ -793,7 +793,7 @@
     },
     {
         "name": "Kiwi bird",
-        "md5": "452a56ec19c06be90cd122299b132541.svg",
+        "md5": "452a56ec19c06be90cd122299b132541.png",
         "type": "sprite",
         "tags": [
             "kiwi",
@@ -811,7 +811,7 @@
                 {
                     "costumeName": "kiwi",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "452a56ec19c06be90cd122299b132541.svg",
+                    "baseLayerMD5": "452a56ec19c06be90cd122299b132541.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
@@ -830,7 +830,7 @@
     },
     {
         "name": "Pug",
-        "md5": "12ee943835965e4acb6310f5022ac09a.svg",
+        "md5": "12ee943835965e4acb6310f5022ac09a.png",
         "type": "sprite",
         "tags": [
             "pug",
@@ -848,7 +848,7 @@
                 {
                     "costumeName": "pug",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "12ee943835965e4acb6310f5022ac09a.svg",
+                    "baseLayerMD5": "12ee943835965e4acb6310f5022ac09a.png",
                     "bitmapResolution": 1,
                     "rotationCenterX": 28,
                     "rotationCenterY": 23
