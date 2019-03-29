@@ -291,6 +291,45 @@
         }
     },
     {
+        "name": "Major Tom",
+        "md5": "98b12609a8d57a43638035b014db37e7.png",
+        "type": "sprite",
+        "tags": [
+            "bear",
+            "space",
+            "cognimate",
+            "speech",
+            "text"
+        ],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Major Tom",
+            "costumes": [
+                {
+                    "costumeName": "maxi-tom",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "98b12609a8d57a43638035b014db37e7.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 31
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 93,
+            "scratchY": -23,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Minor Tom",
         "md5": "96583e0e8aec9a7b247afd591c052eca.png",
         "type": "sprite",
@@ -308,16 +347,6 @@
         ],
         "json": {
             "objName": "Minor Tom",
-            "sounds": [
-                {
-                    "soundName": "Chomp",
-                    "soundID": -1,
-                    "md5": "0b1e3033140d094563248e61de4039e5.wav",
-                    "sampleCount": 2912,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
             "costumes": [
                 {
                     "costumeName": "mini-tom",
@@ -331,6 +360,264 @@
             "currentCostumeIndex": 0,
             "scratchX": 93,
             "scratchY": -23,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Magnifier",
+        "md5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
+        "type": "sprite",
+        "tags": [
+            "tool",
+            "vision"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Magnifier",
+            "costumes": [
+                {
+                    "costumeName": "Magnifier",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Ninjat",
+        "md5": "d50035058acc66d84c8b12039205e490.png",
+        "type": "sprite",
+        "tags": [
+            "ninja",
+            "motion",
+            "cognimate"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Ninjat",
+            "costumes": [
+                {
+                    "costumeName": "Ninjat-center",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d50035058acc66d84c8b12039205e490.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                },
+                {
+                    "costumeName": "Ninjat-left",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "57621ee03eccdb3b902a83f175ebcaf6.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                },
+                {
+                    "costumeName": "Ninjat-right",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "35b13f092bab17dbe8a9ec1f3d86545c.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Sputnik",
+        "md5": "cd5796d7aa1d5879ac536b2eb94cf51c.png",
+        "type": "sprite",
+        "tags": [
+            "robot",
+            "cognimate"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Sputnik",
+            "costumes": [
+                {
+                    "costumeName": "Sputnik",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cd5796d7aa1d5879ac536b2eb94cf51c.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Hertz",
+        "md5": "d2a7c5aaee5e59560c489e5e2a241c64.svg",
+        "type": "sprite",
+        "tags": [
+            "monster",
+            "cognimate",
+            "sound"
+        ],
+        "info": [
+            0,
+            2,
+            1
+        ],
+        "json": {
+            "objName": "Hertz",
+            "costumes": [
+                {
+                    "costumeName": "hertz-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7ef2036610ec9bef7a0a4b9167161b21.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 94
+                },
+                {
+                    "costumeName": "hertz-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d2a7c5aaee5e59560c489e5e2a241c64.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 94
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -171,
+            "scratchY": -76,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Squiggle",
+        "md5": "d3cc0592ee39d8ef31a61ef4db89005e.png",
+        "type": "sprite",
+        "tags": [
+            "robot",
+            "cognimate"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Squiggle",
+            "costumes": [
+                {
+                    "costumeName": "Squiggle",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d3cc0592ee39d8ef31a61ef4db89005e.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Spinderella",
+        "md5": "97bef280e3b445b38f0bd5846dcad86d.png",
+        "type": "sprite",
+        "tags": [
+            "robot",
+            "cognimate"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Spinderella",
+            "costumes": [
+                {
+                    "costumeName": "Spinderella",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "97bef280e3b445b38f0bd5846dcad86d.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                },
+                {
+                    "costumeName": "Spinderella-color",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "bb94c8c7cb7f3baefab35db430d14db4.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                },
+                {
+                    "costumeName": "Spinderella-recording",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7a15fa44426476fdc515ad8b485cdae7.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
