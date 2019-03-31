@@ -37,6 +37,43 @@
         }
     },
     {
+        "name": "Cognimate",
+        "md5": "772cadd28257a3d51967a58cde15c884.png",
+        "type": "sprite",
+        "tags": [
+            "cognimate",
+            "icon",
+            "drone"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Cognimate",
+            "costumes": [
+                {
+                    "costumeName": "cognimate",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "772cadd28257a3d51967a58cde15c884.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 0.2,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Nary",
         "md5": "bffe4b07e13c950527dcb5a0f7b25a11.png",
         "type": "sprite",
@@ -149,16 +186,6 @@
         ],
         "json": {
             "objName": "Jade",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
             "costumes": [
                 {
                     "costumeName": "jade",
@@ -197,16 +224,6 @@
         ],
         "json": {
             "objName": "iBall",
-            "sounds": [
-                {
-                    "soundName": "basketball bounce",
-                    "soundID": -1,
-                    "md5": "1727f65b5f22d151685b8e5917456a60.wav",
-                    "sampleCount": 8099,
-                    "rate": 22050,
-                    "format": "adpcm"
-                }
-            ],
             "costumes": [
                 {
                     "costumeName": "iBall",
@@ -254,7 +271,7 @@
     },
     {
         "name": "Iris",
-        "md5": "52eb21ac89dc44523e1fc69b1e753617.png",
+        "md5": "b8d55deebf4bc3015f44f02c614d3a14.png",
         "type": "sprite",
         "tags": [
             "eye",
@@ -268,29 +285,27 @@
         ],
         "json": {
             "objName": "Iris",
-            "sounds": [
-                {
-                    "soundName": "dance",
-                    "soundID": -1,
-                    "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
-                    "sampleCount": 176401,
-                    "rate": 22050,
-                    "format": "adpcm"
-                },
-                {
-                    "soundName": "dance magic",
-                    "soundID": -1,
-                    "md5": "042309f190183383c0b1c1fc3edc2e84.wav",
-                    "sampleCount": 187200,
-                    "rate": 22050,
-                    "format": "adpcm"
-                }
-            ],
             "costumes": [
                 {
-                    "costumeName": "iris-spider",
+                    "costumeName": "iris-red",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "52eb21ac89dc44523e1fc69b1e753617.png",
+                    "baseLayerMD5": "b8d55deebf4bc3015f44f02c614d3a14.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 76,
+                    "rotationCenterY": 252
+                },
+                {
+                    "costumeName": "iris-color",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8955313e20a393007ee32fc290bde1dc.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 76,
+                    "rotationCenterY": 252
+                },
+                {
+                    "costumeName": "iris-record",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5001fe0d71fad02766270e2b215e6e95.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 76,
                     "rotationCenterY": 252
@@ -377,42 +392,6 @@
             "currentCostumeIndex": 0,
             "scratchX": 93,
             "scratchY": -23,
-            "scale": 0.2,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Magnifier",
-        "md5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
-        "type": "sprite",
-        "tags": [
-            "tool",
-            "vision"
-        ],
-        "info": [
-            0,
-            4,
-            1
-        ],
-        "json": {
-            "objName": "Magnifier",
-            "costumes": [
-                {
-                    "costumeName": "Magnifier",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 31,
-                    "rotationCenterY": 100
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -20,
-            "scratchY": -38,
             "scale": 0.2,
             "direction": 90,
             "rotationStyle": "normal",
@@ -644,6 +623,303 @@
         }
     },
     {
+        "name": "Shinobi",
+        "md5": "ca12f9d8f3c5b2823d6639d11a924033.png",
+        "type": "sprite",
+        "tags": [
+            "ninja",
+            "cognimate",
+            "motion"
+        ],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Shinobi",
+            "costumes": [
+                {
+                    "costumeName": "shinobi",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ca12f9d8f3c5b2823d6639d11a924033.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 31
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 93,
+            "scratchY": -23,
+            "scale": 0.2,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Cozmo",
+        "md5": "3c93e6e08591c17550ff7c4d2098c8b0.png",
+        "type": "sprite",
+        "tags": [
+            "cozmo",
+            "robot",
+            "hardware",
+            "brain"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Cozmo",
+            "costumes": [
+                {
+                    "costumeName": "cozmo",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3c93e6e08591c17550ff7c4d2098c8b0.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Ergo Jr",
+        "md5": "eff4ce1f125e937f405efd4d05a3c423.png",
+        "type": "sprite",
+        "tags": [
+            "Ergo Jr",
+            "robot",
+            "hardware",
+            "brain"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Ergo Jr",
+            "costumes": [
+                {
+                    "costumeName": "ergo",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "eff4ce1f125e937f405efd4d05a3c423.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Muse",
+        "md5": "0852103ed8590af6beab61f807959f27.png",
+        "type": "sprite",
+        "tags": [
+            "Muse",
+            "hardware",
+            "brain"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Muse",
+            "costumes": [
+                {
+                    "costumeName": "muse",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0852103ed8590af6beab61f807959f27.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Microbit",
+        "md5": "5c210df0b26bbb26935123026a1462b8.png",
+        "type": "sprite",
+        "tags": [
+            "microbit",
+            "hardware",
+            "brain"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Microbit",
+            "costumes": [
+                {
+                    "costumeName": "microbit",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5c210df0b26bbb26935123026a1462b8.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Alexa",
+        "md5": "1f65113a48899b565aeb53d8bbd5461f.png",
+        "type": "sprite",
+        "tags": [
+            "alexa",
+            "hardware",
+            "brain"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "alexa",
+            "costumes": [
+                {
+                    "costumeName": "alexa",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1f65113a48899b565aeb53d8bbd5461f.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Twitter",
+        "md5": "c2e14a9d497a6c2a94d1c54be3e3012c.png",
+        "type": "sprite",
+        "tags": [
+            "twitter",
+            "internet",
+            "icon"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Twitter",
+            "costumes": [
+                {
+                    "costumeName": "twitter",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c2e14a9d497a6c2a94d1c54be3e3012c.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 23
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -36,
+            "scratchY": -14,
+            "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },{
+        "name": "Oracle",
+        "md5": "1aa6804b2bd377bc3937274c73ff43c0.png",
+        "type": "sprite",
+        "tags": [
+            "oracle",
+            "cognimate",
+            "vision"
+        ],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Oracle",
+            "costumes": [
+                {
+                    "costumeName": "oracle",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1aa6804b2bd377bc3937274c73ff43c0.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 31
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 93,
+            "scratchY": -23,
+            "scale": 0.2,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Babacool",
         "md5": "91a2e188d12afd7ec915163f3a5bf62f.png",
         "type": "sprite",
@@ -858,6 +1134,78 @@
             "scratchX": -36,
             "scratchY": -14,
             "scale": 0.7,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Astronaut Girl",
+        "md5": "53562101a3c7b3af699388b007f032c3.png",
+        "type": "sprite",
+        "tags": [
+            "person",
+            "space"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Astronaut Girl",
+            "costumes": [
+                {
+                    "costumeName": "astronaut-girl",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "53562101a3c7b3af699388b007f032c3.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 0.2,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Magnifier",
+        "md5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
+        "type": "sprite",
+        "tags": [
+            "tool",
+            "vision"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Magnifier",
+            "costumes": [
+                {
+                    "costumeName": "Magnifier",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c7345817d4f3d8944145cc7cb4fc44bc.png",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 100
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": -38,
+            "scale": 0.2,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
@@ -1288,109 +1636,6 @@
             "currentCostumeIndex": 0,
             "scratchX": 83,
             "scratchY": -45,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Baseball",
-        "md5": "838dc2b2278619d3a9beefc6c8072a08.svg",
-        "type": "sprite",
-        "tags": [
-            "baseball",
-            "sports",
-            "ball",
-            "alex eben meyer"
-        ],
-        "info": [
-            0,
-            1,
-            1
-        ],
-        "json": {
-            "objName": "Baseball",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "baseball",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "838dc2b2278619d3a9beefc6c8072a08.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 28,
-                    "rotationCenterY": 28
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": 173,
-            "scratchY": -89,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Basketball",
-        "md5": "482f04cbffa835c4abf29ab996d3fbbd.svg",
-        "type": "sprite",
-        "tags": [
-            "sports",
-            "basketball",
-            "alex eben meyer"
-        ],
-        "info": [
-            0,
-            1,
-            2
-        ],
-        "json": {
-            "objName": "Basketball",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                },
-                {
-                    "soundName": "basketball bounce",
-                    "soundID": -1,
-                    "md5": "1727f65b5f22d151685b8e5917456a60.wav",
-                    "sampleCount": 8099,
-                    "rate": 22050,
-                    "format": "adpcm"
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "basketball",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "482f04cbffa835c4abf29ab996d3fbbd.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 23,
-                    "rotationCenterY": 23
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": 202,
-            "scratchY": -108,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
