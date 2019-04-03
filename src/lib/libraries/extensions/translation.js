@@ -38,8 +38,7 @@ const allTrans = reformat(Get())
 
 const Translations = function(msg) {
     var key_msg = msg.toLowerCase();
-    //var locale = formatMessage.setup().locale;
-    var locale = 'es'
+    var locale = formatMessage.setup().locale;
     if (locale in allTrans) {
         console.log(allTrans[locale][key_msg])
         return allTrans[locale][key_msg]
