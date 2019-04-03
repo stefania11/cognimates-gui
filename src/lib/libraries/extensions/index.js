@@ -4,6 +4,7 @@ import penImage from './pen.png';
 import speechImage from './speech.png';
 import videoImage from './video-sensing.png';
 import wedoImage from './wedo.png';
+import Translations from './translation.js';
 
 export default [
     {
@@ -24,7 +25,7 @@ export default [
         name: 'Vision',
         extensionURL: 'vision',
         iconURL: videoImage,
-        description: 'Let your projects see the world.',
+        description: "Vision Training",
         featured: true,
         disabled: false
     },

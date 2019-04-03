@@ -1,5 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import Translations from './translation.js';
+
 
 import musicImage from './music.png';
 import musicInsetImage from './music-small.svg';
@@ -46,105 +48,45 @@ import wemoButtonImage from './wemo_ext.png';
 
 export default [
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Vision"
-                description="Name for 'Vision' extension"
-                id="gui.extension.vision.name"
-            />
-        ),
+        name: Translations("Vision"),
         extensionId: 'vision',
         iconURL: visionImage,
         insetIconURL: visionInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Vision Training"
-                description="Description for 'Vision' extension"
-                id="gui.extension.vision.description"
-            />
-        ),
+        description: Translations("Vision Training"),
         featured: true,
         internetConnectionRequired: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Sentiment"
-                description="Name for 'Sentiment' extension"
-                id="gui.extension.sentiment.name"
-            />
-        ),
+        name: Translations("Sentiment"),
         extensionId: 'sentiment',
         iconURL: sentimentImage,
         insetIconURL: sentimentInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Detect feelings"
-                description="Description for 'Sentiment' extension"
-                id="gui.extension.sentiment.description"
-            />
-        ),
+        description: Translations("Detect feelings"),
         featured: true,
         internetConnectionRequired: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Text"
-                description="Name for 'Text' extension"
-                id="gui.extension.text.name"
-            />
-        ),
+        name: Translations("Text"),
         extensionId: 'text',
         iconURL: textClassifyImage,
         insetIconURL: textClassifyInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Use Text in your projects"
-                description="Description for 'Text' extension"
-                id="gui.extension.text.description"
-            />
-        ),
+        description: Translations("Use Text in your projects"),
         featured: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Cozmo"
-                description="Name for 'Cozmo' extension"
-                id="gui.extension.cozmo.name"
-            />
-        ),
+        name: "Cozmo",
         extensionId: 'cozmo',
         iconURL: cozmoImage,
         insetIconURL: cozmoInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Cozmo Robot"
-                description="Program and control Cozmo"
-                id="gui.extension.cozmo.description"
-            />
-        ),
+        description: Translations("Cozmo Robot"),
         featured: true
     },
   {
-      name: (
-          <FormattedMessage
-              defaultMessage="Twitter"
-              description="Name for 'Twitter' extension"
-              id="gui.extension.twitter.name"
-          />
-      ),
+      name: "Twitter",
       extensionId: 'twitter',
       iconURL: twitterImage,
       insetIconURL: twitterInsetImage,
-      description: (
-          <FormattedMessage
-              defaultMessage="Use Twitter in your projects"
-              description="Description for 'Twitter' extension"
-              id="gui.extension.twitter.description"
-          />
-      ),
+      description: Translations("Use Twitter in your project"),
       featured: true,
       internetConnectionRequired: true
   },
@@ -357,106 +299,45 @@ export default [
 
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Alexa"
-                description="Name for the 'Alexa' extension"
-                id="gui.extension.alexa.name"
-            />
-        ),
+        name: "Alexa",
         extensionId: 'alexa',
         iconURL: alexaImage,
         insetIconURL: alexaInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Play with alexa and teach her new things."
-                description="Description for the 'Alexa' extension"
-                id="gui.extension.alexa.description"
-                defaultMessage="Play with Alexa!"
-            />
-        ),
+        description: Translations("Play with Alexa and teach her new things"),
         featured: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Ergo"
-                description="Name for the 'Ergo' extension"
-                id="gui.extension.ergo.name"
-            />
-        ),
+        name: "Ergo",
         extensionId: 'ergo',
         iconURL: ergoImage,
         insetIconURL: ergoInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Play with Poppy Ergo Jr. and more!"
-                description="Description for the 'Ergo' extension"
-                id="gui.extension.ergo.description"
-            />
-        ),
+        description: Translations("Play with Poppy Ergo Jr. and more!"),
         featured: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Speech to Text"
-                description="Name for 'Spech to text' extension"
-                id="gui.extension.speech.name"
-            />
-        ),
+        name: Translations("Speech to Text"),
         extensionId: 'speech',
         iconURL: speechImage,
         insetIconURL: speechInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Speech to Text"
-                description="Description for 'Speech to text' extension"
-                id="gui.extension.speech.description"
-            />
-        ),
+        description: Translations("Speech to Text"),
         featured: true,
         internetConnectionRequired: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Wemo"
-                description="Name for 'Wemo' extension"
-                id="gui.extension.wemo.name"
-            />
-        ),
+        name: "Wemo",
         extensionId: 'wemo',
         iconURL: wemoMenuImage,
         insetIconURL: wemoButtonImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Turn things on and off with Wemo!"
-                description="Description for 'Wemo' extension"
-                id="gui.extension.wemo.description"
-            />
-        ),
+        description: Translations("Turn things on and off with Wemo!"),
         featured: true, 
         internetConnectionRequired: true
     },
     { 
-        name: (
-            <FormattedMessage
-                defaultMessage="Muse"
-                description="Name for 'Muse' extension"
-                id="gui.extension.muse.name"
-            />
-        ),
+        name: "Muse",
         extensionId: 'muse',
         iconURL: museImage,
         insetIconURL: museInsetImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Muse"
-                description="Description for 'Muse' extension"
-                id="gui.extension.muse.description"
-            />
-        ),
+        description: "Muse",
         featured: true,
         internetConnectionRequired: true
     }
