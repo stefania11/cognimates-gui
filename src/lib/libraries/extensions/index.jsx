@@ -43,6 +43,8 @@ import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
 import wemoMenuImage from './wemo_ext.png';
 import wemoButtonImage from './wemo_ext.png';
+import hueMenuImage from './Hue_extension.png';
+import hueButtonImage from './Hue_extension.png';
 
 export default [
     {
@@ -455,6 +457,27 @@ export default [
                 defaultMessage="Muse"
                 description="Description for 'Muse' extension"
                 id="gui.extension.muse.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
+    },
+    { 
+        name: (
+            <FormattedMessage
+                defaultMessage="Smart Lights"
+                description="Name for 'Hue' extension"
+                id="gui.extension.hue.name"
+            />
+        ),
+        extensionId: 'hue',
+        iconURL: hueMenuImage,
+        insetIconURL: hueButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Hue"
+                description="Description for 'Hue' extension"
+                id="gui.extension.hue.description"
             />
         ),
         featured: true,
