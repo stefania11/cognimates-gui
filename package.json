@@ -8,7 +8,8 @@
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "prune": "./prune-gh-pages.sh",
-    "i18n:push": "tx-push-src scratch-editor interface translations/en.json",
+    "i18n:push": "tx-push-src cognimates interface translations/en.json",
+    "i18n:pull": "tx pull -r 'cognimates.*' -f",
     "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/ && npm run i18n:push",
     "start": "webpack-dev-server",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
@@ -46,6 +47,7 @@
     "bowser": "1.9.4",
     "chromedriver": "2.44.1",
     "classnames": "2.2.6",
+    "cognimates-l10n": "https://github.com/hackidemia/cognimates-l10n/tarball/master",
     "computed-style-to-inline-style": "3.0.0",
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "2.5.7",
@@ -106,7 +108,7 @@
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20190114210212",
     "scratch-blocks": "0.1.0-prerelease.1549990124",
-    "scratch-l10n": "3.1.20190213193054",
+    "scratch-l10n": "^3.1.20190213193054",
     "scratch-paint": "0.2.0-prerelease.20190114205252",
     "scratch-render": "0.1.0-prerelease.20190214183944",
     "scratch-storage": "1.2.2",
@@ -138,5 +140,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
     }
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0"
   }
 }

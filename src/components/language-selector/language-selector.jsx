@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import locales from 'scratch-l10n';
+import locales from 'cognimates-l10n';
 import styles from './language-selector.css';
 
 // supported languages to exclude from the menu, but allow as a URL option
 const ignore = [];
+
+console.log(locales)
 
 const LanguageSelector = ({currentLocale, label, onChange}) => (
     <select
