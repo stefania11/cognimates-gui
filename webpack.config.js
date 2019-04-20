@@ -36,7 +36,7 @@ const base = {
         rules: [{
             test: /\.jsx?$/,
             loader: 'babel-loader',
-            include: [path.resolve(__dirname, 'src'), /node_modules[\\/]scratch-[^\\/]+[\\/]src/],
+            include: [path.resolve(__dirname, 'src'), /node_modules[\\/]scratch-[^\\/]+[\\/]src/, /node_modules[\\/]cognimates-l10n[\\/]src/],
             options: {
                 // Explicitly disable babelrc so we don't catch various config
                 // in much lower dependencies.
@@ -194,7 +194,8 @@ module.exports = [
             },
             externals: {
                 React: 'react',
-                ReactDOM: 'react-dom'
+                ReactDOM: 'react-dom',
+                'cognimates-l10n': true
             },
             module: {
                 rules: base.module.rules.concat([
