@@ -59,6 +59,11 @@ class ExtensionLibrary extends React.PureComponent {
             label: gaLabel
         });
     }
+
+    refresh() {
+        this.setState(this.state);
+    }
+
     render () {
         const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({
             rawURL: extension.iconURL || extensionIcon,
@@ -73,6 +78,7 @@ class ExtensionLibrary extends React.PureComponent {
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
+                refresh={this.refresh}
             />
         );
     }
@@ -83,7 +89,7 @@ ExtensionLibrary.propTypes = {
     onCategorySelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types
+    vm: PropTypes.instanceOf(VM).isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
 export default injectIntl(ExtensionLibrary);

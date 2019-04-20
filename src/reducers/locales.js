@@ -1,8 +1,10 @@
 import {addLocaleData} from 'react-intl';
 
-import {localeData} from 'scratch-l10n';
-import editorMessages from 'scratch-l10n/locales/editor-msgs';
-import {isRtl} from 'scratch-l10n';
+// import {localeData} from 'scratch-l10n';
+// import editorMessages from 'scratch-l10n/locales/editor-msgs';
+import {localeData} from 'cognimates-l10n';
+import editorMessages from 'cognimates-l10n/locales/editor-msgs';
+import {isRtl} from 'cognimates-l10n';
 
 addLocaleData(localeData);
 
