@@ -34,6 +34,13 @@ class VideoProvider {
          * Stores some canvas/frame data per resolution/mirror states
          */
         this._workspace = [];
+
+        this.resolutions = {  
+            'qvga': {width: {exact: 320}, height: {exact: 240}}, 
+            'vga':{width: {exact: 640}, height: {exact: 480}},
+            'hd': {width: {exact: 1280}, height: {exact: 720}},
+            'default': {width: {min: 480, ideal: 640}, height: {min: 360, ideal: 480}}  
+        }
     }
 
     static get FORMAT_IMAGE_DATA () {
@@ -306,6 +313,18 @@ class VideoProvider {
         // Get an image dataURL from the canvas.
         let imageDataURL = hidden_canvas.toDataURL('/png');
         return imageDataURL;
+    }
+
+    /**
+     * Change the video source.
+     */
+    switchSource(vidSource){
+        console.log(vidSource);
+        let constraints;
+        constraints = this.resolutions[vidSource];
+        this.disableVideo();
+        this._teardown();
+        this._setupVideo(constraints);
     }
 
 
