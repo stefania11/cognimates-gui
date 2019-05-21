@@ -60,7 +60,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.props.onSetExtensionLoading();
                 this.loadExtension(this.props.extensionUrl);
             }
-            if(this.props.isStarted){
+            if(!this.props.vm.cognimatesLoaded){
                 this.props.vm.loadCognimatesExts();
             }
         }
