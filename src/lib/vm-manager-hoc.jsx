@@ -43,6 +43,9 @@ const vmManagerHOC = function (WrappedComponent) {
             }
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
+                if(!this.props.extensionURLProvided){
+                    this.props.vm.loadCognimatesExts();
+                }
             }
         }
         componentDidUpdate (prevProps) {
@@ -87,7 +90,8 @@ const vmManagerHOC = function (WrappedComponent) {
         loadExtension (url) {
             return this.props.vm.loadExtensionFromURL(url)
               .then(() => {
-                  this.props.onSetExtensionLoaded();
+                  this.props.onSetExtensionLoaded();                
+                  this.props.vm.loadCognimatesExts();
               })
               .catch( e => {
                   this.props.onError(e);
