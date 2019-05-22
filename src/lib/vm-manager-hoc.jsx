@@ -60,9 +60,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.props.onSetExtensionLoading();
                 this.loadExtension(this.props.extensionUrl);
             }
-            if(!this.props.vm.cognimatesLoaded){
-                this.props.vm.loadCognimatesExts();
-            }
         }
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
@@ -90,7 +87,8 @@ const vmManagerHOC = function (WrappedComponent) {
         loadExtension (url) {
             return this.props.vm.loadExtensionFromURL(url)
               .then(() => {
-                  this.props.onSetExtensionLoaded();
+                  this.props.onSetExtensionLoaded();                
+                  this.props.vm.loadCognimatesExts();
               })
               .catch( e => {
                   this.props.onError(e);
