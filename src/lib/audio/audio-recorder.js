@@ -54,43 +54,46 @@ class AudioRecorder {
     async attachUserMediaStream (userMediaStream, onUpdate, onError) {
         this.userMediaStream = userMediaStream;
         try {
-            await initializeAudioContext();
-            this.audioContext = new SharedAudioContext();
-            this.mediaStreamSource = this.audioContext.createMediaStreamSource(userMediaStream);
-            this.sourceNode = this.audioContext.createGain();
-            this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
-
-            this.scriptProcessorNode.onaudioprocess = processEvent => {
-                if (this.recording && !this.disposed) {
-                    this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
-                }
-            };
-
-            this.analyserNode = this.audioContext.createAnalyser();
-            this.analyserNode.fftSize = 2048;
-
-            const bufferLength = this.analyserNode.frequencyBinCount;
-            const dataArray = new Float32Array(bufferLength);
+            document.addEventListener('click', this.initializeAudioContextWithGesture.bind(this));
+            document.addEventListener('touchstart', this.initializeAudioContextWithGesture.bind(this));
 
             const update = () => {
                 if (this.disposed) return;
                 requestAnimationFrame(update);
-                this.analyserNode.getFloatTimeDomainData(dataArray);
-                onUpdate(computeRMS(dataArray));
+                if (this.analyserNode) {
+                    const bufferLength = this.analyserNode.frequencyBinCount;
+                    const dataArray = new Float32Array(bufferLength);
+                    this.analyserNode.getFloatTimeDomainData(dataArray);
+                    onUpdate(computeRMS(dataArray));
+                }
             };
 
             requestAnimationFrame(update);
-
-            // Wire everything together, ending in the destination
-            this.mediaStreamSource.connect(this.sourceNode);
-            this.sourceNode.connect(this.analyserNode);
-            this.analyserNode.connect(this.scriptProcessorNode);
-            // Defer connection to audioContext.destination until after a user gesture
-            document.addEventListener('click', this.connectToDestination.bind(this));
-            document.addEventListener('touchstart', this.connectToDestination.bind(this));
         } catch (error) {
             onError(error);
         }
+    }
+
+    async initializeAudioContextWithGesture () {
+        await initializeAudioContext();
+        this.audioContext = new SharedAudioContext();
+        this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
+        this.sourceNode = this.audioContext.createGain();
+
+        this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
+        this.analyserNode = this.audioContext.createAnalyser();
+        this.analyserNode.fftSize = 2048;
+
+        this.scriptProcessorNode.onaudioprocess = processEvent => {
+            if (this.recording && !this.disposed) {
+                this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
+            }
+        };
+
+        this.mediaStreamSource.connect(this.sourceNode);
+        this.sourceNode.connect(this.analyserNode);
+        this.analyserNode.connect(this.scriptProcessorNode);
+        this.connectToDestination();
     }
 
     connectToDestination () {
