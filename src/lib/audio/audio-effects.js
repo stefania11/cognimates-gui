@@ -18,24 +18,6 @@ class AudioEffects {
         return effectTypes;
     }
     constructor (buffer, name) {
-        // Some effects will modify the playback rate and/or number of samples.
-        // Need to precompute those values to create the offline audio context.
-        const pitchRatio = Math.pow(2, 4 / 12); // A major third
-        let sampleCount = buffer.length;
-        let playbackRate = 1;
-        switch (name) {
-        case effectTypes.ECHO:
-            sampleCount = buffer.length + (0.25 * 3 * buffer.sampleRate);
-            break;
-        case effectTypes.FASTER:
-            playbackRate = pitchRatio;
-            sampleCount = Math.floor(buffer.length / playbackRate);
-            break;
-        case effectTypes.SLOWER:
-            playbackRate = 1 / pitchRatio;
-            sampleCount = Math.floor(buffer.length / playbackRate);
-            break;
-        }
         this.buffer = buffer;
         this.name = name;
     }
