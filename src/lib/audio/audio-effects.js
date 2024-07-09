@@ -20,7 +20,22 @@ class AudioEffects {
     constructor (buffer, name) {
         this.buffer = buffer;
         this.name = name;
+        this.userGestureOccurred = false;
+
+        // Bind the handleUserGesture method once
+        this.boundHandleUserGesture = this.handleUserGesture.bind(this);
+
+        // Add event listeners for user gestures
+        document.addEventListener('click', this.boundHandleUserGesture);
+        document.addEventListener('touchstart', this.boundHandleUserGesture);
     }
+
+    handleUserGesture () {
+        this.userGestureOccurred = true;
+        document.removeEventListener('click', this.boundHandleUserGesture);
+        document.removeEventListener('touchstart', this.boundHandleUserGesture);
+    }
+
     async process () {
         try {
             // Ensure the AudioContext is initialized before processing
@@ -100,8 +115,8 @@ class AudioEffects {
 
             await this.audioContext.startRendering();
 
-            // Start the oscillator for the RobotEffect after rendering
-            if (this.name === effectTypes.ROBOT) {
+            // Start the oscillator for the RobotEffect after rendering and user gesture
+            if (this.name === effectTypes.ROBOT && this.userGestureOccurred) {
                 input.startOscillator();
             }
         } catch (error) {
