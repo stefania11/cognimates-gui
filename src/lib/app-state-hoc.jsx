@@ -26,6 +26,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     class AppStateWrapper extends React.Component {
         constructor (props) {
             super(props);
+            this.state = {
+                hasError: false
+            };
             let initialState = {};
             let reducers = {};
             let enhancer;
@@ -84,11 +87,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initialState,
                     enhancer
                 );
-                if (process.env.NODE_ENV === 'development') {
-                    console.log('Redux store initialized with state:', initialState);
-                }
             } catch (error) {
-                console.error('Error initializing Redux store:', error);
+                this.setState({hasError: true});
             }
         }
         componentDidUpdate (prevProps) {
@@ -107,6 +107,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 showTelemetryModal, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
+            if (this.state.hasError) {
+                return <div>{'Error initializing Redux store'}</div>;
+            }
             return (
                 <Provider store={this.store}>
                     <ConnectedIntlProvider>
