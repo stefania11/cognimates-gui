@@ -45,17 +45,23 @@ class AudioRecorder {
     }
 
     startRecording () {
+        console.log('startRecording called');
         if (!this.audioContext) {
+            console.error('AudioContext is not initialized.');
             throw new Error('AudioContext is not initialized.');
         }
+        console.log('AudioContext is initialized, starting recording');
         this.recording = true;
     }
 
     async attachUserMediaStream (userMediaStream, onUpdate, onError) {
+        console.log('attachUserMediaStream called');
         this.userMediaStream = userMediaStream;
         try {
+            console.log('Initializing AudioContext');
             await initializeAudioContext();
             this.audioContext = new SharedAudioContext();
+            console.log('AudioContext initialized');
             this.mediaStreamSource = this.audioContext.createMediaStreamSource(userMediaStream);
             this.sourceNode = this.audioContext.createGain();
             this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
@@ -88,7 +94,9 @@ class AudioRecorder {
             // Defer connection to audioContext.destination until after a user gesture
             document.addEventListener('click', this.connectToDestination.bind(this));
             document.addEventListener('touchstart', this.connectToDestination.bind(this));
+            console.log('Event listeners for user gestures added');
         } catch (error) {
+            console.error('Error initializing AudioContext:', error);
             onError(error);
         }
     }

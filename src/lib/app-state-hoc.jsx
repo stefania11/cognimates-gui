@@ -19,7 +19,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
  * @param {React.Component} WrappedComponent - component to provide state for
  * @param {boolean} localesOnly - only provide the locale state, not everything
  *                      required by the GUI. Used to exclude excess state when
-                        only rendering modals, not the GUI.
+ *                      only rendering modals, not the GUI.
  * @returns {React.Component} component with redux and intl state provided
  */
 const AppStateHOC = function (WrappedComponent, localesOnly) {
@@ -77,12 +77,19 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 };
                 enhancer = composeEnhancers(guiMiddleware);
             }
-            const reducer = combineReducers(reducers);
-            this.store = createStore(
-                reducer,
-                initialState,
-                enhancer
-            );
+            try {
+                const reducer = combineReducers(reducers);
+                this.store = createStore(
+                    reducer,
+                    initialState,
+                    enhancer
+                );
+                if (process.env.NODE_ENV === 'development') {
+                    console.log('Redux store initialized with state:', initialState);
+                }
+            } catch (error) {
+                console.error('Error initializing Redux store:', error);
+            }
         }
         componentDidUpdate (prevProps) {
             if (localesOnly) return;
