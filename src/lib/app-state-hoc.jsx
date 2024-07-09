@@ -27,7 +27,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
         constructor (props) {
             super(props);
             this.state = {
-                hasError: false
+                hasError: false,
+                errorMessage: ''
             };
             let initialState = {};
             let reducers = {};
@@ -88,7 +89,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     enhancer
                 );
             } catch (error) {
-                this.setState({hasError: true});
+                this.setState({hasError: true, errorMessage: error.message});
             }
         }
         componentDidUpdate (prevProps) {
@@ -108,7 +109,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 ...componentProps
             } = this.props;
             if (this.state.hasError) {
-                return <div>{'Error initializing Redux store'}</div>;
+                return <div>{`Error initializing Redux store: ${this.state.errorMessage}`}</div>;
             }
             return (
                 <Provider store={this.store}>
