@@ -14,7 +14,7 @@ var postcssImport = require('postcss-import');
 
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    node: {'fs': 'empty'},
+    node: {fs: 'empty'},
     devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
@@ -36,7 +36,11 @@ const base = {
         rules: [{
             test: /\.jsx?$/,
             loader: 'babel-loader',
-            include: [path.resolve(__dirname, 'src'), /node_modules[\\/]scratch-[^\\/]+[\\/]src/, /node_modules[\\/]cognimates-l10n[\\/]src/],
+            include: [
+                path.resolve(__dirname, 'src'),
+                /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
+                /node_modules[\\/]cognimates-l10n[\\/]src/
+            ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config
                 // in much lower dependencies.
@@ -74,9 +78,7 @@ const base = {
                         return [
                             postcssImport,
                             postcssVars,
-                            autoprefixer({
-                                browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
-                            })
+                            autoprefixer()
                         ];
                     }
                 }
