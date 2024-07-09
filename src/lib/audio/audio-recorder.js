@@ -74,8 +74,11 @@ class AudioRecorder {
         this.userMediaStream = userMediaStream;
         try {
             if (!this.audioContext) {
+                this.logMessage('Initializing AudioContext...');
                 initializeAudioContextOnce();
+                this.logMessage('AudioContext initialized.');
                 this.audioContext = new SharedAudioContext();
+                this.logMessage('SharedAudioContext created.');
                 this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
                 this.sourceNode = this.audioContext.createGain();
                 this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
