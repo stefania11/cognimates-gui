@@ -20,6 +20,24 @@ class AudioRecorder {
         this.buffers = [];
 
         this.disposed = false;
+        this.audioContextInitialized = false;
+        this.localErrorLog = []; // Initialize localErrorLog as an empty array
+    }
+
+    getLocalErrorLog () {
+        return [...this.localErrorLog]; // Return a copy of the array
+    }
+
+    clearLocalErrorLog () {
+        this.localErrorLog = [];
+    }
+
+    logMessage (message, context = '') {
+        this.localErrorLog.push({
+            message: message.toString(),
+            stack: message.stack,
+            context: context
+        });
     }
 
     startListening (onStarted, onUpdate, onError) {
@@ -46,7 +64,9 @@ class AudioRecorder {
 
     startRecording () {
         if (!this.audioContext) {
-            throw new Error('AudioContext is not initialized.');
+            const error = new Error('AudioContext is not initialized.');
+            this.logMessage(error);
+            throw error;
         }
         this.recording = true;
     }
@@ -54,8 +74,17 @@ class AudioRecorder {
     async attachUserMediaStream (userMediaStream, onUpdate, onError) {
         this.userMediaStream = userMediaStream;
         try {
-            document.addEventListener('click', this.initializeAudioContextWithGesture.bind(this));
-            document.addEventListener('touchstart', this.initializeAudioContextWithGesture.bind(this));
+            if (!this.audioContext) {
+                if (!this.audioContextInitialized) {
+                    document.addEventListener('click', this.initializeAudioContextWithGesture.bind(this), {once: true});
+                    document.addEventListener(
+                        'touchstart',
+                        this.initializeAudioContextWithGesture.bind(this),
+                        {once: true}
+                    );
+                    this.audioContextInitialized = true;
+                }
+            }
 
             const update = () => {
                 if (this.disposed) return;
@@ -70,30 +99,60 @@ class AudioRecorder {
 
             requestAnimationFrame(update);
         } catch (error) {
+            this.logMessage(error, 'Error in attachUserMediaStream');
             onError(error);
         }
     }
 
     async initializeAudioContextWithGesture () {
-        await initializeAudioContext();
-        this.audioContext = new SharedAudioContext();
-        this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
-        this.sourceNode = this.audioContext.createGain();
+        try {
+            this.audioContextInitialized = true; // Move flag setting before fetch request
+            this.logMessage(new Error('Initializing AudioContext'), 'initializeAudioContextWithGesture');
+            await initializeAudioContext();
+            this.audioContext = new SharedAudioContext();
+            this.logMessage(new Error('SharedAudioContext created'), 'initializeAudioContextWithGesture');
+            this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
+            this.logMessage(new Error('MediaStreamSource created'), 'initializeAudioContextWithGesture');
+            this.sourceNode = this.audioContext.createGain();
+            this.logMessage(new Error('GainNode created'), 'initializeAudioContextWithGesture');
 
-        this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
-        this.analyserNode = this.audioContext.createAnalyser();
-        this.analyserNode.fftSize = 2048;
+            this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
+            this.logMessage(new Error('ScriptProcessorNode created'), 'initializeAudioContextWithGesture');
+            this.analyserNode = this.audioContext.createAnalyser();
+            this.analyserNode.fftSize = 2048;
+            this.logMessage(new Error('AnalyserNode created'), 'initializeAudioContextWithGesture');
 
-        this.scriptProcessorNode.onaudioprocess = processEvent => {
-            if (this.recording && !this.disposed) {
-                this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
-            }
-        };
+            this.scriptProcessorNode.onaudioprocess = processEvent => {
+                if (this.recording && !this.disposed) {
+                    this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
+                }
+            };
 
-        this.mediaStreamSource.connect(this.sourceNode);
-        this.sourceNode.connect(this.analyserNode);
-        this.analyserNode.connect(this.scriptProcessorNode);
-        this.connectToDestination();
+            this.mediaStreamSource.connect(this.sourceNode);
+            this.sourceNode.connect(this.analyserNode);
+            this.analyserNode.connect(this.scriptProcessorNode);
+            this.connectToDestination();
+
+            // Log successful initialization
+            this.logMessage(new Error('AudioContext initialized successfully'), 'initializeAudioContextWithGesture');
+        } catch (error) {
+            fetch('/log-error', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    error: error.toString(),
+                    stack: error.stack,
+                    context: 'Error initializing AudioContext in initializeAudioContextWithGesture'
+                })
+            }).catch(fetchError => {
+                // Local fallback logging mechanism
+                this.logMessage(error, 'Error initializing AudioContext in initializeAudioContextWithGesture');
+                this.logMessage(fetchError, 'Fetch error in initializeAudioContextWithGesture');
+            });
+            this.audioContextInitialized = false;
+        }
     }
 
     connectToDestination () {
@@ -104,6 +163,8 @@ class AudioRecorder {
 
     stop () {
         if (!this.audioContext) {
+            const error = new Error('AudioContext is not initialized.');
+            this.logMessage(error);
             return null;
         }
 
@@ -149,21 +210,25 @@ class AudioRecorder {
 
     dispose () {
         if (this.started) {
-            if (this.scriptProcessorNode) {
-                this.scriptProcessorNode.onaudioprocess = null;
-                this.scriptProcessorNode.disconnect();
-            }
-            if (this.analyserNode) {
-                this.analyserNode.disconnect();
-            }
-            if (this.sourceNode) {
-                this.sourceNode.disconnect();
-            }
-            if (this.mediaStreamSource) {
-                this.mediaStreamSource.disconnect();
-            }
-            if (this.userMediaStream) {
-                this.userMediaStream.getAudioTracks()[0].stop();
+            try {
+                if (this.scriptProcessorNode) {
+                    this.scriptProcessorNode.onaudioprocess = null;
+                    this.scriptProcessorNode.disconnect();
+                }
+                if (this.analyserNode) {
+                    this.analyserNode.disconnect();
+                }
+                if (this.sourceNode) {
+                    this.sourceNode.disconnect();
+                }
+                if (this.mediaStreamSource) {
+                    this.mediaStreamSource.disconnect();
+                }
+                if (this.userMediaStream) {
+                    this.userMediaStream.getAudioTracks()[0].stop();
+                }
+            } catch (error) {
+                this.logMessage(error, 'Error in dispose');
             }
         }
         this.disposed = true;
