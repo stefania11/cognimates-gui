@@ -2,7 +2,6 @@ import StartAudioContext from 'startaudiocontext';
 import bowser from 'bowser';
 
 let AUDIO_CONTEXT;
-const debugMode = true; // Debug mode flag
 
 /**
  * Initialize the AudioContext on user interaction
@@ -26,12 +25,6 @@ const handleError = error => {
     });
 };
 
-const logMessage = message => {
-    if (debugMode) {
-        console.log(`[DEBUG] ${new Date().toISOString()}: ${message}`);
-    }
-};
-
 const initializeAudioContext = function () {
     return new Promise((resolve, reject) => {
         if (!AUDIO_CONTEXT && !bowser.msie) {
@@ -39,7 +32,6 @@ const initializeAudioContext = function () {
             StartAudioContext(AUDIO_CONTEXT);
             AUDIO_CONTEXT.resume().then(() => {
                 // AudioContext resumed successfully
-                logMessage('AudioContext resumed successfully');
                 resolve();
             })
                 .catch(error => {
@@ -53,14 +45,24 @@ const initializeAudioContext = function () {
     });
 };
 
+/**
+ * Initialize the AudioContext only once
+ */
+let audioContextInitialized = false;
+
+const initializeAudioContextOnce = () => {
+    if (!audioContextInitialized) {
+        audioContextInitialized = true;
+        initializeAudioContext().catch(handleError);
+    }
+};
+
 document.addEventListener('click', () => {
-    logMessage('Click event detected, initializing AudioContext');
-    initializeAudioContext().catch(handleError);
+    initializeAudioContextOnce();
 });
 
 document.addEventListener('touchstart', () => {
-    logMessage('Touchstart event detected, initializing AudioContext');
-    initializeAudioContext().catch(handleError);
+    initializeAudioContextOnce();
 });
 
 /**
@@ -74,4 +76,4 @@ export default async function () {
     return AUDIO_CONTEXT;
 }
 
-export {initializeAudioContext};
+export {initializeAudioContext, initializeAudioContextOnce};

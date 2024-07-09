@@ -1,6 +1,6 @@
 import 'get-float-time-domain-data';
 import getUserMedia from 'get-user-media-promise';
-import SharedAudioContext, {initializeAudioContext} from './shared-audio-context.js';
+import SharedAudioContext, {initializeAudioContextOnce} from './shared-audio-context.js';
 import {computeRMS} from './audio-util.js';
 
 class AudioRecorder {
@@ -20,7 +20,6 @@ class AudioRecorder {
         this.buffers = [];
 
         this.disposed = false;
-        this.audioContextInitialized = false;
         this.localErrorLog = []; // Initialize localErrorLog as an empty array
     }
 
@@ -75,15 +74,29 @@ class AudioRecorder {
         this.userMediaStream = userMediaStream;
         try {
             if (!this.audioContext) {
-                if (!this.audioContextInitialized) {
-                    document.addEventListener('click', this.initializeAudioContextWithGesture.bind(this), {once: true});
-                    document.addEventListener(
-                        'touchstart',
-                        this.initializeAudioContextWithGesture.bind(this),
-                        {once: true}
-                    );
-                    this.audioContextInitialized = true;
+                initializeAudioContextOnce();
+                this.audioContext = new SharedAudioContext();
+                this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
+                this.sourceNode = this.audioContext.createGain();
+                this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
+                this.analyserNode = this.audioContext.createAnalyser();
+                this.analyserNode.fftSize = 2048;
+            }
+
+            this.scriptProcessorNode.onaudioprocess = processEvent => {
+                if (this.recording && !this.disposed) {
+                    this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
                 }
+            };
+
+            try {
+                this.mediaStreamSource.connect(this.sourceNode);
+                this.sourceNode.connect(this.analyserNode);
+                this.analyserNode.connect(this.scriptProcessorNode);
+                this.connectToDestination();
+            } catch (error) {
+                this.logMessage(error, 'Error connecting audio nodes in attachUserMediaStream');
+                onError(error);
             }
 
             const update = () => {
@@ -101,57 +114,6 @@ class AudioRecorder {
         } catch (error) {
             this.logMessage(error, 'Error in attachUserMediaStream');
             onError(error);
-        }
-    }
-
-    async initializeAudioContextWithGesture () {
-        try {
-            this.audioContextInitialized = true; // Move flag setting before fetch request
-            this.logMessage(new Error('Initializing AudioContext'), 'initializeAudioContextWithGesture');
-            await initializeAudioContext();
-            this.audioContext = new SharedAudioContext();
-            this.logMessage(new Error('SharedAudioContext created'), 'initializeAudioContextWithGesture');
-            this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
-            this.logMessage(new Error('MediaStreamSource created'), 'initializeAudioContextWithGesture');
-            this.sourceNode = this.audioContext.createGain();
-            this.logMessage(new Error('GainNode created'), 'initializeAudioContextWithGesture');
-
-            this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
-            this.logMessage(new Error('ScriptProcessorNode created'), 'initializeAudioContextWithGesture');
-            this.analyserNode = this.audioContext.createAnalyser();
-            this.analyserNode.fftSize = 2048;
-            this.logMessage(new Error('AnalyserNode created'), 'initializeAudioContextWithGesture');
-
-            this.scriptProcessorNode.onaudioprocess = processEvent => {
-                if (this.recording && !this.disposed) {
-                    this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
-                }
-            };
-
-            this.mediaStreamSource.connect(this.sourceNode);
-            this.sourceNode.connect(this.analyserNode);
-            this.analyserNode.connect(this.scriptProcessorNode);
-            this.connectToDestination();
-
-            // Log successful initialization
-            this.logMessage(new Error('AudioContext initialized successfully'), 'initializeAudioContextWithGesture');
-        } catch (error) {
-            fetch('/log-error', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    error: error.toString(),
-                    stack: error.stack,
-                    context: 'Error initializing AudioContext in initializeAudioContextWithGesture'
-                })
-            }).catch(fetchError => {
-                // Local fallback logging mechanism
-                this.logMessage(error, 'Error initializing AudioContext in initializeAudioContextWithGesture');
-                this.logMessage(fetchError, 'Fetch error in initializeAudioContextWithGesture');
-            });
-            this.audioContextInitialized = false;
         }
     }
 
