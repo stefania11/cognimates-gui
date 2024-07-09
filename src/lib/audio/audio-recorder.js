@@ -85,9 +85,17 @@ class AudioRecorder {
             this.mediaStreamSource.connect(this.sourceNode);
             this.sourceNode.connect(this.analyserNode);
             this.analyserNode.connect(this.scriptProcessorNode);
-            this.scriptProcessorNode.connect(this.audioContext.destination);
+            // Defer connection to audioContext.destination until after a user gesture
+            document.addEventListener('click', this.connectToDestination.bind(this));
+            document.addEventListener('touchstart', this.connectToDestination.bind(this));
         } catch (error) {
             onError(error);
+        }
+    }
+
+    connectToDestination() {
+        if (this.scriptProcessorNode && this.audioContext) {
+            this.scriptProcessorNode.connect(this.audioContext.destination);
         }
     }
 
