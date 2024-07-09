@@ -89,6 +89,19 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     enhancer
                 );
             } catch (error) {
+                // Implement a more robust error logging mechanism
+                fetch('/log-error', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        error: error.toString(),
+                        stack: error.stack
+                    })
+                }).catch(() => {
+                    // Handle fetch error (e.g., retry logic or alternative logging)
+                });
                 this.setState({hasError: true, errorMessage: error.message});
             }
         }

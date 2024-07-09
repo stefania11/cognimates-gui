@@ -11,8 +11,18 @@ const handleError = error => {
     // Implement a more robust error handling strategy here
     // For example, log the error to a monitoring service or display a user-friendly message
     // Placeholder for error handling logic
-    // TODO: Replace console.error with a more robust error handling mechanism
-    console.error('Error initializing AudioContext:', error);
+    // Error logging to a monitoring service
+    fetch('/log-error', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            error: error.toString()
+        })
+    }).catch(() => {
+        // Fetch error handling (e.g., retry logic or alternative logging)
+    });
 };
 
 const initializeAudioContext = function () {
