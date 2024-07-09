@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {compose} from 'redux';
+import PropTypes from 'prop-types';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
@@ -29,6 +30,55 @@ const handleTelemetryModalOptOut = () => {
  * that instantiates the VM causes unsupported browsers to crash
  * {object} appTarget - the DOM element to render to
  */
+class ErrorBoundary extends React.Component {
+    static getDerivedStateFromError (error) {
+        // Update state so the next render will show the fallback UI.
+        log.error('ErrorBoundary caught an error in getDerivedStateFromError:', error);
+        return {hasError: true};
+    }
+
+    constructor (props) {
+        super(props);
+        this.state = {hasError: false};
+    }
+
+    componentDidCatch (error, errorInfo) {
+        // Log the error to an error reporting service
+        try {
+            fetch('/log-error', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    error: error.toString(),
+                    errorInfo
+                })
+            });
+        } catch (fetchError) {
+            log.error('Failed to log error to server:', fetchError);
+        }
+    }
+
+    render () {
+        if (this.state.hasError) {
+            // Render custom fallback UI
+            return (
+                <div>
+                    <h1>{'Something went wrong.'}</h1>
+                    <p>{'Please try refreshing the page or contact support if the issue persists.'}</p>
+                </div>
+            );
+        }
+
+        return this.props.children;
+    }
+}
+
+ErrorBoundary.propTypes = {
+    children: PropTypes.node
+};
+
 export default appTarget => {
     GUI.setAppElement(appTarget);
 
@@ -63,23 +113,29 @@ export default appTarget => {
         window.onbeforeunload = () => true;
     }
 
-    ReactDOM.render(
-        // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
-        simulateScratchDesktop ?
-            <WrappedGui
-                isScratchDesktop
-                showTelemetryModal
-                canSave={false}
-                onTelemetryModalCancel={handleTelemetryModalCancel}
-                onTelemetryModalOptIn={handleTelemetryModalOptIn}
-                onTelemetryModalOptOut={handleTelemetryModalOptOut}
-            /> :
-            <WrappedGui
-                backpackVisible
-                showComingSoon
-                backpackHost={backpackHost}
-                canSave={false}
-                onClickLogo={onClickLogo}
-            />,
-        appTarget);
+    try {
+        ReactDOM.render(
+            // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
+            <ErrorBoundary>
+                {simulateScratchDesktop ?
+                    <WrappedGui
+                        isScratchDesktop
+                        showTelemetryModal
+                        canSave={false}
+                        onTelemetryModalCancel={handleTelemetryModalCancel}
+                        onTelemetryModalOptIn={handleTelemetryModalOptIn}
+                        onTelemetryModalOptOut={handleTelemetryModalOptOut}
+                    /> :
+                    <WrappedGui
+                        backpackVisible
+                        showComingSoon
+                        backpackHost={backpackHost}
+                        canSave={false}
+                        onClickLogo={onClickLogo}
+                    />}
+            </ErrorBoundary>,
+            appTarget);
+    } catch (error) {
+        log.error('Error during ReactDOM.render:', error);
+    }
 };

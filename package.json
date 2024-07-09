@@ -11,7 +11,7 @@
     "i18n:push": "tx-push-src cognimates interface translations/en.json",
     "i18n:pull": "tx pull -r 'cognimates.*' -f",
     "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/ && npm run i18n:push",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --disable-host-check",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --runInBand test[\\\\/]integration",
     "test:lint": "eslint . --ext .js,.jsx",

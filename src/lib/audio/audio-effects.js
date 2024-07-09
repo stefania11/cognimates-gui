@@ -1,6 +1,7 @@
 import EchoEffect from './effects/echo-effect.js';
 import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
+import {initializeAudioContext} from './shared-audio-context.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -66,37 +67,48 @@ class AudioEffects {
         this.source.playbackRate.value = playbackRate;
         this.name = name;
     }
-    process (done) {
-        // Some effects need to use more nodes and must expose an input and output
-        let input;
-        let output;
-        switch (this.name) {
-        case effectTypes.LOUDER:
-            ({input, output} = new VolumeEffect(this.audioContext, 1.25));
-            break;
-        case effectTypes.SOFTER:
-            ({input, output} = new VolumeEffect(this.audioContext, 0.75));
-            break;
-        case effectTypes.ECHO:
-            ({input, output} = new EchoEffect(this.audioContext, 0.25));
-            break;
-        case effectTypes.ROBOT:
-            ({input, output} = new RobotEffect(this.audioContext, 0.25));
-            break;
+    async process () {
+        try {
+            // Ensure the AudioContext is initialized before processing
+            await initializeAudioContext();
+
+            // Some effects need to use more nodes and must expose an input and output
+            let input;
+            let output;
+            switch (this.name) {
+            case effectTypes.LOUDER:
+                ({input, output} = new VolumeEffect(this.audioContext, 1.25));
+                break;
+            case effectTypes.SOFTER:
+                ({input, output} = new VolumeEffect(this.audioContext, 0.75));
+                break;
+            case effectTypes.ECHO:
+                ({input, output} = new EchoEffect(this.audioContext, 0.25));
+                break;
+            case effectTypes.ROBOT:
+                ({input, output} = new RobotEffect(this.audioContext, 0.25));
+                break;
+            }
+
+            if (input && output) {
+                this.source.connect(input);
+                output.connect(this.audioContext.destination);
+            } else {
+                // No effects nodes are needed, wire directly to the output
+                this.source.connect(this.audioContext.destination);
+            }
+
+            this.source.start();
+
+            await this.audioContext.startRendering();
+
+            // Start the oscillator for the RobotEffect after rendering
+            if (this.name === effectTypes.ROBOT) {
+                input.startOscillator();
+            }
+        } catch (error) {
+            throw new Error(`Error initializing AudioContext: ${error.message}`);
         }
-
-        if (input && output) {
-            this.source.connect(input);
-            output.connect(this.audioContext.destination);
-        } else {
-            // No effects nodes are needed, wire directly to the output
-            this.source.connect(this.audioContext.destination);
-        }
-
-        this.source.start();
-
-        this.audioContext.startRendering();
-        this.audioContext.oncomplete = done;
     }
 }
 

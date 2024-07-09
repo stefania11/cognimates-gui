@@ -33,9 +33,8 @@ class RobotEffect {
             return node;
         };
 
-        const oscillator = this.audioContext.createOscillator();
-        oscillator.frequency.value = 50;
-        oscillator.start(0);
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.frequency.value = 50;
 
         const vInGain = this.audioContext.createGain();
         vInGain.gain.value = 0.5;
@@ -75,7 +74,7 @@ class RobotEffect {
 
         vcInverter1.connect(vcDiode3);
 
-        oscillator.connect(vInGain);
+        this.oscillator.connect(vInGain);
         vInGain.connect(vInInverter1);
         vInGain.connect(vcInverter1);
         vInGain.connect(vcDiode4);
@@ -95,6 +94,10 @@ class RobotEffect {
         biquadFilter.connect(compressor);
 
         compressor.connect(this.output);
+    }
+
+    startOscillator () {
+        this.oscillator.start(0);
     }
 }
 
