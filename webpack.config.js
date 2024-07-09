@@ -195,8 +195,8 @@ module.exports = [
                 path: path.resolve('dist')
             },
             externals: {
-                React: 'react',
-                ReactDOM: 'react-dom',
+                'React': 'react',
+                'ReactDOM': 'react-dom',
                 'cognimates-l10n': true
             },
             module: {

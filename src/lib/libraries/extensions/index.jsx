@@ -110,7 +110,7 @@ export default [
         featured: true
     },
     {
-        name: "Cozmo",
+        name: 'Cozmo',
         extensionId: 'cozmo',
         iconURL: cozmoImage,
         insetIconURL: cozmoInsetImage,
@@ -123,22 +123,22 @@ export default [
         ),
         featured: true
     },
-  {
-      name: "Twitter",
-      extensionId: 'twitter',
-      iconURL: twitterImage,
-      insetIconURL: twitterInsetImage,
-      description: (
+    {
+        name: 'Twitter',
+        extensionId: 'twitter',
+        iconURL: twitterImage,
+        insetIconURL: twitterInsetImage,
+        description: (
             <FormattedMessage
                 defaultMessage="Use Twitter in your projects"
                 description="Description for the 'Twitter' extension"
                 id="gui.extension.twitter.description"
             />
         ),
-      featured: true,
-      internetConnectionRequired: true
-  },
-  {
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
         name: (
             <FormattedMessage
                 defaultMessage="Music"
@@ -347,7 +347,7 @@ export default [
 
     },
     {
-        name: "Alexa",
+        name: 'Alexa',
         extensionId: 'alexa',
         iconURL: alexaImage,
         insetIconURL: alexaInsetImage,
@@ -361,7 +361,7 @@ export default [
         featured: true
     },
     {
-        name: "Ergo",
+        name: 'Ergo',
         extensionId: 'ergo',
         iconURL: ergoImage,
         insetIconURL: ergoInsetImage,
@@ -396,7 +396,7 @@ export default [
         internetConnectionRequired: true
     },
     {
-        name: "Wemo",
+        name: 'Wemo',
         extensionId: 'wemo',
         iconURL: wemoMenuImage,
         insetIconURL: wemoButtonImage,
@@ -406,20 +406,20 @@ export default [
                 description="Description for the 'Text' extension"
                 id="gui.extension.wemo.description"
             />
-        ), 
-        featured: true, 
-        internetConnectionRequired: true
-    },
-    { 
-        name: "Muse",
-        extensionId: 'muse',
-        iconURL: museImage,
-        insetIconURL: museInsetImage,
-        description: "Muse",
+        ),
         featured: true,
         internetConnectionRequired: true
     },
-    { 
+    {
+        name: 'Muse',
+        extensionId: 'muse',
+        iconURL: museImage,
+        insetIconURL: museInsetImage,
+        description: 'Muse',
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
         name: (
             <FormattedMessage
                 defaultMessage="Smart Lights"

@@ -60,7 +60,7 @@ class ExtensionLibrary extends React.PureComponent {
         });
     }
 
-    refresh() {
+    refresh () {
         this.setState(this.state);
     }
 
@@ -89,7 +89,7 @@ ExtensionLibrary.propTypes = {
     onCategorySelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired, // eslint-disable-line react/no-unused-prop-types
+    vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 export default injectIntl(ExtensionLibrary);

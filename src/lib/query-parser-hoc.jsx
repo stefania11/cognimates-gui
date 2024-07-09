@@ -20,8 +20,8 @@ const QueryParserHOC = function (WrappedComponent) {
             super(props);
             const queryParams = queryString.parse(location.search);
             if (queryParams.url != undefined) {
-              this.openExtensionFromURL(queryParams.url);
-              return;
+                this.openExtensionFromURL(queryParams.url);
+                return;
             }
             const tutorialId = detectTutorialId(queryParams);
             if (tutorialId) {

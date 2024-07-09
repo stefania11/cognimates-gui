@@ -25,7 +25,7 @@ export default [
         name: 'Vision',
         extensionURL: 'vision',
         iconURL: videoImage,
-        description: "Vision Training",
+        description: 'Vision Training',
         featured: true,
         disabled: false
     },

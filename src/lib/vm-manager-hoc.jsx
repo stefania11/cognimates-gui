@@ -15,10 +15,10 @@ import {
 } from '../reducers/project-state';
 
 import {
-  isExtensionUrlProvided,
-  setExtensionLoading,
-  setExtensionLoaded,
-  extensionLoadingStates
+    isExtensionUrlProvided,
+    setExtensionLoading,
+    setExtensionLoaded,
+    extensionLoadingStates
 } from '../reducers/extension-loader';
 
 /*
@@ -43,7 +43,7 @@ const vmManagerHOC = function (WrappedComponent) {
             }
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
-                if(!this.props.extensionURLProvided){
+                if (!this.props.extensionURLProvided){
                     this.props.vm.loadCognimatesExts();
                 }
             }
@@ -89,13 +89,13 @@ const vmManagerHOC = function (WrappedComponent) {
         }
         loadExtension (url) {
             return this.props.vm.loadExtensionFromURL(url)
-              .then(() => {
-                  this.props.onSetExtensionLoaded();                
-                  this.props.vm.loadCognimatesExts();
-              })
-              .catch( e => {
-                  this.props.onError(e);
-              });
+                .then(() => {
+                    this.props.onSetExtensionLoaded();
+                    this.props.vm.loadCognimatesExts();
+                })
+                .catch(e => {
+                    this.props.onError(e);
+                });
         }
         render () {
             const {
@@ -151,7 +151,7 @@ const vmManagerHOC = function (WrappedComponent) {
     VMManager.defaultProps = {
         extensionURLProvided: false,
         extensionUrl: ''
-    }
+    };
 
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
