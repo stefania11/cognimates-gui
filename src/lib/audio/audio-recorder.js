@@ -93,7 +93,7 @@ class AudioRecorder {
         }
     }
 
-    connectToDestination() {
+    connectToDestination () {
         if (this.scriptProcessorNode && this.audioContext) {
             this.scriptProcessorNode.connect(this.audioContext.destination);
         }
