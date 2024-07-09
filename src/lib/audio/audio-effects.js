@@ -36,41 +36,57 @@ class AudioEffects {
             sampleCount = Math.floor(buffer.length / playbackRate);
             break;
         }
-        if (window.OfflineAudioContext) {
-            this.audioContext = new window.OfflineAudioContext(1, sampleCount, buffer.sampleRate);
-        } else {
-            // Need to use webkitOfflineAudioContext, which doesn't support all sample rates.
-            // Resample by adjusting sample count to make room and set offline context to desired sample rate.
-            const sampleScale = 44100 / buffer.sampleRate;
-            this.audioContext = new window.webkitOfflineAudioContext(1, sampleScale * sampleCount, 44100);
-        }
-
-        // For the reverse effect we need to manually reverse the data into a new audio buffer
-        // to prevent overwriting the original, so that the undo stack works correctly.
-        // Doing buffer.reverse() would mutate the original data.
-        if (name === effectTypes.REVERSE) {
-            const originalBufferData = buffer.getChannelData(0);
-            const newBuffer = this.audioContext.createBuffer(1, buffer.length, buffer.sampleRate);
-            const newBufferData = newBuffer.getChannelData(0);
-            const bufferLength = buffer.length;
-            for (let i = 0; i < bufferLength; i++) {
-                newBufferData[i] = originalBufferData[bufferLength - i - 1];
-            }
-            this.buffer = newBuffer;
-        } else {
-            // All other effects use the original buffer because it is not modified.
-            this.buffer = buffer;
-        }
-
-        this.source = this.audioContext.createBufferSource();
-        this.source.buffer = this.buffer;
-        this.source.playbackRate.value = playbackRate;
+        this.buffer = buffer;
         this.name = name;
     }
     async process () {
         try {
             // Ensure the AudioContext is initialized before processing
             await initializeAudioContext();
+
+            // Create the OfflineAudioContext after the AudioContext is initialized
+            const pitchRatio = Math.pow(2, 4 / 12); // A major third
+            let sampleCount = this.buffer.length;
+            let playbackRate = 1;
+            switch (this.name) {
+            case effectTypes.ECHO:
+                sampleCount = this.buffer.length + (0.25 * 3 * this.buffer.sampleRate);
+                break;
+            case effectTypes.FASTER:
+                playbackRate = pitchRatio;
+                sampleCount = Math.floor(this.buffer.length / playbackRate);
+                break;
+            case effectTypes.SLOWER:
+                playbackRate = 1 / pitchRatio;
+                sampleCount = Math.floor(this.buffer.length / playbackRate);
+                break;
+            }
+            if (window.OfflineAudioContext) {
+                this.audioContext = new window.OfflineAudioContext(1, sampleCount, this.buffer.sampleRate);
+            } else {
+                // Need to use webkitOfflineAudioContext, which doesn't support all sample rates.
+                // Resample by adjusting sample count to make room and set offline context to desired sample rate.
+                const sampleScale = 44100 / this.buffer.sampleRate;
+                this.audioContext = new window.webkitOfflineAudioContext(1, sampleScale * sampleCount, 44100);
+            }
+
+            // For the reverse effect we need to manually reverse the data into a new audio buffer
+            // to prevent overwriting the original, so that the undo stack works correctly.
+            // Doing buffer.reverse() would mutate the original data.
+            if (this.name === effectTypes.REVERSE) {
+                const originalBufferData = this.buffer.getChannelData(0);
+                const newBuffer = this.audioContext.createBuffer(1, this.buffer.length, this.buffer.sampleRate);
+                const newBufferData = newBuffer.getChannelData(0);
+                const bufferLength = this.buffer.length;
+                for (let i = 0; i < bufferLength; i++) {
+                    newBufferData[i] = originalBufferData[bufferLength - i - 1];
+                }
+                this.buffer = newBuffer;
+            }
+
+            this.source = this.audioContext.createBufferSource();
+            this.source.buffer = this.buffer;
+            this.source.playbackRate.value = playbackRate;
 
             // Some effects need to use more nodes and must expose an input and output
             let input;
