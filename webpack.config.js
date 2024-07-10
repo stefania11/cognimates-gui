@@ -7,11 +7,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // Minification is disabled to address linter error
 
-// PostCss
-var autoprefixer = require('autoprefixer');
-var postcssVars = require('postcss-simple-vars');
-var postcssImport = require('postcss-import');
-
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     node: {},
@@ -86,9 +81,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                postcssImport(),
-                                postcssVars(),
-                                autoprefixer()
+                                'postcss-import',
+                                'postcss-simple-vars',
+                                'autoprefixer'
                             ]
                         }
                     }
@@ -113,9 +108,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                postcssImport(),
-                                postcssVars(),
-                                autoprefixer()
+                                'postcss-import',
+                                'postcss-simple-vars',
+                                'autoprefixer'
                             ]
                         }
                     }
@@ -199,9 +194,9 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        postcssImport(),
-                                        postcssVars(),
-                                        autoprefixer()
+                                        'postcss-import',
+                                        'postcss-simple-vars',
+                                        'autoprefixer'
                                     ]
                                 }
                             }
@@ -226,9 +221,9 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        postcssImport(),
-                                        postcssVars(),
-                                        autoprefixer()
+                                        'postcss-import',
+                                        'postcss-simple-vars',
+                                        'autoprefixer'
                                     ]
                                 }
                             }
