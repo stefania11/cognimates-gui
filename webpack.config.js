@@ -73,7 +73,7 @@ const base = {
                 loader: 'css-loader',
                 options: {
                     modules: true,
-                    importLoaders: 2, // Adjusted to ensure proper handling of @imported resources
+                    importLoaders: 1, // Adjusted to ensure proper handling of @imported resources
                     localIdentName: '[name]_[local]_[hash:base64:5]',
                     camelCase: true
                 }
@@ -170,7 +170,7 @@ module.exports = [
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            importLoaders: 2, // Adjusted to ensure proper handling of @imported resources
+                            importLoaders: 1, // Adjusted to ensure proper handling of @imported resources
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             camelCase: true
                         }
