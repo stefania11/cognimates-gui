@@ -64,7 +64,6 @@ const base = {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
-                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -85,7 +84,8 @@ const base = {
                             ]
                         }
                     }
-                }
+                },
+                'style-loader'
             ]
         },
         {
@@ -122,7 +122,6 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
-                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -192,7 +191,6 @@ module.exports = [
                     test: /\.css$/,
                     exclude: /node_modules/,
                     use: [
-                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -213,7 +211,8 @@ module.exports = [
                                     ]
                                 }
                             }
-                        }
+                        },
+                        'style-loader'
                     ]
                 },
                 {
@@ -249,7 +248,6 @@ module.exports = [
                     test: /\.css$/,
                     include: /node_modules/,
                     use: [
-                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -266,7 +264,8 @@ module.exports = [
                                     ]
                                 }
                             }
-                        }
+                        },
+                        'style-loader'
                     ]
                 }
             ])
