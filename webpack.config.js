@@ -198,7 +198,6 @@ module.exports = [
                                 postcssOptions: {
                                     plugins: [
                                         'postcss-import',
-                                        'postcss-simple-vars',
                                         'autoprefixer'
                                     ]
                                 }
@@ -226,7 +225,6 @@ module.exports = [
                                 postcssOptions: {
                                     plugins: [
                                         'postcss-import',
-                                        'postcss-simple-vars',
                                         'autoprefixer'
                                     ]
                                 }
