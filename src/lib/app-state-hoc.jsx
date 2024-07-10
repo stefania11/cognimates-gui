@@ -92,14 +92,30 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(applyMiddleware(guiMiddleware, loggerMiddleware));
             }
             try {
+                if (process.env.NODE_ENV === 'development') {
+                    // eslint-disable-next-line no-console
+                    console.log('Initializing Redux store with the following configuration:');
+                    // eslint-disable-next-line no-console
+                    console.log('Reducers:', reducers);
+                    // eslint-disable-next-line no-console
+                    console.log('Initial State:', initialState);
+                    // eslint-disable-next-line no-console
+                    console.log('Enhancer:', enhancer);
+                }
+
                 const reducer = combineReducers(reducers);
                 this.store = createStore(
                     reducer,
                     initialState,
                     enhancer
                 );
-                // eslint-disable-next-line no-console
-                console.log('Initial Redux store state:', this.store.getState());
+
+                if (process.env.NODE_ENV === 'development') {
+                    // eslint-disable-next-line no-console
+                    console.log('Redux store created successfully.');
+                    // eslint-disable-next-line no-console
+                    console.log('Initial Redux store state:', this.store.getState());
+                }
             } catch (error) {
                 // Log the error details to the console for debugging
                 // eslint-disable-next-line no-console
