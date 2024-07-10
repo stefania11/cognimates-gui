@@ -119,7 +119,7 @@ const base = {
     optimization: {
         splitChunks: {
             chunks: 'all',
-            name: 'lib.min'
+            name: false
         },
         runtimeChunk: {
             name: entrypoint => `runtime~${entrypoint.name}`
@@ -217,7 +217,7 @@ module.exports = [
         optimization: {
             splitChunks: {
                 chunks: 'all',
-                name: 'lib.min'
+                name: false
             },
             runtimeChunk: {
                 name: 'runtime'
