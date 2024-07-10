@@ -77,6 +77,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
                 const {ScratchPaintReducer} = require('scratch-paint');
+                console.log('ScratchPaintReducer:', ScratchPaintReducer);
+                console.log('Props:', props);
 
                 let initializedGui = guiInitialState;
                 if (props.isFullScreen || props.isPlayerOnly) {
@@ -111,6 +113,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     console.log('Enhancer before store creation:', enhancer);
                     // eslint-disable-next-line no-console
                     console.log('Type of createStore:', typeof createStore);
+                    // eslint-disable-next-line no-console
+                    console.log('Props before store creation:', props);
                 }
 
                 const reducer = combineReducers(reducers);
@@ -124,6 +128,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 if (process.env.NODE_ENV === 'development') {
                     // eslint-disable-next-line no-console
                     console.log('Created Redux store:', this.store);
+                    // eslint-disable-next-line no-console
+                    console.log('Store state after creation:', this.store.getState());
+                    // eslint-disable-next-line no-console
+                    console.log('Props after store creation:', props);
                     // Expose the store on the window object for debugging
                     window.store = this.store;
                 }
