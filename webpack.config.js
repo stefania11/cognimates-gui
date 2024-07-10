@@ -75,7 +75,17 @@ const base = {
                         importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
-                'postcss-loader'
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                'postcss-import',
+                                'autoprefixer'
+                            ]
+                        }
+                    }
+                }
             ]
         },
         // CSS loader configuration for node_modules CSS files
@@ -164,7 +174,17 @@ module.exports = [
                                 importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
-                        'postcss-loader'
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        'postcss-import',
+                                        'autoprefixer'
+                                    ]
+                                }
+                            }
+                        }
                     ]
                 },
                 {
