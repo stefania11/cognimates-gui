@@ -126,7 +126,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
 
                 // Implement a more robust error logging mechanism
                 // Intended use: send error details to a remote logging service
-                fetch('/log-error', {
+                fetch('http://localhost:8602/log-error', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -160,7 +160,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
 
             // Implement a more robust error logging mechanism
             // Intended use: send error details to a remote logging service
-            fetch('/log-error', {
+            fetch('http://localhost:8602/log-error', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
