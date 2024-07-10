@@ -32,7 +32,10 @@ const base = {
         ReactDOM: 'react-dom'
     },
     resolve: {
-        symlinks: false
+        symlinks: false,
+        fallback: {
+            stream: require.resolve('stream-browserify')
+        }
     },
     module: {
         rules: [{
@@ -75,13 +78,13 @@ const base = {
             }, {
                 loader: 'postcss-loader',
                 options: {
-                    ident: 'postcss',
-                    plugins: function () {
-                        return [
+                    postcssOptions: {
+                        ident: 'postcss',
+                        plugins: [
                             postcssImport,
                             postcssVars,
                             autoprefixer()
-                        ];
+                        ]
                     }
                 }
             }]
@@ -132,7 +135,7 @@ module.exports = [
                 name: 'lib.min'
             },
             runtimeChunk: {
-                name: 'lib.min'
+                name: 'runtime'
             }
         },
         plugins: base.plugins.concat([
