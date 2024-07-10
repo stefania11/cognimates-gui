@@ -131,6 +131,9 @@
     "worker-loader": "^3.0.8",
     "xhr": "2.5.0"
   },
+  "resolutions": {
+    "worker-loader": "^3.0.8"
+  },
   "jest": {
     "setupFiles": [
       "raf/polyfill",
