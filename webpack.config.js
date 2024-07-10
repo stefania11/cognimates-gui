@@ -111,7 +111,8 @@ const base = {
                             ]
                         }
                     }
-                }
+                },
+                'sass-loader' // Add sass-loader to handle SCSS files
             ]
         }]
     },
@@ -209,7 +210,8 @@ module.exports = [
                                     ]
                                 }
                             }
-                        }
+                        },
+                        'sass-loader' // Add sass-loader to handle SCSS files
                     ]
                 }
             ])
