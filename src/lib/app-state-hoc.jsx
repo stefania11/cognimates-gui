@@ -98,6 +98,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initialState,
                     enhancer
                 );
+                // eslint-disable-next-line no-console
+                console.log('Initial Redux store state:', this.store.getState());
             } catch (error) {
                 // Log the error details to the console for debugging
                 // eslint-disable-next-line no-console
@@ -131,6 +133,30 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             if (prevProps.isFullScreen !== this.props.isFullScreen) {
                 this.store.dispatch(setFullScreen(this.props.isFullScreen));
             }
+        }
+        componentDidCatch (error, errorInfo) {
+            // Log the error details to the console for debugging
+            // eslint-disable-next-line no-console
+            console.error('Error caught by componentDidCatch:', error, errorInfo);
+
+            // Implement a more robust error logging mechanism
+            // Intended use: send error details to a remote logging service
+            fetch('/log-error', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    error: error.toString(),
+                    errorInfo
+                })
+            }).catch(fetchError => {
+                // eslint-disable-next-line no-console
+                console.error('Failed to log error to server:', fetchError);
+            });
+
+            // Set the error state with additional information
+            this.setState({hasError: true, errorMessage: error.message});
         }
         render () {
             const {
