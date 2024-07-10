@@ -21,11 +21,15 @@ const appTarget = document.createElement('div');
 appTarget.className = styles.app;
 document.body.appendChild(appTarget);
 
+console.log('appTarget:', appTarget);
+console.log('supportedBrowser:', supportedBrowser());
+
 if (supportedBrowser()) {
     // require needed here to avoid importing unsupported browser-crashing code
     // at the top level
-    require('./render-gui.jsx').default(appTarget);
-
+    const renderGui = require('./render-gui.jsx').default;
+    console.log('renderGui:', renderGui);
+    renderGui(appTarget);
 } else {
     BrowserModalComponent.setAppElement(appTarget);
     const WrappedBrowserModalComponent = AppStateHOC(BrowserModalComponent, true /* localesOnly */);

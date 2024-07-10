@@ -150,7 +150,7 @@ const base = {
             name: false
         },
         runtimeChunk: {
-            name: 'runtime'
+            name: entrypoint => `runtime~${entrypoint.name}`
         }
     },
     plugins: []
@@ -160,10 +160,17 @@ module.exports = [
     // to run editor examples
     defaultsDeep({}, base, {
         entry: {
-            gui: './src/playground/index.jsx',
-            blocksonly: './src/playground/blocks-only.jsx',
-            compatibilitytesting: './src/playground/compatibility-testing.jsx',
-            player: './src/playground/player.jsx'
+            'lib.min': ['react', 'react-dom'],
+            'gui': './src/playground/index.jsx',
+            'blocksonly': {
+                import: './src/playground/blocks-only.jsx',
+                dependOn: 'lib.min'
+            },
+            'compatibilitytesting': {
+                import: './src/playground/compatibility-testing.jsx',
+                dependOn: 'lib.min'
+            },
+            'player': './src/playground/player.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),

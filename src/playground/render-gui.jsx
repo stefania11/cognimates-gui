@@ -114,6 +114,8 @@ export default appTarget => {
     }
 
     try {
+        console.log('appTarget:', appTarget);
+        console.log('WrappedGui:', WrappedGui);
         ReactDOM.render(
             // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
             <ErrorBoundary>
