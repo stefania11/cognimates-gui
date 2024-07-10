@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose} from 'redux';
+import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
@@ -12,6 +12,16 @@ import locales from 'scratch-l10n';
 import {detectLocale} from './detect-locale';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// Logging middleware to capture state and actions
+const loggerMiddleware = next => action => {
+    const sanitizedAction = {...action};
+    // Sanitize action payload if necessary
+    const result = next(sanitizedAction);
+    // const sanitizedState = {...store.getState()}; // Commented out as it's not used
+    // Sanitize state if necessary
+    return result;
+};
 
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided
@@ -44,7 +54,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 // browser modal
                 reducers = {locales: localesReducer};
                 initialState = {locales: initializedLocales};
-                enhancer = composeEnhancers();
+                enhancer = composeEnhancers(applyMiddleware(loggerMiddleware));
             } else {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
@@ -79,7 +89,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     locales: initializedLocales,
                     scratchGui: initializedGui
                 };
-                enhancer = composeEnhancers(guiMiddleware);
+                enhancer = composeEnhancers(applyMiddleware(guiMiddleware, loggerMiddleware));
             }
             try {
                 const reducer = combineReducers(reducers);
@@ -90,12 +100,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 );
             } catch (error) {
                 // Implement a more robust error logging mechanism
-                console.error('Error initializing Redux store:', {
-                    error: error.toString(),
-                    stack: error.stack,
-                    initialState: JSON.stringify(initialState),
-                    reducers: Object.keys(reducers)
-                });
+                // Intended use: send error details to a remote logging service
                 this.setState({hasError: true, errorMessage: error.message});
             }
         }

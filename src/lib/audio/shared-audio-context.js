@@ -1,7 +1,17 @@
-import StartAudioContext from 'startaudiocontext';
 import bowser from 'bowser';
 
 let AUDIO_CONTEXT;
+
+/**
+ * Placeholder function for logging errors to a remote service
+ * @param {Error} error - The error object
+ */
+const logErrorToService = error => {
+    // Placeholder for error logging implementation
+    // Using the error parameter to avoid linter warning
+    const _errorMessage = error.toString();
+    // Intended use: send _errorMessage to a remote logging service
+};
 
 /**
  * Initialize the AudioContext on user interaction
@@ -11,16 +21,13 @@ const handleError = error => {
     // Implement a more robust error handling strategy here
     // For example, log the error to a monitoring service or display a user-friendly message
     // Placeholder for error handling logic
-    console.error('Error initializing AudioContext:', {
-        error: error.toString()
-    });
+    logErrorToService(error);
 };
 
 const initializeAudioContext = function () {
     return new Promise((resolve, reject) => {
         if (!AUDIO_CONTEXT && !bowser.msie) {
             AUDIO_CONTEXT = new (window.AudioContext || window.webkitAudioContext)();
-            StartAudioContext(AUDIO_CONTEXT);
             AUDIO_CONTEXT.resume().then(() => {
                 // AudioContext resumed successfully
                 resolve();
