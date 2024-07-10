@@ -14,10 +14,17 @@ import {detectLocale} from './detect-locale';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Logging middleware to capture state and actions
-const loggerMiddleware = next => action => {
-    const sanitizedAction = {...action};
-    // Sanitize action payload if necessary
-    return next(sanitizedAction);
+const loggerMiddleware = store => next => action => {
+    if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log('Dispatching action:', action);
+    }
+    const result = next(action);
+    if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log('Next state:', store.getState());
+    }
+    return result;
 };
 
 /*
@@ -90,6 +97,14 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             }
             try {
                 // Log the state of variables before creating the store
+                if (process.env.NODE_ENV === 'development') {
+                    // eslint-disable-next-line no-console
+                    console.log('Reducers before store creation:', reducers);
+                    // eslint-disable-next-line no-console
+                    console.log('Initial State before store creation:', initialState);
+                    // eslint-disable-next-line no-console
+                    console.log('Enhancer before store creation:', enhancer);
+                }
 
                 const reducer = combineReducers(reducers);
                 this.store = createStore(
@@ -99,8 +114,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 );
 
                 // Log the created store
-
                 if (process.env.NODE_ENV === 'development') {
+                    // eslint-disable-next-line no-console
+                    console.log('Created Redux store:', this.store);
                     // Expose the store on the window object for debugging
                     window.store = this.store;
                 }
