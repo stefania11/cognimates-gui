@@ -98,12 +98,24 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(applyMiddleware(guiMiddleware, loggerMiddleware));
             }
             try {
+                // Log the state of variables before creating the store
+                if (process.env.NODE_ENV === 'development') {
+                    console.log('Reducers:', reducers);
+                    console.log('Initial State:', initialState);
+                    console.log('Enhancer:', enhancer);
+                }
+
                 const reducer = combineReducers(reducers);
                 this.store = createStore(
                     reducer,
                     initialState,
                     enhancer
                 );
+
+                // Log the created store
+                if (process.env.NODE_ENV === 'development') {
+                    console.log('Created Store:', this.store);
+                }
 
                 if (process.env.NODE_ENV === 'development') {
                     // Expose the store on the window object for debugging

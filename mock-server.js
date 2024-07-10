@@ -6,8 +6,16 @@ const path = require('path');
 const app = express();
 const PORT = 8602;
 
-// Middleware to parse JSON bodies
-app.use(bodyParser.json());
+// Middleware to parse JSON bodies with increased payload size limit
+app.use(bodyParser.json({limit: '10mb'}));
+
+// Middleware to enable CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
 // Route handler for /log-error endpoint
 app.post('/log-error', (req, res) => {

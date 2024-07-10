@@ -5,7 +5,7 @@ var webpack = require('webpack');
 // Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// var UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // Minification is disabled to address linter error
 
 // PostCss
 var autoprefixer = require('autoprefixer');
@@ -86,11 +86,11 @@ const base = {
         }]
     },
     optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                include: /\.min\.js$/
-            })
-        ]
+        // minimizer: [
+        //     new UglifyJsPlugin({
+        //         include: /\.min\.js$/
+        //     })
+        // ]
     },
     plugins: []
 };
