@@ -77,9 +77,7 @@ document.addEventListener('touchstart', () => {
  * @return {AudioContext} The singleton AudioContext
  */
 export default async function () {
-    if (!AUDIO_CONTEXT) {
-        await initializeAudioContext();
-    }
+    await initializeAudioContextOnce();
     return AUDIO_CONTEXT;
 }
 
