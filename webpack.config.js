@@ -68,7 +68,9 @@ const base = {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
-                'style-loader',
+                {
+                    loader: 'style-loader'
+                },
                 {
                     loader: 'css-loader',
                     options: {
@@ -119,6 +121,15 @@ const base = {
                     }
                 }
             ]
+        },
+        {
+            test: /\.worker\.js$/,
+            use: {
+                loader: 'worker-loader',
+                options: {
+                    inline: 'no-fallback'
+                }
+            }
         }]
     },
     optimization: {
