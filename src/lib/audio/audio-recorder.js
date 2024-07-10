@@ -122,7 +122,7 @@ class AudioRecorder {
     }
 
     connectToDestination () {
-        if (this.scriptProcessorNode && this.audioContext) {
+        if (this.scriptProcessorNode && this.audioContext && this.audioContext.state === 'running') {
             this.scriptProcessorNode.connect(this.audioContext.destination);
         }
     }
