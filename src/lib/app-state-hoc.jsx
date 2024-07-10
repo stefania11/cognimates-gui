@@ -27,6 +27,16 @@ const loggerMiddleware = store => next => action => {
     return result;
 };
 
+const guiRedux = require('../reducers/gui');
+const guiReducer = guiRedux.default;
+const {
+    guiInitialState,
+    guiMiddleware,
+    initFullScreen,
+    initPlayer,
+    initTelemetryModal
+} = guiRedux;
+
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided
  * it will override the internal `intl` redux state
@@ -62,15 +72,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             } else {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
-                const guiRedux = require('../reducers/gui');
-                const guiReducer = guiRedux.default;
-                const {
-                    guiInitialState,
-                    guiMiddleware,
-                    initFullScreen,
-                    initPlayer,
-                    initTelemetryModal
-                } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
 
                 let initializedGui = guiInitialState;
@@ -132,6 +133,17 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 // eslint-disable-next-line no-console
                 console.error('Enhancer:', enhancer);
 
+                // Log the middlewareAPI and the result of applyMiddleware
+                const middlewareAPI = {
+                    getState: this.store ? this.store.getState : () => {},
+                    dispatch: this.store ? this.store.dispatch : () => {}
+                };
+                const appliedMiddleware = applyMiddleware(guiMiddleware, loggerMiddleware)(middlewareAPI);
+                // eslint-disable-next-line no-console
+                console.error('Middleware API:', middlewareAPI);
+                // eslint-disable-next-line no-console
+                console.error('Applied Middleware:', appliedMiddleware);
+
                 // Implement a more robust error logging mechanism
                 // Intended use: send error details to a remote logging service
                 fetch('http://localhost:8602/log-error', {
@@ -144,7 +156,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                         stack: error.stack,
                         reducers: JSON.stringify(reducers),
                         initialState: JSON.stringify(initialState),
-                        enhancer: enhancer.toString()
+                        enhancer: enhancer.toString(),
+                        middlewareAPI: JSON.stringify(middlewareAPI),
+                        appliedMiddleware: appliedMiddleware.toString()
                     })
                 }).catch(fetchError => {
                     // eslint-disable-next-line no-console
