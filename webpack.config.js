@@ -88,6 +88,7 @@ const base = {
                 }
             ]
         },
+        // SCSS loader configuration for non-node_modules SCSS files
         {
             test: /\.scss$/,
             exclude: /node_modules/,
