@@ -61,11 +61,12 @@ class AudioRecorder {
         }
     }
 
-    startRecording () {
+    async startRecording () {
         if (!this.audioContext) {
-            const error = new Error('AudioContext is not initialized.');
-            this.logMessage(error);
-            throw error;
+            this.logMessage('AudioContext is not initialized. Initializing now...');
+            await initializeAudioContextOnce();
+            this.audioContext = new SharedAudioContext();
+            this.logMessage('AudioContext initialized.');
         }
         this.recording = true;
     }
@@ -75,7 +76,7 @@ class AudioRecorder {
         try {
             if (!this.audioContext) {
                 this.logMessage('Initializing AudioContext...');
-                initializeAudioContextOnce();
+                await initializeAudioContextOnce();
                 this.logMessage('AudioContext initialized.');
                 this.audioContext = new SharedAudioContext();
                 this.logMessage('SharedAudioContext created.');

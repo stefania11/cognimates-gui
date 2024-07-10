@@ -50,19 +50,26 @@ const initializeAudioContext = function () {
  */
 let audioContextInitialized = false;
 
-const initializeAudioContextOnce = () => {
-    if (!audioContextInitialized) {
-        audioContextInitialized = true;
-        initializeAudioContext().catch(handleError);
+const initializeAudioContextOnce = () => new Promise((resolve, reject) => {
+    if (audioContextInitialized) {
+        resolve();
+        return;
     }
-};
+    audioContextInitialized = true;
+    initializeAudioContext()
+        .then(resolve)
+        .catch(error => {
+            handleError(error);
+            reject(error);
+        });
+});
 
 document.addEventListener('click', () => {
-    initializeAudioContextOnce();
+    initializeAudioContextOnce().catch(handleError);
 });
 
 document.addEventListener('touchstart', () => {
-    initializeAudioContextOnce();
+    initializeAudioContextOnce().catch(handleError);
 });
 
 /**
