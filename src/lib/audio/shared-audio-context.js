@@ -30,10 +30,12 @@ const initializeAudioContext = function () {
             AUDIO_CONTEXT = new (window.AudioContext || window.webkitAudioContext)();
             AUDIO_CONTEXT.resume().then(() => {
                 // AudioContext resumed successfully
+                console.log('AudioContext resumed successfully');
                 resolve();
             })
                 .catch(error => {
                     // Error resuming AudioContext
+                    console.error('Error resuming AudioContext:', error);
                     handleError(error);
                     reject(error);
                 });
@@ -59,9 +61,11 @@ const initializeAudioContextOnce = () => new Promise((resolve, reject) => {
             // Remove event listeners after successful initialization
             document.removeEventListener('click', initializeAudioContextOnce);
             document.removeEventListener('touchstart', initializeAudioContextOnce);
+            console.log('AudioContext initialized once');
             resolve();
         })
         .catch(error => {
+            console.error('Error initializing AudioContext once:', error);
             handleError(error);
             reject(error);
         });
@@ -87,8 +91,14 @@ document.addEventListener('touchstart', () => {
  * @return {AudioContext} The singleton AudioContext
  */
 export default async function () {
-    await initializeAudioContextOnce();
-    return AUDIO_CONTEXT;
+    try {
+        await initializeAudioContextOnce();
+        return AUDIO_CONTEXT;
+    } catch (error) {
+        console.error('Error in default export function:', error);
+        handleError(error);
+        throw error;
+    }
 }
 
 export {initializeAudioContext, initializeAudioContextOnce};
