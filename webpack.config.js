@@ -261,8 +261,7 @@ module.exports = [
             new CopyWebpackPlugin({
                 patterns: [
                     {from: 'static', to: 'static'},
-                    {from: 'node_modules/scratch-blocks/media', to: 'static/blocks-media'},
-                    {from: 'extensions/**', to: 'static', context: 'src/examples'}
+                    {from: 'node_modules/scratch-blocks/media', to: 'static/blocks-media'}
                 ]
             })
         ])
