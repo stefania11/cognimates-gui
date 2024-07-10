@@ -98,24 +98,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(applyMiddleware(guiMiddleware, loggerMiddleware));
             }
             try {
-                if (process.env.NODE_ENV === 'development') {
-                    // eslint-disable-next-line no-console
-                    console.log('Initializing Redux store with the following configuration:');
-                    // eslint-disable-next-line no-console
-                    console.log('Reducers:', reducers);
-                    // eslint-disable-next-line no-console
-                    console.log('Initial State:', initialState);
-                    // eslint-disable-next-line no-console
-                    console.log('Enhancer:', enhancer);
-                }
-
                 const reducer = combineReducers(reducers);
-
-                if (process.env.NODE_ENV === 'development') {
-                    // eslint-disable-next-line no-console
-                    console.log('Combined Reducers:', reducer);
-                }
-
                 this.store = createStore(
                     reducer,
                     initialState,
@@ -123,18 +106,20 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 );
 
                 if (process.env.NODE_ENV === 'development') {
-                    // eslint-disable-next-line no-console
-                    console.log('Redux store created successfully.');
-                    // eslint-disable-next-line no-console
-                    console.log('Initial Redux store state:', this.store.getState());
+                    // Expose the store on the window object for debugging
+                    window.store = this.store;
                 }
-
-                // Expose the store on the window object for debugging
-                window.store = this.store;
             } catch (error) {
-                // Log the error details to the console for debugging
                 // eslint-disable-next-line no-console
                 console.error('Error initializing Redux store:', error);
+
+                // Additional detailed logging for debugging
+                // eslint-disable-next-line no-console
+                console.error('Reducers:', reducers);
+                // eslint-disable-next-line no-console
+                console.error('Initial State:', initialState);
+                // eslint-disable-next-line no-console
+                console.error('Enhancer:', enhancer);
 
                 // Implement a more robust error logging mechanism
                 // Intended use: send error details to a remote logging service
