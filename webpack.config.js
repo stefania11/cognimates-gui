@@ -72,7 +72,7 @@ const base = {
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             exportLocalsConvention: 'camelCase'
                         },
-                        importLoaders: 1
+                        importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -80,8 +80,8 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
-                                'autoprefixer'
+                                require('postcss-import'),
+                                require('autoprefixer')
                             ]
                         }
                     }
@@ -105,8 +105,8 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
-                                'autoprefixer'
+                                require('postcss-import'),
+                                require('autoprefixer')
                             ]
                         }
                     }
@@ -177,7 +177,7 @@ module.exports = [
                                     localIdentName: '[name]_[local]_[hash:base64:5]',
                                     exportLocalsConvention: 'camelCase'
                                 },
-                                importLoaders: 1
+                                importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -185,8 +185,8 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
-                                        'autoprefixer'
+                                        require('postcss-import'),
+                                        require('autoprefixer')
                                     ]
                                 }
                             }
@@ -209,8 +209,8 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
-                                        'autoprefixer'
+                                        require('postcss-import'),
+                                        require('autoprefixer')
                                     ]
                                 }
                             }
