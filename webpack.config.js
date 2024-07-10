@@ -72,7 +72,7 @@ const base = {
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             exportLocalsConvention: 'camelCase'
                         },
-                        importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
+                        importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -80,14 +80,15 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                require('postcss-import'),
-                                require('autoprefixer')
+                                'postcss-import',
+                                'autoprefixer'
                             ]
                         }
                     }
                 }
             ]
         },
+        // CSS loader configuration for node_modules CSS files
         // CSS loader configuration for node_modules CSS files
         {
             test: /\.css$/,
@@ -97,7 +98,7 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
+                        importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -105,8 +106,8 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                require('postcss-import'),
-                                require('autoprefixer')
+                                'postcss-import',
+                                'autoprefixer'
                             ]
                         }
                     }
@@ -171,7 +172,7 @@ module.exports = [
                                     localIdentName: '[name]_[local]_[hash:base64:5]',
                                     exportLocalsConvention: 'camelCase'
                                 },
-                                importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
+                                importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -179,8 +180,8 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        require('postcss-import'),
-                                        require('autoprefixer')
+                                        'postcss-import',
+                                        'autoprefixer'
                                     ]
                                 }
                             }
@@ -195,7 +196,7 @@ module.exports = [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
+                                importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -203,8 +204,8 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        require('postcss-import'),
-                                        require('autoprefixer')
+                                        'postcss-import',
+                                        'autoprefixer'
                                     ]
                                 }
                             }
