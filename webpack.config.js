@@ -72,7 +72,7 @@ const base = {
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             exportLocalsConvention: 'camelCase'
                         },
-                        importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
+                        importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -97,7 +97,7 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
+                        importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -180,7 +180,7 @@ module.exports = [
                                     localIdentName: '[name]_[local]_[hash:base64:5]',
                                     exportLocalsConvention: 'camelCase'
                                 },
-                                importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
+                                importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -204,7 +204,7 @@ module.exports = [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
+                                importLoaders: 2 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
