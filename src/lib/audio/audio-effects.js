@@ -41,6 +41,11 @@ class AudioEffects {
             // Ensure the AudioContext is initialized before processing
             await initializeAudioContext();
 
+            // Wait for a user gesture before creating the OfflineAudioContext
+            if (!this.userGestureOccurred) {
+                throw new Error('AudioContext cannot be initialized without a user gesture.');
+            }
+
             // Create the OfflineAudioContext after the AudioContext is initialized
             const pitchRatio = Math.pow(2, 4 / 12); // A major third
             let sampleCount = this.buffer.length;
