@@ -106,6 +106,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     console.log('Initial State before store creation:', initialState);
                     // eslint-disable-next-line no-console
                     console.log('Enhancer before store creation:', enhancer);
+                    // eslint-disable-next-line no-console
+                    console.log('Type of createStore:', typeof createStore);
                 }
 
                 const reducer = combineReducers(reducers);
