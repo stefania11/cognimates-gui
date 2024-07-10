@@ -103,6 +103,8 @@ const base = {
                     postcssOptions: {
                         ident: 'postcss',
                         plugins: [
+                            postcssImport,
+                            postcssVars,
                             autoprefixer()
                         ]
                     }
@@ -195,6 +197,8 @@ module.exports = [
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
+                                    postcssImport,
+                                    postcssVars,
                                     autoprefixer()
                                 ]
                             }
