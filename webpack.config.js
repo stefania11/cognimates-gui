@@ -34,7 +34,8 @@ const base = {
     resolve: {
         symlinks: false,
         fallback: {
-            stream: require.resolve('stream-browserify')
+            stream: require.resolve('stream-browserify'),
+            url: require.resolve('url/')
         }
     },
     module: {
@@ -98,7 +99,7 @@ const base = {
             }, {
                 loader: 'css-loader',
                 options: {
-                    importLoaders: 2 // Adjusted to ensure proper handling of @imported resources
+                    importLoaders: 1 // Adjusted to ensure proper handling of @imported resources
                 }
             }, {
                 loader: 'postcss-loader',
@@ -195,7 +196,7 @@ module.exports = [
                     }, {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2 // Adjusted to ensure proper handling of @imported resources
+                            importLoaders: 1 // Adjusted to ensure proper handling of @imported resources
                         }
                     }, {
                         loader: 'postcss-loader',
