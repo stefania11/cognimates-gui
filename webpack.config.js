@@ -142,17 +142,6 @@ const base = {
                     }
                 }
             ]
-        },
-        {
-            test: /\.worker\.js$/,
-            use: {
-                loader: 'worker-loader',
-                options: {
-                    inline: 'no-fallback',
-                    publicPath: '/workers/',
-                    esModule: true // Ensure compatibility with Webpack 5
-                }
-            }
         }]
     },
     optimization: {
