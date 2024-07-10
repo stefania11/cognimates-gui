@@ -65,6 +65,7 @@ const base = {
         },
         {
             test: /\.css$/,
+            exclude: /node_modules/,
             use: [{
                 loader: 'style-loader'
             }, {
@@ -83,6 +84,25 @@ const base = {
                         plugins: [
                             postcssImport,
                             postcssVars,
+                            autoprefixer()
+                        ]
+                    }
+                }
+            }]
+        },
+        {
+            test: /\.css$/,
+            include: /node_modules/,
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader'
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    postcssOptions: {
+                        ident: 'postcss',
+                        plugins: [
                             autoprefixer()
                         ]
                     }
@@ -137,6 +157,7 @@ module.exports = [
                 },
                 {
                     test: /\.css$/,
+                    exclude: /node_modules/,
                     use: [{
                         loader: 'style-loader'
                     }, {
@@ -155,6 +176,25 @@ module.exports = [
                                 plugins: [
                                     postcssImport,
                                     postcssVars,
+                                    autoprefixer()
+                                ]
+                            }
+                        }
+                    }]
+                },
+                {
+                    test: /\.css$/,
+                    include: /node_modules/,
+                    use: [{
+                        loader: 'style-loader'
+                    }, {
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
                                     autoprefixer()
                                 ]
                             }
