@@ -64,6 +64,7 @@ const base = {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -84,8 +85,7 @@ const base = {
                             ]
                         }
                     }
-                },
-                'style-loader'
+                }
             ]
         },
         {
@@ -122,6 +122,7 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -140,6 +141,15 @@ const base = {
                     }
                 }
             ]
+        },
+        {
+            test: /\.worker\.js$/,
+            use: {
+                loader: 'worker-loader',
+                options: {
+                    inline: 'no-fallback'
+                }
+            }
         }]
     },
     optimization: {
@@ -191,6 +201,7 @@ module.exports = [
                     test: /\.css$/,
                     exclude: /node_modules/,
                     use: [
+                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -211,8 +222,7 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        'style-loader'
+                        }
                     ]
                 },
                 {
@@ -248,6 +258,7 @@ module.exports = [
                     test: /\.css$/,
                     include: /node_modules/,
                     use: [
+                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -264,8 +275,7 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        'style-loader'
+                        }
                     ]
                 }
             ])
