@@ -163,23 +163,14 @@ module.exports = [
                 filename: 'player.html',
                 title: 'Scratch 3.0 GUI: Player Example'
             }),
-            new CopyWebpackPlugin([{
-                from: 'static',
-                to: 'static'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-blocks/media',
-                to: 'static/blocks-media'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extensions/**',
-                to: 'static',
-                context: 'src/examples'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extension-worker.{js,js.map}',
-                context: 'node_modules/scratch-vm/dist/web'
-            }])
+            new CopyWebpackPlugin({
+                patterns: [
+                    {from: 'static', to: 'static'},
+                    {from: 'node_modules/scratch-blocks/media', to: 'static/blocks-media'},
+                    {from: 'extensions/**', to: 'static', context: 'src/examples'},
+                    {from: 'extension-worker.{js,js.map}', context: 'node_modules/scratch-vm/dist/web'}
+                ]
+            })
         ])
     })
 ].concat(
@@ -212,14 +203,12 @@ module.exports = [
                 ])
             },
             plugins: base.plugins.concat([
-                new CopyWebpackPlugin([{
-                    from: 'node_modules/scratch-blocks/media',
-                    to: 'static/blocks-media'
-                }]),
-                new CopyWebpackPlugin([{
-                    from: 'extension-worker.{js,js.map}',
-                    context: 'node_modules/scratch-vm/dist/web'
-                }])
+                new CopyWebpackPlugin({
+                    patterns: [
+                        {from: 'node_modules/scratch-blocks/media', to: 'static/blocks-media'},
+                        {from: 'extension-worker.{js,js.map}', context: 'node_modules/scratch-vm/dist/web'}
+                    ]
+                })
             ])
         })) : []
 );
