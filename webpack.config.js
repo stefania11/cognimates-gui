@@ -81,7 +81,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
+                                ['postcss-import', {
+                                    path: ['src/css']
+                                }],
                                 'postcss-simple-vars',
                                 'autoprefixer'
                             ]
@@ -108,7 +110,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
+                                ['postcss-import', {
+                                    path: ['src/css']
+                                }],
                                 'postcss-simple-vars',
                                 'autoprefixer'
                             ]
@@ -194,7 +198,9 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
+                                        ['postcss-import', {
+                                            path: ['src/css']
+                                        }],
                                         'postcss-simple-vars',
                                         'autoprefixer'
                                     ]
@@ -221,7 +227,9 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
+                                        ['postcss-import', {
+                                            path: ['src/css']
+                                        }],
                                         'postcss-simple-vars',
                                         'autoprefixer'
                                     ]
