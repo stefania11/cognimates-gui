@@ -57,20 +57,20 @@ const initializeAudioContextOnce = () => new Promise((resolve, reject) => {
     }
     audioContextInitialized = true;
     initializeAudioContext()
-        .then(resolve)
+        .then(() => {
+            // Remove event listeners after successful initialization
+            document.removeEventListener('click', initializeAudioContextOnce);
+            document.removeEventListener('touchstart', initializeAudioContextOnce);
+            resolve();
+        })
         .catch(error => {
             handleError(error);
             reject(error);
         });
 });
 
-document.addEventListener('click', () => {
-    initializeAudioContextOnce().catch(handleError);
-});
-
-document.addEventListener('touchstart', () => {
-    initializeAudioContextOnce().catch(handleError);
-});
+document.addEventListener('click', initializeAudioContextOnce);
+document.addEventListener('touchstart', initializeAudioContextOnce);
 
 /**
  * Wrap browser AudioContext because we shouldn't create more than one
