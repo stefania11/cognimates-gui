@@ -97,7 +97,7 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 1
+                        importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -201,7 +201,7 @@ module.exports = [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1
+                                importLoaders: 1 // Ensure that postcss-loader is applied before css-loader
                             }
                         },
                         {
