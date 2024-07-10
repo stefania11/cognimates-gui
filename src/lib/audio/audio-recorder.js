@@ -1,6 +1,6 @@
 import 'get-float-time-domain-data';
 import getUserMedia from 'get-user-media-promise';
-import SharedAudioContext, {initializeAudioContextOnce} from './shared-audio-context.js';
+import {initializeAudioContextOnce} from './shared-audio-context.js';
 import {computeRMS} from './audio-util.js';
 
 class AudioRecorder {
@@ -21,6 +21,12 @@ class AudioRecorder {
 
         this.disposed = false;
         this.localErrorLog = []; // Initialize localErrorLog as an empty array
+
+        this.userGestureOccurred = false; // Flag to track if a user gesture has occurred
+    }
+
+    handleUserGesture () {
+        this.userGestureOccurred = true;
     }
 
     getLocalErrorLog () {
@@ -62,13 +68,15 @@ class AudioRecorder {
     }
 
     async startRecording () {
+        if (!this.userGestureOccurred) {
+            this.logMessage('User gesture required to initialize AudioContext.');
+            return;
+        }
+
         if (!this.audioContext) {
             this.logMessage('AudioContext is not initialized. Initializing now...');
             await initializeAudioContextOnce();
-            if (!this.audioContext) {
-                this.audioContext = new SharedAudioContext();
-                this.logMessage('AudioContext initialized.');
-            }
+            this.logMessage('AudioContext initialized.');
         }
         this.recording = true;
     }
@@ -76,12 +84,15 @@ class AudioRecorder {
     async attachUserMediaStream (userMediaStream, onUpdate, onError) {
         this.userMediaStream = userMediaStream;
         try {
+            if (!this.userGestureOccurred) {
+                this.logMessage('User gesture required to initialize AudioContext.');
+                return;
+            }
+
             if (!this.audioContext) {
                 this.logMessage('Initializing AudioContext...');
-                await initializeAudioContextOnce();
+                this.audioContext = await initializeAudioContextOnce();
                 this.logMessage('AudioContext initialized.');
-                this.audioContext = new SharedAudioContext();
-                this.logMessage('SharedAudioContext created.');
                 this.mediaStreamSource = this.audioContext.createMediaStreamSource(this.userMediaStream);
                 this.sourceNode = this.audioContext.createGain();
                 this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);

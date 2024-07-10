@@ -32,10 +32,12 @@ class RecordingStep extends React.Component {
     }
     componentDidMount () {
         this.audioRecorder = new AudioRecorder();
+        window.audioRecorderInstance = this.audioRecorder; // Set the global audioRecorderInstance
         this.audioRecorder.startListening(this.handleStarted, this.handleLevelUpdate, this.handleRecordingError);
     }
     componentWillUnmount () {
         this.audioRecorder.dispose();
+        window.audioRecorderInstance = null; // Clean up the global audioRecorderInstance
     }
     handleStarted () {
         this.setState({listening: true});

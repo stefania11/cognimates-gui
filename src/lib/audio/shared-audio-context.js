@@ -67,8 +67,18 @@ const initializeAudioContextOnce = () => new Promise((resolve, reject) => {
         });
 });
 
-document.addEventListener('click', initializeAudioContextOnce);
-document.addEventListener('touchstart', initializeAudioContextOnce);
+document.addEventListener('click', () => {
+    initializeAudioContextOnce();
+    if (window.audioRecorderInstance) {
+        window.audioRecorderInstance.handleUserGesture();
+    }
+});
+document.addEventListener('touchstart', () => {
+    initializeAudioContextOnce();
+    if (window.audioRecorderInstance) {
+        window.audioRecorderInstance.handleUserGesture();
+    }
+});
 
 /**
  * Wrap browser AudioContext because we shouldn't create more than one
