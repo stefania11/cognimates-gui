@@ -508,7 +508,7 @@ class MenuBar extends React.Component {
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
-              
+
                                                 onClick={() => {
                                                     this.handleClickShare(waitForUpdate);
                                                 }}
@@ -534,11 +534,11 @@ class MenuBar extends React.Component {
                                         waitForUpdate => (
                                             <CommunityButton
                                                 className={styles.menuBarButton}
-                                                
+
                                                 onClick={() => {
                                                     this.handleClickSeeCommunity(waitForUpdate);
                                                 }}
-                                                
+
                                             />
                                         )
                                     }
@@ -571,10 +571,10 @@ class MenuBar extends React.Component {
                                             styles.mystuffButton
                                         )}
                                     >
-                                        <img
+                                        {/* <img
                                             className={styles.mystuffIcon}
                                             src={mystuffIcon}
-                                        />
+                                        /> */}
                                     </div>
                                 </a>
                                 <AccountNav
@@ -661,10 +661,10 @@ class MenuBar extends React.Component {
                                                 styles.mystuffButton
                                             )}
                                         >
-                                            <img
+                                            {/* <img
                                                 className={styles.mystuffIcon}
                                                 src={mystuffIcon}
-                                            />
+                                            /> */}
                                         </div>
                                     </MenuBarItemTooltip>
                                     <MenuBarItemTooltip
