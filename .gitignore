@@ -18,3 +18,6 @@ npm-*
 # generated translation files
 /translations
 /locale
+
+# Error logs
+/error-log.txt

@@ -99,8 +99,27 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     enhancer
                 );
             } catch (error) {
+                // Log the error details to the console for debugging
+                // eslint-disable-next-line no-console
+                console.error('Error initializing Redux store:', error);
+
                 // Implement a more robust error logging mechanism
                 // Intended use: send error details to a remote logging service
+                fetch('/log-error', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        error: error.toString(),
+                        stack: error.stack
+                    })
+                }).catch(fetchError => {
+                    // eslint-disable-next-line no-console
+                    console.error('Failed to log error to server:', fetchError);
+                });
+
+                // Set the error state with additional information
                 this.setState({hasError: true, errorMessage: error.message});
             }
         }
