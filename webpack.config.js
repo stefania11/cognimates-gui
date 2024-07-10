@@ -72,7 +72,7 @@ const base = {
                 loader: 'css-loader',
                 options: {
                     modules: true,
-                    importLoaders: 1,
+                    importLoaders: 2, // Adjusted to ensure proper handling of @imported resources
                     localIdentName: '[name]_[local]_[hash:base64:5]',
                     camelCase: true
                 }
@@ -82,8 +82,8 @@ const base = {
                     postcssOptions: {
                         ident: 'postcss',
                         plugins: [
-                            postcssImport,
-                            postcssVars,
+                            postcssImport(),
+                            postcssVars(),
                             autoprefixer()
                         ]
                     }
@@ -96,15 +96,18 @@ const base = {
             use: [{
                 loader: 'style-loader'
             }, {
-                loader: 'css-loader'
+                loader: 'css-loader',
+                options: {
+                    importLoaders: 2 // Adjusted to ensure proper handling of @imported resources
+                }
             }, {
                 loader: 'postcss-loader',
                 options: {
                     postcssOptions: {
                         ident: 'postcss',
                         plugins: [
-                            postcssImport,
-                            postcssVars,
+                            postcssImport(),
+                            postcssVars(),
                             autoprefixer()
                         ]
                     }
@@ -166,7 +169,7 @@ module.exports = [
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            importLoaders: 1,
+                            importLoaders: 2, // Adjusted to ensure proper handling of @imported resources
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             camelCase: true
                         }
@@ -176,8 +179,8 @@ module.exports = [
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
-                                    postcssImport,
-                                    postcssVars,
+                                    postcssImport(),
+                                    postcssVars(),
                                     autoprefixer()
                                 ]
                             }
@@ -190,15 +193,18 @@ module.exports = [
                     use: [{
                         loader: 'style-loader'
                     }, {
-                        loader: 'css-loader'
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2 // Adjusted to ensure proper handling of @imported resources
+                        }
                     }, {
                         loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
-                                    postcssImport,
-                                    postcssVars,
+                                    postcssImport(),
+                                    postcssVars(),
                                     autoprefixer()
                                 ]
                             }
