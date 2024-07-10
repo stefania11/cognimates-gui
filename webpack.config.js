@@ -140,9 +140,11 @@ module.exports = [
         },
         plugins: base.plugins.concat([
             new webpack.DefinePlugin({
-                'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
-                'process.env.DEBUG': Boolean(process.env.DEBUG),
-                'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
+                'process.env.NODE_ENV': JSON.stringify(
+                    process.env.NODE_ENV === 'production' ? 'production' : 'development'
+                ),
+                'process.env.DEBUG': JSON.stringify(Boolean(process.env.DEBUG)),
+                'process.env.GA_ID': JSON.stringify(process.env.GA_ID || 'UA-000000-01')
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
