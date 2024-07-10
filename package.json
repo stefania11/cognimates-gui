@@ -107,7 +107,7 @@
     "redux-mock-store": "^1.2.3",
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
-    "scratch-audio": "0.1.0-prerelease.20190114210212",
+    "scratch-audio": "^1.0.170",
     "scratch-blocks": "0.1.0-prerelease.1549990124",
     "scratch-l10n": "^3.1.20190213193054",
     "scratch-paint": "0.2.0-prerelease.20190114205252",
