@@ -145,7 +145,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     },
                     body: JSON.stringify({
                         error: error.toString(),
-                        stack: error.stack
+                        stack: error.stack,
+                        reducers: JSON.stringify(reducers),
+                        initialState: JSON.stringify(initialState),
+                        enhancer: enhancer.toString()
                     })
                 }).catch(fetchError => {
                     // eslint-disable-next-line no-console
