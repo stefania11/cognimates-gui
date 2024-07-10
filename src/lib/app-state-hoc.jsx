@@ -97,7 +97,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     },
                     body: JSON.stringify({
                         error: error.toString(),
-                        stack: error.stack
+                        stack: error.stack,
+                        initialState: JSON.stringify(initialState),
+                        reducers: Object.keys(reducers)
                     })
                 }).catch(() => {
                     // Handle fetch error (e.g., retry logic or alternative logging)

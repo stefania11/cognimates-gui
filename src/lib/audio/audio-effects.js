@@ -34,17 +34,27 @@ class AudioEffects {
         this.userGestureOccurred = true;
         document.removeEventListener('click', this.boundHandleUserGesture);
         document.removeEventListener('touchstart', this.boundHandleUserGesture);
+        initializeAudioContextOnce().catch(error => {
+            fetch('/log-error', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    error: error.toString()
+                })
+            }).catch(() => {
+                // Fetch error handling (e.g., retry logic or alternative logging)
+            });
+        });
     }
 
     async process () {
         try {
-            // Wait for a user gesture before initializing the AudioContext
-            if (!this.userGestureOccurred) {
-                throw new Error('AudioContext cannot be initialized without a user gesture.');
-            }
-
             // Ensure the AudioContext is initialized before processing
-            await initializeAudioContextOnce();
+            if (!this.userGestureOccurred) {
+                throw new Error('AudioContext cannot be started without a user gesture.');
+            }
 
             // Create the OfflineAudioContext after the AudioContext is initialized
             const pitchRatio = Math.pow(2, 4 / 12); // A major third
