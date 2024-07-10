@@ -684,7 +684,7 @@ class MenuBar extends React.Component {
                                         </div>
                                     </MenuBarItemTooltip>
                                 </React.Fragment>
-                            ) : [])}
+                            ) : null)}
                         </React.Fragment>
                     )}
                 </div>
