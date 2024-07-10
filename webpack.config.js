@@ -64,6 +64,9 @@ const base = {
             exclude: /node_modules/,
             use: [
                 {
+                    loader: 'style-loader'
+                },
+                {
                     loader: 'css-loader',
                     options: {
                         modules: {
@@ -84,9 +87,6 @@ const base = {
                             ]
                         }
                     }
-                },
-                {
-                    loader: 'style-loader'
                 }
             ]
         },
@@ -94,6 +94,9 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
+                {
+                    loader: 'style-loader'
+                },
                 {
                     loader: 'css-loader',
                     options: {
@@ -111,9 +114,6 @@ const base = {
                             ]
                         }
                     }
-                },
-                {
-                    loader: 'style-loader'
                 }
             ]
         },
@@ -177,6 +177,9 @@ module.exports = [
                     exclude: /node_modules/,
                     use: [
                         {
+                            loader: 'style-loader'
+                        },
+                        {
                             loader: 'css-loader',
                             options: {
                                 modules: {
@@ -197,9 +200,6 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        {
-                            loader: 'style-loader'
                         }
                     ]
                 },
@@ -207,6 +207,9 @@ module.exports = [
                     test: /\.css$/,
                     include: /node_modules/,
                     use: [
+                        {
+                            loader: 'style-loader'
+                        },
                         {
                             loader: 'css-loader',
                             options: {
@@ -224,9 +227,6 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        {
-                            loader: 'style-loader'
                         }
                     ]
                 }
