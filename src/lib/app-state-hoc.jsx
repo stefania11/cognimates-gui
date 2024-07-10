@@ -14,12 +14,18 @@ import {detectLocale} from './detect-locale';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Logging middleware to capture state and actions
-const loggerMiddleware = next => action => {
+const loggerMiddleware = store => next => action => {
+    if (process.env.NODE_ENV === 'development') {
+        // Log the state before the action is dispatched
+        console.log('Previous State:', store.getState());
+    }
     const sanitizedAction = {...action};
     // Sanitize action payload if necessary
     const result = next(sanitizedAction);
-    // const sanitizedState = {...store.getState()}; // Commented out as it's not used
-    // Sanitize state if necessary
+    if (process.env.NODE_ENV === 'development') {
+        // Log the state after the action is dispatched
+        console.log('Next State:', store.getState());
+    }
     return result;
 };
 
@@ -104,14 +110,17 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 }
 
                 const reducer = combineReducers(reducers);
+
+                if (process.env.NODE_ENV === 'development') {
+                    // eslint-disable-next-line no-console
+                    console.log('Combined Reducers:', reducer);
+                }
+
                 this.store = createStore(
                     reducer,
                     initialState,
                     enhancer
                 );
-
-                // Expose the store on the window object for debugging
-                window.store = this.store;
 
                 if (process.env.NODE_ENV === 'development') {
                     // eslint-disable-next-line no-console
@@ -119,6 +128,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     // eslint-disable-next-line no-console
                     console.log('Initial Redux store state:', this.store.getState());
                 }
+
+                // Expose the store on the window object for debugging
+                window.store = this.store;
             } catch (error) {
                 // Log the error details to the console for debugging
                 // eslint-disable-next-line no-console
@@ -184,8 +196,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 showTelemetryModal, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
-            if (this.state.hasError) {
-                return <div>{`Error initializing Redux store: ${this.state.errorMessage}`}</div>;
+            if (this.state.hasError || !this.store) {
+                return <div>{`Error initializing Redux store: ${this.state.errorMessage || 'Store not found'}`}</div>;
             }
             return (
                 <Provider store={this.store}>
