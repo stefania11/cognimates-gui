@@ -85,7 +85,6 @@ const base = {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
-                            ident: 'postcss',
                             plugins: [
                                 postcssImport(),
                                 postcssVars(),
@@ -113,7 +112,6 @@ const base = {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
-                            ident: 'postcss',
                             plugins: [
                                 postcssImport(),
                                 postcssVars(),
@@ -191,7 +189,6 @@ module.exports = [
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
-                                    ident: 'postcss',
                                     plugins: [
                                         postcssImport(),
                                         postcssVars(),
@@ -219,7 +216,6 @@ module.exports = [
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
-                                    ident: 'postcss',
                                     plugins: [
                                         postcssImport(),
                                         postcssVars(),
