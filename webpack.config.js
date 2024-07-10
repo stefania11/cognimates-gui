@@ -147,7 +147,8 @@ const base = {
             use: {
                 loader: 'worker-loader',
                 options: {
-                    inline: 'no-fallback'
+                    inline: 'no-fallback',
+                    publicPath: '/workers/' // Ensure workers are served from the correct path
                 }
             }
         }]
