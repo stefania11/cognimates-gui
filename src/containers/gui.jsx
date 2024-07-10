@@ -49,14 +49,11 @@ const messages = defineMessages({
 
 class GUI extends React.Component {
     componentDidMount () {
-        console.log('GUI componentDidMount props:', this.props);
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
     }
     componentDidUpdate (prevProps) {
-        console.log('GUI componentDidUpdate prevProps:', prevProps);
-        console.log('GUI componentDidUpdate currentProps:', this.props);
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
             this.props.onUpdateProjectId(this.props.projectId);
         }
@@ -79,7 +76,6 @@ class GUI extends React.Component {
         }
     }
     render () {
-        console.log('GUI render props:', this.props);
         if (this.props.isError) {
             throw new Error(
                 `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
