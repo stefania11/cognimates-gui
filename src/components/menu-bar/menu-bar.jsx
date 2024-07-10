@@ -554,7 +554,7 @@ class MenuBar extends React.Component {
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
-                {/* <div className={styles.accountInfoGroup}>
+                <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
@@ -571,10 +571,6 @@ class MenuBar extends React.Component {
                                             styles.mystuffButton
                                         )}
                                     >
-                                        {/* <img
-                                            className={styles.mystuffIcon}
-                                            src={mystuffIcon}
-                                        /> */}
                                     </div>
                                 </a>
                                 <AccountNav
@@ -661,10 +657,6 @@ class MenuBar extends React.Component {
                                                 styles.mystuffButton
                                             )}
                                         >
-                                            {/* <img
-                                                className={styles.mystuffIcon}
-                                                src={mystuffIcon}
-                                            /> */}
                                         </div>
                                     </MenuBarItemTooltip>
                                     <MenuBarItemTooltip
@@ -695,11 +687,112 @@ class MenuBar extends React.Component {
                             ) : [])}
                         </React.Fragment>
                     )}
-                </div> */}
+                </div>
             </Box>
         );
     }
 }
+
+MenuBar.propTypes = {
+    accountMenuOpen: PropTypes.bool,
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorThumbnailUrl: PropTypes.string,
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    autoUpdateProject: PropTypes.func,
+    canCreateCopy: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canEditTitle: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canShare: PropTypes.bool,
+    className: PropTypes.string,
+    editMenuOpen: PropTypes.bool,
+    enableCommunity: PropTypes.bool,
+    fileMenuOpen: PropTypes.bool,
+    intl: intlShape,
+    isRtl: PropTypes.bool,
+    isShared: PropTypes.bool,
+    isShowingProject: PropTypes.bool,
+    isUpdating: PropTypes.bool,
+    languageMenuOpen: PropTypes.bool,
+    loginMenuOpen: PropTypes.bool,
+    onClickAccount: PropTypes.func,
+    onClickEdit: PropTypes.func,
+    onClickFile: PropTypes.func,
+    onClickLanguage: PropTypes.func,
+    onClickLogin: PropTypes.func,
+    onClickLogo: PropTypes.func,
+    onClickNew: PropTypes.func,
+    onClickRemix: PropTypes.func,
+    onClickSave: PropTypes.func,
+    onClickSaveAsCopy: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
+    onOpenTipLibrary: PropTypes.func,
+    onRequestCloseAccount: PropTypes.func,
+    onRequestCloseEdit: PropTypes.func,
+    onRequestCloseFile: PropTypes.func,
+    onRequestCloseLanguage: PropTypes.func,
+    onRequestCloseLogin: PropTypes.func,
+    onSeeCommunity: PropTypes.func,
+    onShare: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
+    projectTitle: PropTypes.string,
+    renderLogin: PropTypes.func,
+    sessionExists: PropTypes.bool,
+    showComingSoon: PropTypes.bool,
+    username: PropTypes.string
+};
+
+MenuBar.defaultProps = {
+    onShare: () => {}
+};
+
+const mapStateToProps = state => {
+    const loadingState = state.scratchGui.projectState.loadingState;
+    const user = state.session && state.session.session && state.session.session.user;
+    return {
+        accountMenuOpen: accountMenuOpen(state),
+        fileMenuOpen: fileMenuOpen(state),
+        editMenuOpen: editMenuOpen(state),
+        isRtl: state.locales.isRtl,
+        isUpdating: getIsUpdating(loadingState),
+        isShowingProject: getIsShowingProject(loadingState),
+        languageMenuOpen: languageMenuOpen(state),
+        loginMenuOpen: loginMenuOpen(state),
+        projectChanged: state.scratchGui.projectChanged,
+        projectTitle: state.scratchGui.projectTitle,
+        sessionExists: state.session && typeof state.session.session !== 'undefined',
+        username: user ? user.username : null
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    autoUpdateProject: () => dispatch(autoUpdateProject()),
+    onOpenTipLibrary: () => dispatch(openTipsLibrary()),
+    onClickAccount: () => dispatch(openAccountMenu()),
+    onRequestCloseAccount: () => dispatch(closeAccountMenu()),
+    onClickFile: () => dispatch(openFileMenu()),
+    onRequestCloseFile: () => dispatch(closeFileMenu()),
+    onClickEdit: () => dispatch(openEditMenu()),
+    onRequestCloseEdit: () => dispatch(closeEditMenu()),
+    onClickLanguage: () => dispatch(openLanguageMenu()),
+    onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
+    onClickLogin: () => dispatch(openLoginMenu()),
+    onRequestCloseLogin: () => dispatch(closeLoginMenu()),
+    onClickNew: needSave => dispatch(requestNewProject(needSave)),
+    onClickRemix: () => dispatch(remixProject()),
+    onClickSave: () => dispatch(manualUpdateProject()),
+    onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
+    onSeeCommunity: () => dispatch(setPlayer(true))
+});
+
+export default injectIntl(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MenuBar));
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
