@@ -89,6 +89,35 @@ const base = {
                 'sass-loader' // Add sass-loader to handle SCSS files
             ]
         },
+        {
+            test: /\.scss$/,
+            exclude: /node_modules/,
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            exportLocalsConvention: 'camelCase'
+                        },
+                        importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                'postcss-import',
+                                'autoprefixer'
+                            ]
+                        }
+                    }
+                },
+                'sass-loader' // Add sass-loader to handle SCSS files
+            ]
+        },
         // CSS loader configuration for node_modules CSS files
         {
             test: /\.css$/,
@@ -163,6 +192,35 @@ module.exports = [
                 },
                 {
                     test: /\.css$/,
+                    exclude: /node_modules/,
+                    use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    localIdentName: '[name]_[local]_[hash:base64:5]',
+                                    exportLocalsConvention: 'camelCase'
+                                },
+                                importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        'postcss-import',
+                                        'autoprefixer'
+                                    ]
+                                }
+                            }
+                        },
+                        'sass-loader' // Add sass-loader to handle SCSS files
+                    ]
+                },
+                {
+                    test: /\.scss$/,
                     exclude: /node_modules/,
                     use: [
                         'style-loader',
