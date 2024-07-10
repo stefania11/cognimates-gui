@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import {createStore, combineReducers, compose} from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
@@ -12,15 +12,6 @@ import locales from 'scratch-l10n';
 import {detectLocale} from './detect-locale';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-import {
-    default as guiReducer,
-    guiInitialState,
-    guiMiddleware,
-    initFullScreen,
-    initPlayer,
-    initTelemetryModal
-} from '../reducers/gui';
 
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided
@@ -53,6 +44,15 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             } else {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
+                const guiRedux = require('../reducers/gui');
+                const guiReducer = guiRedux.default;
+                const {
+                    guiInitialState,
+                    guiMiddleware,
+                    initFullScreen,
+                    initPlayer,
+                    initTelemetryModal
+                } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
 
                 let initializedGui = guiInitialState;
@@ -75,7 +75,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     locales: initializedLocales,
                     scratchGui: initializedGui
                 };
-                enhancer = composeEnhancers(applyMiddleware(guiMiddleware));
+                enhancer = composeEnhancers(guiMiddleware);
             }
             const reducer = combineReducers(reducers);
             this.store = createStore(
@@ -116,6 +116,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
+        isTelemetryEnabled: PropTypes.bool,
         showTelemetryModal: PropTypes.bool
     };
     return AppStateWrapper;
