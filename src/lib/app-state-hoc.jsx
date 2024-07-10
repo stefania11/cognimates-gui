@@ -27,15 +27,14 @@ const loggerMiddleware = store => next => action => {
     return result;
 };
 
-const guiRedux = require('../reducers/gui');
-const guiReducer = guiRedux.default;
-const {
+import {
+    default as guiReducer,
     guiInitialState,
     guiMiddleware,
     initFullScreen,
     initPlayer,
     initTelemetryModal
-} = guiRedux;
+} from '../reducers/gui';
 
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided
