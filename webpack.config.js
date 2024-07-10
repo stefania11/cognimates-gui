@@ -84,9 +84,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
-                                'postcss-simple-vars',
-                                'autoprefixer'
+                                postcssImport(),
+                                postcssVars(),
+                                autoprefixer()
                             ]
                         }
                     }
