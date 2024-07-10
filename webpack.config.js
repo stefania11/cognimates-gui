@@ -68,6 +68,17 @@ const base = {
                     loader: 'style-loader'
                 },
                 {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            exportLocalsConvention: 'camelCase'
+                        },
+                        importLoaders: 1,
+                        esModule: false
+                    }
+                },
+                {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
@@ -77,16 +88,6 @@ const base = {
                                 'autoprefixer'
                             ]
                         }
-                    }
-                },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: {
-                            localIdentName: '[name]_[local]_[hash:base64:5]',
-                            exportLocalsConvention: 'camelCase'
-                        },
-                        importLoaders: 1
                     }
                 }
             ]
@@ -114,7 +115,8 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 1
+                        importLoaders: 1,
+                        esModule: false
                     }
                 }
             ]
@@ -182,6 +184,17 @@ module.exports = [
                             loader: 'style-loader'
                         },
                         {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    localIdentName: '[name]_[local]_[hash:base64:5]',
+                                    exportLocalsConvention: 'camelCase'
+                                },
+                                importLoaders: 1,
+                                esModule: false
+                            }
+                        },
+                        {
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
@@ -191,16 +204,6 @@ module.exports = [
                                         'autoprefixer'
                                     ]
                                 }
-                            }
-                        },
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: {
-                                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                                    exportLocalsConvention: 'camelCase'
-                                },
-                                importLoaders: 1
                             }
                         }
                     ]
@@ -227,7 +230,8 @@ module.exports = [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1
+                                importLoaders: 1,
+                                esModule: false
                             }
                         }
                     ]
