@@ -84,7 +84,6 @@ const base = {
                         postcssOptions: {
                             plugins: [
                                 'postcss-import',
-                                'postcss-simple-vars',
                                 'autoprefixer'
                             ]
                         }
@@ -97,26 +96,17 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
-                {
-                    loader: 'style-loader'
-                },
+                'style-loader',
+                'css-loader',
                 {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
                             plugins: [
                                 'postcss-import',
-                                'postcss-simple-vars',
                                 'autoprefixer'
                             ]
                         }
-                    }
-                },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1,
-                        esModule: false
                     }
                 }
             ]
