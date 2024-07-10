@@ -700,6 +700,10 @@ class MenuBar extends React.Component {
         );
     }
 }
+            </Box>
+        );
+    }
+}
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
