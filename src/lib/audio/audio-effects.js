@@ -1,7 +1,7 @@
 import EchoEffect from './effects/echo-effect.js';
 import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
-import {initializeAudioContext} from './shared-audio-context.js';
+import {initializeAudioContextOnce} from './shared-audio-context.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -39,7 +39,7 @@ class AudioEffects {
     async process () {
         try {
             // Ensure the AudioContext is initialized before processing
-            await initializeAudioContext();
+            await initializeAudioContextOnce();
 
             // Wait for a user gesture before creating the OfflineAudioContext
             if (!this.userGestureOccurred) {
