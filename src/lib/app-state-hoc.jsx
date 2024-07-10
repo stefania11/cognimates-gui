@@ -14,19 +14,10 @@ import {detectLocale} from './detect-locale';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Logging middleware to capture state and actions
-const loggerMiddleware = store => next => action => {
-    if (process.env.NODE_ENV === 'development') {
-        // Log the state before the action is dispatched
-        console.log('Previous State:', store.getState());
-    }
+const loggerMiddleware = () => next => action => {
     const sanitizedAction = {...action};
     // Sanitize action payload if necessary
-    const result = next(sanitizedAction);
-    if (process.env.NODE_ENV === 'development') {
-        // Log the state after the action is dispatched
-        console.log('Next State:', store.getState());
-    }
-    return result;
+    return next(sanitizedAction);
 };
 
 /*
@@ -99,11 +90,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             }
             try {
                 // Log the state of variables before creating the store
-                if (process.env.NODE_ENV === 'development') {
-                    console.log('Reducers:', reducers);
-                    console.log('Initial State:', initialState);
-                    console.log('Enhancer:', enhancer);
-                }
 
                 const reducer = combineReducers(reducers);
                 this.store = createStore(
@@ -113,9 +99,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 );
 
                 // Log the created store
-                if (process.env.NODE_ENV === 'development') {
-                    console.log('Created Store:', this.store);
-                }
 
                 if (process.env.NODE_ENV === 'development') {
                     // Expose the store on the window object for debugging
