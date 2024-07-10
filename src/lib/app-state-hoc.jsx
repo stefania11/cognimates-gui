@@ -19,6 +19,9 @@ const loggerMiddleware = store => next => action => {
         // eslint-disable-next-line no-console
         console.log('Dispatching action:', action);
     }
+    if (typeof next !== 'function') {
+        throw new Error('Middleware chain is broken: next is not a function');
+    }
     const result = next(action);
     if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
