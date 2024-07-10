@@ -151,6 +151,7 @@
     "body-parser": "^1.20.2",
     "dotenv": "^7.0.0",
     "express": "^4.19.2",
+    "sass-loader": "^14.2.1",
     "scratch-render-fonts": "^1.0.70"
   }
 }
