@@ -68,9 +68,7 @@ const base = {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
-                {
-                    loader: 'style-loader'
-                },
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -86,9 +84,9 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                postcssImport(),
-                                postcssVars(),
-                                autoprefixer()
+                                'postcss-import',
+                                'postcss-simple-vars',
+                                'autoprefixer'
                             ]
                         }
                     }
