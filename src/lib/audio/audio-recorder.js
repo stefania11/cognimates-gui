@@ -65,8 +65,10 @@ class AudioRecorder {
         if (!this.audioContext) {
             this.logMessage('AudioContext is not initialized. Initializing now...');
             await initializeAudioContextOnce();
-            this.audioContext = new SharedAudioContext();
-            this.logMessage('AudioContext initialized.');
+            if (!this.audioContext) {
+                this.audioContext = new SharedAudioContext();
+                this.logMessage('AudioContext initialized.');
+            }
         }
         this.recording = true;
     }
