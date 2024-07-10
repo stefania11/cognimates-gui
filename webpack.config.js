@@ -116,7 +116,10 @@ const base = {
         {
             test: /\.worker\.js$/,
             use: {
-                loader: 'worker-loader'
+                loader: 'worker-loader',
+                options: {
+                    type: 'module'
+                }
             }
         }]
     },
