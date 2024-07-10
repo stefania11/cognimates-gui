@@ -64,9 +64,7 @@ const base = {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
-                {
-                    loader: 'style-loader'
-                },
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
@@ -74,8 +72,7 @@ const base = {
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             exportLocalsConvention: 'camelCase'
                         },
-                        importLoaders: 1,
-                        esModule: false
+                        importLoaders: 1
                     }
                 },
                 {
@@ -83,7 +80,6 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
                                 'autoprefixer'
                             ]
                         }
@@ -96,14 +92,11 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
-                {
-                    loader: 'style-loader'
-                },
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 1,
-                        esModule: false
+                        importLoaders: 1
                     }
                 },
                 {
@@ -111,7 +104,6 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                'postcss-import',
                                 'autoprefixer'
                             ]
                         }
@@ -122,10 +114,7 @@ const base = {
         {
             test: /\.worker\.js$/,
             use: {
-                loader: 'worker-loader',
-                options: {
-                    type: 'classic'
-                }
+                loader: 'worker-loader'
             }
         }]
     },
@@ -178,9 +167,7 @@ module.exports = [
                     test: /\.css$/,
                     exclude: /node_modules/,
                     use: [
-                        {
-                            loader: 'style-loader'
-                        },
+                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -188,8 +175,7 @@ module.exports = [
                                     localIdentName: '[name]_[local]_[hash:base64:5]',
                                     exportLocalsConvention: 'camelCase'
                                 },
-                                importLoaders: 1,
-                                esModule: false
+                                importLoaders: 1
                             }
                         },
                         {
@@ -197,7 +183,6 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
                                         'autoprefixer'
                                     ]
                                 }
@@ -209,14 +194,11 @@ module.exports = [
                     test: /\.css$/,
                     include: /node_modules/,
                     use: [
-                        {
-                            loader: 'style-loader'
-                        },
+                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1,
-                                esModule: false
+                                importLoaders: 1
                             }
                         },
                         {
@@ -224,7 +206,6 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        'postcss-import',
                                         'autoprefixer'
                                     ]
                                 }
