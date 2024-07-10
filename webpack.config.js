@@ -59,12 +59,25 @@ const base = {
                 ]
             }
         },
+        // CSS loader configuration for non-node_modules CSS files
         {
             test: /\.css$/,
             exclude: /node_modules/,
             use: [
                 {
                     loader: 'style-loader'
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                'postcss-import',
+                                'postcss-simple-vars',
+                                'autoprefixer'
+                            ]
+                        }
+                    }
                 },
                 {
                     loader: 'css-loader',
@@ -75,21 +88,10 @@ const base = {
                         },
                         importLoaders: 1
                     }
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                'postcss-import',
-                                'postcss-simple-vars',
-                                'autoprefixer'
-                            ]
-                        }
-                    }
                 }
             ]
         },
+        // CSS loader configuration for node_modules CSS files
         {
             test: /\.css$/,
             include: /node_modules/,
@@ -98,12 +100,6 @@ const base = {
                     loader: 'style-loader'
                 },
                 {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1
-                    }
-                },
-                {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
@@ -113,6 +109,12 @@ const base = {
                                 'autoprefixer'
                             ]
                         }
+                    }
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1
                     }
                 }
             ]
@@ -180,16 +182,6 @@ module.exports = [
                             loader: 'style-loader'
                         },
                         {
-                            loader: 'css-loader',
-                            options: {
-                                modules: {
-                                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                                    exportLocalsConvention: 'camelCase'
-                                },
-                                importLoaders: 1
-                            }
-                        },
-                        {
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
@@ -199,6 +191,16 @@ module.exports = [
                                         'autoprefixer'
                                     ]
                                 }
+                            }
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    localIdentName: '[name]_[local]_[hash:base64:5]',
+                                    exportLocalsConvention: 'camelCase'
+                                },
+                                importLoaders: 1
                             }
                         }
                     ]
@@ -211,12 +213,6 @@ module.exports = [
                             loader: 'style-loader'
                         },
                         {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
-                        {
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
@@ -226,6 +222,12 @@ module.exports = [
                                         'autoprefixer'
                                     ]
                                 }
+                            }
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1
                             }
                         }
                     ]
