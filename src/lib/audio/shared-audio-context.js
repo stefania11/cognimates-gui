@@ -68,16 +68,18 @@ const initializeAudioContextOnce = () => new Promise((resolve, reject) => {
 });
 
 document.addEventListener('click', () => {
-    initializeAudioContextOnce();
-    if (window.audioRecorderInstance) {
-        window.audioRecorderInstance.handleUserGesture();
-    }
+    initializeAudioContextOnce().then(() => {
+        if (window.audioRecorderInstance) {
+            window.audioRecorderInstance.handleUserGesture();
+        }
+    });
 });
 document.addEventListener('touchstart', () => {
-    initializeAudioContextOnce();
-    if (window.audioRecorderInstance) {
-        window.audioRecorderInstance.handleUserGesture();
-    }
+    initializeAudioContextOnce().then(() => {
+        if (window.audioRecorderInstance) {
+            window.audioRecorderInstance.handleUserGesture();
+        }
+    });
 });
 
 /**
