@@ -80,6 +80,7 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
+                                'postcss-import',
                                 'autoprefixer'
                             ]
                         }
@@ -104,6 +105,7 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
+                                'postcss-import',
                                 'autoprefixer'
                             ]
                         }
@@ -183,6 +185,7 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
+                                        'postcss-import',
                                         'autoprefixer'
                                     ]
                                 }
@@ -206,6 +209,7 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
+                                        'postcss-import',
                                         'autoprefixer'
                                     ]
                                 }
