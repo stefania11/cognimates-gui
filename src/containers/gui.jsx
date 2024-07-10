@@ -210,5 +210,9 @@ const WrappedGui = compose(
     cloudManagerHOC
 )(ConnectedGUI);
 
-WrappedGui.setAppElement = ReactModal.setAppElement;
+WrappedGui.setAppElement = (appTarget) => {
+    console.log('Setting app element:', appTarget);
+    ReactModal.setAppElement(appTarget);
+};
+
 export default WrappedGui;
