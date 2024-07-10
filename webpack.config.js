@@ -122,7 +122,7 @@ const base = {
             use: {
                 loader: 'worker-loader',
                 options: {
-                    inline: 'no-fallback'
+                    type: 'classic'
                 }
             }
         }]
