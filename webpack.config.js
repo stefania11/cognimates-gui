@@ -67,53 +67,62 @@ const base = {
         {
             test: /\.css$/,
             exclude: /node_modules/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                    importLoaders: 1, // Adjusted to ensure proper handling of @imported resources
-                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                    camelCase: true
-                }
-            }, {
-                loader: 'postcss-loader',
-                options: {
-                    postcssOptions: {
-                        ident: 'postcss',
-                        plugins: [
-                            postcssImport(),
-                            postcssVars(),
-                            autoprefixer()
-                        ]
+            use: [
+                {
+                    loader: 'style-loader'
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            exportLocalsConvention: 'camelCase'
+                        },
+                        importLoaders: 1
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            ident: 'postcss',
+                            plugins: [
+                                postcssImport(),
+                                postcssVars(),
+                                autoprefixer()
+                            ]
+                        }
                     }
                 }
-            }]
+            ]
         },
         {
             test: /\.css$/,
             include: /node_modules/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader',
-                options: {
-                    importLoaders: 1 // Adjusted to ensure proper handling of @imported resources
-                }
-            }, {
-                loader: 'postcss-loader',
-                options: {
-                    postcssOptions: {
-                        ident: 'postcss',
-                        plugins: [
-                            postcssImport(),
-                            postcssVars(),
-                            autoprefixer()
-                        ]
+            use: [
+                {
+                    loader: 'style-loader'
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            ident: 'postcss',
+                            plugins: [
+                                postcssImport(),
+                                postcssVars(),
+                                autoprefixer()
+                            ]
+                        }
                     }
                 }
-            }]
+            ]
         }]
     },
     optimization: {
@@ -164,53 +173,62 @@ module.exports = [
                 {
                     test: /\.css$/,
                     exclude: /node_modules/,
-                    use: [{
-                        loader: 'style-loader'
-                    }, {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1, // Adjusted to ensure proper handling of @imported resources
-                            localIdentName: '[name]_[local]_[hash:base64:5]',
-                            camelCase: true
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    postcssImport(),
-                                    postcssVars(),
-                                    autoprefixer()
-                                ]
+                    use: [
+                        {
+                            loader: 'style-loader'
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    localIdentName: '[name]_[local]_[hash:base64:5]',
+                                    exportLocalsConvention: 'camelCase'
+                                },
+                                importLoaders: 1
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    ident: 'postcss',
+                                    plugins: [
+                                        postcssImport(),
+                                        postcssVars(),
+                                        autoprefixer()
+                                    ]
+                                }
                             }
                         }
-                    }]
+                    ]
                 },
                 {
                     test: /\.css$/,
                     include: /node_modules/,
-                    use: [{
-                        loader: 'style-loader'
-                    }, {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1 // Adjusted to ensure proper handling of @imported resources
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    postcssImport(),
-                                    postcssVars(),
-                                    autoprefixer()
-                                ]
+                    use: [
+                        {
+                            loader: 'style-loader'
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    ident: 'postcss',
+                                    plugins: [
+                                        postcssImport(),
+                                        postcssVars(),
+                                        autoprefixer()
+                                    ]
+                                }
                             }
                         }
-                    }]
+                    ]
                 }
             ])
         },
