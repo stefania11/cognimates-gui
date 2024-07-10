@@ -90,19 +90,11 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 );
             } catch (error) {
                 // Implement a more robust error logging mechanism
-                fetch('/log-error', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        error: error.toString(),
-                        stack: error.stack,
-                        initialState: JSON.stringify(initialState),
-                        reducers: Object.keys(reducers)
-                    })
-                }).catch(() => {
-                    // Handle fetch error (e.g., retry logic or alternative logging)
+                console.error('Error initializing Redux store:', {
+                    error: error.toString(),
+                    stack: error.stack,
+                    initialState: JSON.stringify(initialState),
+                    reducers: Object.keys(reducers)
                 });
                 this.setState({hasError: true, errorMessage: error.message});
             }

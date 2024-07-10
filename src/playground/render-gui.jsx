@@ -45,18 +45,12 @@ class ErrorBoundary extends React.Component {
     componentDidCatch (error, errorInfo) {
         // Log the error to an error reporting service
         try {
-            fetch('/log-error', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    error: error.toString(),
-                    errorInfo
-                })
+            console.error('ErrorBoundary caught an error in componentDidCatch:', {
+                error: error.toString(),
+                errorInfo
             });
         } catch (fetchError) {
-            log.error('Failed to log error to server:', fetchError);
+            log.error('Failed to log error to console:', fetchError);
         }
     }
 
