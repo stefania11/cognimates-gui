@@ -126,7 +126,8 @@ const base = {
             use: {
                 loader: 'worker-loader',
                 options: {
-                    type: 'classic'
+                    type: 'classic',
+                    version: '3.0.8'
                 }
             }
         }]
