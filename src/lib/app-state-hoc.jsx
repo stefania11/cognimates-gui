@@ -14,7 +14,7 @@ import {detectLocale} from './detect-locale';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Logging middleware to capture state and actions
-const loggerMiddleware = () => next => action => {
+const loggerMiddleware = next => action => {
     const sanitizedAction = {...action};
     // Sanitize action payload if necessary
     return next(sanitizedAction);
