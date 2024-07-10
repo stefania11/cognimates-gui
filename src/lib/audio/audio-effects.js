@@ -38,13 +38,13 @@ class AudioEffects {
 
     async process () {
         try {
-            // Ensure the AudioContext is initialized before processing
-            await initializeAudioContextOnce();
-
-            // Wait for a user gesture before creating the OfflineAudioContext
+            // Wait for a user gesture before initializing the AudioContext
             if (!this.userGestureOccurred) {
                 throw new Error('AudioContext cannot be initialized without a user gesture.');
             }
+
+            // Ensure the AudioContext is initialized before processing
+            await initializeAudioContextOnce();
 
             // Create the OfflineAudioContext after the AudioContext is initialized
             const pitchRatio = Math.pow(2, 4 / 12); // A major third
