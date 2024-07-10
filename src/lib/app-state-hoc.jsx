@@ -13,25 +13,6 @@ import {detectLocale} from './detect-locale';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Logging middleware to capture state and actions
-const loggerMiddleware = store => next => action => {
-    if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.log('Dispatching action:', action);
-    }
-    if (typeof next !== 'function') {
-        throw new Error('Middleware chain is broken: next is not a function');
-    }
-    const result = next(action);
-    if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.log('Next state:', store.getState());
-        // eslint-disable-next-line no-console
-        console.log('Next function:', next);
-    }
-    return result;
-};
-
 import {
     default as guiReducer,
     guiInitialState,
@@ -54,10 +35,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     class AppStateWrapper extends React.Component {
         constructor (props) {
             super(props);
-            this.state = {
-                hasError: false,
-                errorMessage: ''
-            };
             let initialState = {};
             let reducers = {};
             let enhancer;
@@ -72,13 +49,11 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 // browser modal
                 reducers = {locales: localesReducer};
                 initialState = {locales: initializedLocales};
-                enhancer = composeEnhancers(applyMiddleware(loggerMiddleware));
+                enhancer = composeEnhancers();
             } else {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
                 const {ScratchPaintReducer} = require('scratch-paint');
-                console.log('ScratchPaintReducer:', ScratchPaintReducer);
-                console.log('Props:', props);
 
                 let initializedGui = guiInitialState;
                 if (props.isFullScreen || props.isPlayerOnly) {
@@ -100,89 +75,16 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     locales: initializedLocales,
                     scratchGui: initializedGui
                 };
-                enhancer = composeEnhancers(applyMiddleware(guiMiddleware, loggerMiddleware));
+                enhancer = composeEnhancers(applyMiddleware(guiMiddleware));
             }
-            try {
-                // Log the state of variables before creating the store
-                if (process.env.NODE_ENV === 'development') {
-                    // eslint-disable-next-line no-console
-                    console.log('Reducers before store creation:', reducers);
-                    // eslint-disable-next-line no-console
-                    console.log('Initial State before store creation:', initialState);
-                    // eslint-disable-next-line no-console
-                    console.log('Enhancer before store creation:', enhancer);
-                    // eslint-disable-next-line no-console
-                    console.log('Type of createStore:', typeof createStore);
-                    // eslint-disable-next-line no-console
-                    console.log('Props before store creation:', props);
-                }
-
-                const reducer = combineReducers(reducers);
-                this.store = createStore(
-                    reducer,
-                    initialState,
-                    enhancer
-                );
-
-                // Log the created store
-                if (process.env.NODE_ENV === 'development') {
-                    // eslint-disable-next-line no-console
-                    console.log('Created Redux store:', this.store);
-                    // eslint-disable-next-line no-console
-                    console.log('Store state after creation:', this.store.getState());
-                    // eslint-disable-next-line no-console
-                    console.log('Props after store creation:', props);
-                    // Expose the store on the window object for debugging
-                    window.store = this.store;
-                }
-            } catch (error) {
-                // eslint-disable-next-line no-console
-                console.error('Error initializing Redux store:', error);
-
-                // Additional detailed logging for debugging
-                // eslint-disable-next-line no-console
-                console.error('Reducers:', reducers);
-                // eslint-disable-next-line no-console
-                console.error('Initial State:', initialState);
-                // eslint-disable-next-line no-console
-                console.error('Enhancer:', enhancer);
-
-                // Log the middlewareAPI and the result of applyMiddleware
-                const middlewareAPI = {
-                    getState: this.store ? this.store.getState : () => {},
-                    dispatch: this.store ? this.store.dispatch : () => {}
-                };
-                const appliedMiddleware = applyMiddleware(guiMiddleware, loggerMiddleware)(middlewareAPI);
-                // eslint-disable-next-line no-console
-                console.error('Middleware API:', middlewareAPI);
-                // eslint-disable-next-line no-console
-                console.error('Applied Middleware:', appliedMiddleware);
-
-                // Implement a more robust error logging mechanism
-                // Intended use: send error details to a remote logging service
-                fetch('http://localhost:8602/log-error', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        error: error.toString(),
-                        stack: error.stack,
-                        reducers: JSON.stringify(reducers),
-                        initialState: JSON.stringify(initialState),
-                        enhancer: enhancer.toString(),
-                        middlewareAPI: JSON.stringify(middlewareAPI),
-                        appliedMiddleware: appliedMiddleware.toString()
-                    })
-                }).catch(fetchError => {
-                    // eslint-disable-next-line no-console
-                    console.error('Failed to log error to server:', fetchError);
-                });
-
-                // Set the error state with additional information
-                this.setState({hasError: true, errorMessage: error.message});
-            }
+            const reducer = combineReducers(reducers);
+            this.store = createStore(
+                reducer,
+                initialState,
+                enhancer
+            );
         }
+
         componentDidUpdate (prevProps) {
             if (localesOnly) return;
             if (prevProps.isPlayerOnly !== this.props.isPlayerOnly) {
@@ -192,30 +94,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 this.store.dispatch(setFullScreen(this.props.isFullScreen));
             }
         }
-        componentDidCatch (error, errorInfo) {
-            // Log the error details to the console for debugging
-            // eslint-disable-next-line no-console
-            console.error('Error caught by componentDidCatch:', error, errorInfo);
 
-            // Implement a more robust error logging mechanism
-            // Intended use: send error details to a remote logging service
-            fetch('http://localhost:8602/log-error', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    error: error.toString(),
-                    errorInfo
-                })
-            }).catch(fetchError => {
-                // eslint-disable-next-line no-console
-                console.error('Failed to log error to server:', fetchError);
-            });
-
-            // Set the error state with additional information
-            this.setState({hasError: true, errorMessage: error.message});
-        }
         render () {
             const {
                 isFullScreen, // eslint-disable-line no-unused-vars
@@ -223,9 +102,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 showTelemetryModal, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
-            if (this.state.hasError || !this.store) {
-                return <div>{`Error initializing Redux store: ${this.state.errorMessage || 'Store not found'}`}</div>;
-            }
             return (
                 <Provider store={this.store}>
                     <ConnectedIntlProvider>
@@ -239,7 +115,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     }
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
-        isPlayerOnly: PropTypes.bool
+        isPlayerOnly: PropTypes.bool,
+        showTelemetryModal: PropTypes.bool
     };
     return AppStateWrapper;
 };
