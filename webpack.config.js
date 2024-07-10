@@ -149,7 +149,8 @@ const base = {
                 loader: 'worker-loader',
                 options: {
                     inline: 'no-fallback',
-                    publicPath: '/workers/' // Ensure workers are served from the correct path
+                    publicPath: '/workers/',
+                    esModule: true // Ensure compatibility with Webpack 5
                 }
             }
         }]
