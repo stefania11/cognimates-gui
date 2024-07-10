@@ -81,9 +81,7 @@ const base = {
                     options: {
                         postcssOptions: {
                             plugins: [
-                                ['postcss-import', {
-                                    path: ['src/css']
-                                }],
+                                'postcss-import',
                                 'postcss-simple-vars',
                                 'autoprefixer'
                             ]
@@ -198,9 +196,7 @@ module.exports = [
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        ['postcss-import', {
-                                            path: ['src/css']
-                                        }],
+                                        'postcss-import',
                                         'postcss-simple-vars',
                                         'autoprefixer'
                                     ]
