@@ -91,11 +91,13 @@ const base = {
         }]
     },
     optimization: {
-        // minimizer: [
-        //     new UglifyJsPlugin({
-        //         include: /\.min\.js$/
-        //     })
-        // ]
+        splitChunks: {
+            chunks: 'all',
+            name: 'lib.min'
+        },
+        runtimeChunk: {
+            name: entrypoint => `runtime~${entrypoint.name}`
+        }
     },
     plugins: []
 };
@@ -106,8 +108,14 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'gui': './src/playground/index.jsx',
-            'blocksonly': './src/playground/blocks-only.jsx',
-            'compatibilitytesting': './src/playground/compatibility-testing.jsx',
+            'blocksonly': {
+                import: './src/playground/blocks-only.jsx',
+                dependOn: 'lib.min'
+            },
+            'compatibilitytesting': {
+                import: './src/playground/compatibility-testing.jsx',
+                dependOn: 'lib.min'
+            },
             'player': './src/playground/player.jsx'
         },
         output: {
@@ -126,6 +134,32 @@ module.exports = [
                     options: {
                         outputPath: 'static/assets/'
                     }
+                },
+                {
+                    test: /\.css$/,
+                    use: [{
+                        loader: 'style-loader'
+                    }, {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            camelCase: true
+                        }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    postcssImport,
+                                    postcssVars,
+                                    autoprefixer()
+                                ]
+                            }
+                        }
+                    }]
                 }
             ])
         },
