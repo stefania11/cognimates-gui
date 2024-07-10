@@ -116,7 +116,12 @@ class AudioEffects {
                 this.source.connect(this.audioContext.destination);
             }
 
-            this.source.start();
+            // Start the source only if a user gesture has occurred
+            if (this.userGestureOccurred) {
+                this.source.start();
+            } else {
+                throw new Error('AudioContext cannot be started without a user gesture.');
+            }
 
             await this.audioContext.startRendering();
 
