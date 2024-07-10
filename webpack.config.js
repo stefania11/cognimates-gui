@@ -96,8 +96,16 @@ const base = {
             test: /\.css$/,
             include: /node_modules/,
             use: [
-                'style-loader',
-                'css-loader',
+                {
+                    loader: 'style-loader'
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1,
+                        esModule: false
+                    }
+                },
                 {
                     loader: 'postcss-loader',
                     options: {
@@ -207,6 +215,13 @@ module.exports = [
                             loader: 'style-loader'
                         },
                         {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                esModule: false
+                            }
+                        },
+                        {
                             loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
@@ -216,13 +231,6 @@ module.exports = [
                                         'autoprefixer'
                                     ]
                                 }
-                            }
-                        },
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                                esModule: false
                             }
                         }
                     ]
