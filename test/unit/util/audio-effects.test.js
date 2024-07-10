@@ -8,10 +8,17 @@ import AudioEffects from '../../../src/lib/audio/audio-effects';
 import RobotEffect from '../../../src/lib/audio/effects/robot-effect';
 import EchoEffect from '../../../src/lib/audio/effects/echo-effect';
 import VolumeEffect from '../../../src/lib/audio/effects/volume-effect';
+import SharedAudioContext, {initializeAudioContextOnce} from '../../../src/lib/audio/shared-audio-context';
 
 describe('Audio Effects manager', () => {
-    const audioContext = new AudioContext();
-    const audioBuffer = audioContext.createBuffer(1, 400, 44100);
+    let audioContext;
+    let audioBuffer;
+
+    beforeAll(async () => {
+        await initializeAudioContextOnce();
+        audioContext = new SharedAudioContext();
+        audioBuffer = audioContext.createBuffer(1, 400, 44100);
+    });
 
     test('changes buffer length and playback rate for faster effect', () => {
         const audioEffects = new AudioEffects(audioBuffer, 'faster');
@@ -19,7 +26,7 @@ describe('Audio Effects manager', () => {
         expect(audioEffects.source.playbackRate.value).toBeGreaterThan(1);
     });
 
-    test('changes buffer length  and playback rate for slower effect', () => {
+    test('changes buffer length and playback rate for slower effect', () => {
         const audioEffects = new AudioEffects(audioBuffer, 'slower');
         expect(audioEffects.audioContext._.length).toBeGreaterThan(400);
         expect(audioEffects.source.playbackRate.value).toBeLessThan(1);
@@ -38,8 +45,9 @@ describe('Audio Effects manager', () => {
 describe('Effects', () => {
     let audioContext;
 
-    beforeEach(() => {
-        audioContext = new AudioContext();
+    beforeEach(async () => {
+        await initializeAudioContextOnce();
+        audioContext = new SharedAudioContext();
     });
 
     test('all effects provide an input and output that are connected', () => {
