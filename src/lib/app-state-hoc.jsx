@@ -110,6 +110,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     enhancer
                 );
 
+                // Expose the store on the window object for debugging
+                window.store = this.store;
+
                 if (process.env.NODE_ENV === 'development') {
                     // eslint-disable-next-line no-console
                     console.log('Redux store created successfully.');
