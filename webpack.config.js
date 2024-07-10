@@ -72,7 +72,7 @@ const base = {
                             localIdentName: '[name]_[local]_[hash:base64:5]',
                             exportLocalsConvention: 'camelCase'
                         },
-                        importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                        importLoaders: 1 // Ensure that only postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -85,8 +85,7 @@ const base = {
                             ]
                         }
                     }
-                },
-                'sass-loader' // Add sass-loader to handle SCSS files
+                }
             ]
         },
         {
@@ -127,7 +126,7 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                        importLoaders: 1 // Ensure that only postcss-loader is applied before css-loader
                     }
                 },
                 {
@@ -140,8 +139,7 @@ const base = {
                             ]
                         }
                     }
-                },
-                'sass-loader' // Add sass-loader to handle SCSS files
+                }
             ]
         }]
     },
@@ -202,7 +200,7 @@ module.exports = [
                                     localIdentName: '[name]_[local]_[hash:base64:5]',
                                     exportLocalsConvention: 'camelCase'
                                 },
-                                importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                                importLoaders: 1 // Ensure that only postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -215,8 +213,7 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        'sass-loader' // Add sass-loader to handle SCSS files
+                        }
                     ]
                 },
                 {
@@ -256,7 +253,7 @@ module.exports = [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 2 // Ensure that both postcss-loader and sass-loader are applied before css-loader
+                                importLoaders: 1 // Ensure that only postcss-loader is applied before css-loader
                             }
                         },
                         {
@@ -269,8 +266,7 @@ module.exports = [
                                     ]
                                 }
                             }
-                        },
-                        'sass-loader' // Add sass-loader to handle SCSS files
+                        }
                     ]
                 }
             ])
