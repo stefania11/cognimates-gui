@@ -38,7 +38,8 @@ const base = {
     resolve: {
         symlinks: false,
         alias: {
-            css: path.resolve(__dirname, 'src/css')
+            css: path.resolve(__dirname, 'src/css'),
+            'scratch-paint-css': path.resolve(__dirname, 'node_modules/scratch-paint/src/css')
         },
         fallback: {
             stream: require.resolve('stream-browserify'),
