@@ -28,7 +28,8 @@ module.exports = {
                             implementation: require('sass'),
                             sassOptions: {
                                 includePaths: [path.resolve(__dirname, 'src/css')]
-                            }
+                            },
+                            additionalData: `@import "colors.css"; @import "units.css"; @import "typography.css"; @import "z-index.css";`
                         }
                     }
                 ]
