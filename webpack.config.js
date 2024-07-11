@@ -30,7 +30,6 @@ module.exports = {
                         use: [
                             'style-loader',
                             'css-loader',
-                            'postcss-loader', // Move postcss-loader before sass-loader
                             {
                                 loader: 'sass-loader',
                                 options: {
@@ -40,7 +39,8 @@ module.exports = {
                                         includePaths: [path.resolve(__dirname, 'src/css')]
                                     }
                                 }
-                            }
+                            },
+                            'postcss-loader' // Move postcss-loader after sass-loader
                         ]
                     },
                     {
@@ -64,7 +64,6 @@ module.exports = {
                                     }
                                 }
                             },
-                            'postcss-loader', // Move postcss-loader before sass-loader
                             {
                                 loader: 'sass-loader',
                                 options: {
@@ -74,7 +73,8 @@ module.exports = {
                                         includePaths: [path.resolve(__dirname, 'src/css')]
                                     }
                                 }
-                            }
+                            },
+                            'postcss-loader' // Move postcss-loader after sass-loader
                         ]
                     }
                 ]
