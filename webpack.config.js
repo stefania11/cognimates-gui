@@ -28,8 +28,7 @@ module.exports = {
                             implementation: require('sass'),
                             sassOptions: {
                                 includePaths: [path.resolve(__dirname, 'src/css')]
-                            },
-                            additionalData: `@import "${path.resolve(__dirname, 'src/css/colors.scss')}"; @import "${path.resolve(__dirname, 'src/css/units.scss')}"; @import "${path.resolve(__dirname, 'src/css/typography.scss')}"; @import "${path.resolve(__dirname, 'src/css/z-index.scss')}";`
+                            }
                         }
                     }
                 ]
