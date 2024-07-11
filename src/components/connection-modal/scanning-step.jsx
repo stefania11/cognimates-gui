@@ -10,7 +10,7 @@ import Dots from './dots.jsx';
 import radarIcon from './icons/searching.png';
 import refreshIcon from './icons/refresh.svg';
 
-import styles from './connection-modal.css';
+import styles from './connection-modal.scss';
 
 const ScanningStep = props => (
     <Box className={styles.body}>
