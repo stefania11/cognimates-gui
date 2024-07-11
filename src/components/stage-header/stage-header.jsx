@@ -48,6 +48,7 @@ const messages = defineMessages({
 });
 
 const StageHeaderComponent = function (props) {
+    console.log("StageHeaderComponent is being processed");
     const {
         isFullScreen,
         isPlayerOnly,
