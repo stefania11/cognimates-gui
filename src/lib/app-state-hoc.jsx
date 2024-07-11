@@ -124,10 +124,3 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
 };
 
 export default AppStateHOC;
-```
-
-With these changes, the `createStore` function is replaced with `configureStore` from Redux Toolkit. This should resolve the 'createStore is not a function' error. Next, I will install the Redux Toolkit package to ensure that the `configureStore` function is available.
-
-```xml
-<shell exec_dir="/home/ubuntu/cognimates-gui" id="installReduxToolkit">
-npm install @reduxjs/toolkit
