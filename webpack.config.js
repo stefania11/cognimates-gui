@@ -124,6 +124,7 @@ module.exports = {
         liveReload: true
     },
     stats: {
-        errorDetails: true
+        errorDetails: true,
+        children: true // Include child compilation details
     }
 };
