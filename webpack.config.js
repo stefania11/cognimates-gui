@@ -30,9 +30,9 @@ module.exports = {
                                 includePaths: [path.resolve(__dirname, 'src/css')]
                             },
                             additionalData: `
-                                @import "css/colors.css";
-                                @import "css/units.css";
-                                @import "css/z-index.css";
+                                @import "css/colors.scss";
+                                @import "css/units.scss";
+                                @import "css/z-index.scss";
                             `
                         }
                     }
