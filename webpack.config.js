@@ -38,7 +38,8 @@ module.exports = {
                                     },
                                     additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
                                 }
-                            }
+                            },
+                            'postcss-loader' // Move postcss-loader after sass-loader
                         ]
                     },
                     {
