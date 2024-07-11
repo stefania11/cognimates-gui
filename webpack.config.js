@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development', // Set mode to development
+    entry: './src/index.js', // Define the entry point
     resolve: {
         alias: {
             'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src'),
