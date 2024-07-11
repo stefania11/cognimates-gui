@@ -84,7 +84,7 @@ $hover-scale: 2;
 
 .trim-handle {
     position: absolute;
-    left: calc(-$trim-handle-width / 2);
+    left: calc(-1 * #{$trim-handle-width} / 2);
     width: $trim-handle-width;
     height: $trim-handle-height;
 }
