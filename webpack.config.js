@@ -12,26 +12,56 @@ module.exports = {
         rules: [
             {
                 test: /\.(css|scss)$/,
-                use: [
-                    'style-loader',
+                oneOf: [
                     {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                namedExport: false
-                            }
-                        }
+                        test: /\.css$/,
+                        include: path.resolve(__dirname, 'node_modules/scratch-paint'),
+                        use: [
+                            'style-loader',
+                            'css-loader'
+                        ]
                     },
-                    'postcss-loader',
                     {
-                        loader: 'sass-loader',
-                        options: {
-                            implementation: require('sass'),
-                            sassOptions: {
-                                includePaths: [path.resolve(__dirname, 'src/css')]
+                        test: /\.scss$/,
+                        include: path.resolve(__dirname, 'node_modules/scratch-paint'),
+                        use: [
+                            'style-loader',
+                            'css-loader',
+                            {
+                                loader: 'sass-loader',
+                                options: {
+                                    implementation: require('sass'),
+                                    sassOptions: {
+                                        includePaths: [path.resolve(__dirname, 'src/css')]
+                                    },
+                                    additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        use: [
+                            'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: {
+                                        namedExport: false
+                                    }
+                                }
                             },
-                            additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
-                        }
+                            'postcss-loader',
+                            {
+                                loader: 'sass-loader',
+                                options: {
+                                    implementation: require('sass'),
+                                    sassOptions: {
+                                        includePaths: [path.resolve(__dirname, 'src/css')]
+                                    },
+                                    additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
+                                }
+                            }
+                        ]
                     }
                 ]
             },
