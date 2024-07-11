@@ -107,19 +107,19 @@ $sides: 20rem;
 }
 
 [dir="ltr"] .header-item-title {
-    margin: 0 -$sides 0 0;
+    margin: 0 (-$sides) 0 0;
 }
 
 [dir="rtl"] .header-item-title {
-    margin: 0 0 0 -$sides;
+    margin: 0 0 0 (-$sides);
 }
 
 .full-screen [dir="ltr"] .header-item-title {
-    margin: 0 0 0 -$sides;
+    margin: 0 0 0 (-$sides);
 }
 
 .full-screen [dir="rtl"] .header-item-title {
-    margin: 0 -$sides 0 0;
+    margin: 0 (-$sides) 0 0;
 }
 
 .header-item-close {
