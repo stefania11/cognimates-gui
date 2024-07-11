@@ -14,7 +14,8 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    'postcss-loader'
+                    'postcss-loader',
+                    'sass-loader' // Added sass-loader to handle SCSS-style variables
                 ]
             },
             {
