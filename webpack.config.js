@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'development', // Set mode to development
     resolve: {
         alias: {
             'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src'),
@@ -56,6 +57,11 @@ module.exports = {
                 ],
             }
         ]
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     devServer: {
         static: {
