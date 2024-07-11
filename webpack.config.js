@@ -10,7 +10,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     'style-loader',
                     {
@@ -22,7 +22,15 @@ module.exports = {
                         }
                     },
                     'postcss-loader',
-                    'sass-loader' // Added sass-loader to handle SCSS-style variables
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'src/css')]
+                            }
+                        }
+                    }
                 ]
             },
             {
