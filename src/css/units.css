@@ -28,3 +28,6 @@ $menu-bar-large-font-size: 0.875rem;
 $menu-bar-button-size: 2rem;
 
 $menu-bar-item-max-width: 12rem;
+
+/* Define the $grid-unit variable */
+$grid-unit: 1rem;
