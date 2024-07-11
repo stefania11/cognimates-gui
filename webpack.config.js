@@ -20,17 +20,7 @@ module.exports = {
                         include: path.resolve(__dirname, 'node_modules/scratch-paint'),
                         use: [
                             'style-loader',
-                            'css-loader',
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    implementation: require('sass'),
-                                    sassOptions: {
-                                        includePaths: [path.resolve(__dirname, 'src/css')]
-                                    },
-                                    additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
-                                }
-                            }
+                            'css-loader'
                         ]
                     },
                     {
@@ -57,17 +47,7 @@ module.exports = {
                         use: [
                             'style-loader',
                             'css-loader',
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    implementation: require('sass'),
-                                    sassOptions: {
-                                        includePaths: [path.resolve(__dirname, 'src/css')]
-                                    },
-                                    additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
-                                }
-                            },
-                            'postcss-loader' // Move postcss-loader after sass-loader
+                            'postcss-loader' // Move postcss-loader after css-loader
                         ]
                     },
                     {
