@@ -29,14 +29,14 @@ module.exports = {
                             sassOptions: {
                                 includePaths: [path.resolve(__dirname, 'src/css')]
                             },
-                            additionalData: `@import "./css/colors.scss"; @import "./css/units.scss"; @import "./css/typography.scss"; @import "./css/z-index.scss";`
+                            additionalData: `@import "css/colors.scss"; @import "css/units.scss"; @import "css/typography.scss"; @import "css/z-index.scss";`
                         }
                     }
                 ]
             },
             {
                 test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!scratch-paint)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
