@@ -7,11 +7,23 @@ import {setFullScreen, setPlayer} from './reducers/mode';
 import {remixProject} from './reducers/project-state';
 import {setAppElement} from 'react-modal';
 
+console.log('Initializing application...');
+
 const guiReducers = {
     locales: LocalesReducer,
     scratchGui: GuiReducer,
     scratchPaint: ScratchPaintReducer
 };
+
+console.log('Reducers initialized:', guiReducers);
+
+try {
+    console.log('Setting up application state...');
+    const appState = AppStateHOC(GUI);
+    console.log('Application state set up successfully:', appState);
+} catch (error) {
+    console.error('Error setting up application state:', error);
+}
 
 export {
     GUI as default,
@@ -29,3 +41,5 @@ export {
     setFullScreen,
     setPlayer
 };
+
+console.log('Application setup complete.');
