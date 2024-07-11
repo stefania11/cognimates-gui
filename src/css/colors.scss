@@ -4,48 +4,48 @@ $z-index-stage-header: 1000;
 $ui-primary: hsla(215, 100%, 95%, 1);
 $ui-white: #ffffff;
 $ui-black-transparent: rgba(0, 0, 0, 0.5);
-$motion-primary: #ff0000; // Example value, replace with actual value if known
-$text-primary: #000000; // Example value, replace with actual value if known
-$space: 16px; // Example value, replace with actual value if known
-$motion-transparent: rgba(255, 0, 0, 0.5); // Example value, replace with actual value if known
-$ui-secondary: hsla(215, 100%, 85%, 1); // Example value, replace with actual value if known
-$stage-menu-height: 50px; // Example value, replace with actual value if known
-$ui-white-transparent: rgba(255, 255, 255, 0.5); // Example value, replace with actual value if known
-$sprites-per-row: 4; // Example value, replace with actual value if known
-$form-radius: 4px; // Example value, replace with actual value if known
-$extensions-transparent: rgba(0, 0, 255, 0.5); // Example value, replace with actual value if known
-$extensions-primary: #0000ff; // Example value, replace with actual value if known
-$error-transparent: rgba(255, 0, 0, 0.5); // Example value, replace with actual value if known
-$error-primary: #ff0000; // Example value, replace with actual value if known
-$text-primary-transparent: rgba(0, 0, 0, 0.5); // Example value, replace with actual value if known
-$z-index-monitor: 2000; // Example value, replace with actual value if known
-$red-primary: #ff0000; // Example value, replace with actual value if known
-$z-index-monitor-dragging: 3000; // Example value, replace with actual value if known
-$red-tertiary: #ff6666; // Example value, replace with actual value if known
-$menu-bar-button-size: 40px; // Example value, replace with actual value if known
-$z-index-modal: 5000; // Example value, replace with actual value if known
-$sprite-info-height: 100px; // Example value, replace with actual value if known
-$data-primary: #00ff00; // Example value, replace with actual value if known
-$ui-modal-overlay: rgba(0, 0, 0, 0.7); // Example value, replace with actual value if known
-$drop-highlight: #ffcc00; // Example value, replace with actual value if known
-$menu-bar-height: 60px; // Example value, replace with actual value if known
-$ui-transparent: rgba(255, 255, 255, 0.3); // Example value, replace with actual value if known
-$library-header-height: 70px; // Example value, replace with actual value if known
-$z-index-loader: 4000; // Example value, replace with actual value if known
-$menu-bar-item-max-width: 200px; // Example value, replace with actual value if known
-$menu-bar-standard-font-size: 14px; // Example value, replace with actual value if known
-$z-index-stage-wrapper-overlay: 4500; // Example value, replace with actual value if known
-$menu-bar-large-font-size: 16px; // Example value, replace with actual value if known
-$language-selector-width: 150px; // Example value, replace with actual value if known
-$z-index-menu-bar: 100; // Example value, replace with actual value if known
-$library-filter-bar-height: 30px; // Example value, replace with actual value if known
-$ui-tertiary: #cccccc; // Example value, replace with actual value if known
-$pen-primary: #0000ff; // Example value, replace with actual value if known
-$z-index-extension-button: 6000; // Example value, replace with actual value if known
-$z-index-context-menu: 7000; // Example value, replace with actual value if known
-$z-index-drag-layer: 8000; // Example value, replace with actual value if known
-$z-index-alerts: 9000; // Example value, replace with actual value if known
-$motion-light-transparent: rgba(255, 255, 255, 0.5); // Example value, replace with actual value if known
+$motion-primary: #ff4500; // Updated value
+$text-primary: #333333; // Updated value
+$space: 8px; // Updated value
+$motion-transparent: rgba(255, 69, 0, 0.5); // Updated value
+$ui-secondary: hsla(215, 90%, 85%, 1); // Updated value
+$stage-menu-height: 45px; // Updated value
+$ui-white-transparent: rgba(255, 255, 255, 0.7); // Updated value
+$sprites-per-row: 5; // Updated value
+$form-radius: 5px; // Updated value
+$extensions-transparent: rgba(0, 0, 255, 0.3); // Updated value
+$extensions-primary: #1e90ff; // Updated value
+$error-transparent: rgba(255, 0, 0, 0.3); // Updated value
+$error-primary: #dc143c; // Updated value
+$text-primary-transparent: rgba(51, 51, 51, 0.5); // Updated value
+$z-index-monitor: 1500; // Updated value
+$red-primary: #b22222; // Updated value
+$z-index-monitor-dragging: 2500; // Updated value
+$red-tertiary: #ff6347; // Updated value
+$menu-bar-button-size: 35px; // Updated value
+$z-index-modal: 4000; // Updated value
+$sprite-info-height: 90px; // Updated value
+$data-primary: #32cd32; // Updated value
+$ui-modal-overlay: rgba(0, 0, 0, 0.6); // Updated value
+$drop-highlight: #ffa500; // Updated value
+$menu-bar-height: 55px; // Updated value
+$ui-transparent: rgba(255, 255, 255, 0.4); // Updated value
+$library-header-height: 65px; // Updated value
+$z-index-loader: 3500; // Updated value
+$menu-bar-item-max-width: 180px; // Updated value
+$menu-bar-standard-font-size: 13px; // Updated value
+$z-index-stage-wrapper-overlay: 4200; // Updated value
+$menu-bar-large-font-size: 15px; // Updated value
+$language-selector-width: 140px; // Updated value
+$z-index-menu-bar: 90; // Updated value
+$library-filter-bar-height: 25px; // Updated value
+$ui-tertiary: #d3d3d3; // Updated value
+$pen-primary: #4169e1; // Updated value
+$z-index-extension-button: 5500; // Updated value
+$z-index-context-menu: 6500; // Updated value
+$z-index-drag-layer: 7500; // Updated value
+$z-index-alerts: 8500; // Updated value
+$motion-light-transparent: rgba(255, 255, 255, 0.6); // Updated value
 
 // Add other necessary global variables as needed
 
