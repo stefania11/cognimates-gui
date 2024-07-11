@@ -27,6 +27,6 @@
     width: 100%;
     transform-origin: top;
     will-change: transform;
-    background: $ui-primary;
+    background: hsla(215, 100%, 95%, 1); /* Replacing $ui-primary with its value */
     opacity: 0.75;
 }
