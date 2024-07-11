@@ -49,20 +49,23 @@ const messages = defineMessages({
 
 class GUI extends React.Component {
     componentDidMount () {
+        console.log('componentDidMount: Initializing Scratch Desktop setting and storage');
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
     }
     componentDidUpdate (prevProps) {
+        console.log('componentDidUpdate: Checking for prop changes');
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
+            console.log('componentDidUpdate: Project ID changed', this.props.projectId);
             this.props.onUpdateProjectId(this.props.projectId);
         }
         if (this.props.projectTitle !== prevProps.projectTitle) {
+            console.log('componentDidUpdate: Project title changed', this.props.projectTitle);
             this.setReduxTitle(this.props.projectTitle);
         }
         if (this.props.isShowingProject && !prevProps.isShowingProject) {
-            // this only notifies container when a project changes from not yet loaded to loaded
-            // At this time the project view in www doesn't need to know when a project is unloaded
+            console.log('componentDidUpdate: Project is now showing');
             this.props.onProjectLoaded();
         }
     }
@@ -76,6 +79,7 @@ class GUI extends React.Component {
         }
     }
     render () {
+        console.log('render: Rendering GUI component');
         if (this.props.isError) {
             throw new Error(
                 `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
