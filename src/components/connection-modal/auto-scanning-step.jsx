@@ -13,7 +13,7 @@ import radarIcon from './icons/searching.png';
 import bluetoothIcon from './icons/bluetooth-white.svg';
 import backIcon from './icons/back.svg';
 
-import styles from './connection-modal.css';
+import styles from './connection-modal.scss';
 
 const PHASES = keyMirror({
     prescan: null,
