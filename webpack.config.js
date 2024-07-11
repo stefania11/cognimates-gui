@@ -13,7 +13,14 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                namedExport: false
+                            }
+                        }
+                    },
                     'postcss-loader',
                     'sass-loader' // Added sass-loader to handle SCSS-style variables
                 ]
