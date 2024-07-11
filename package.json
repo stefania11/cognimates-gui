@@ -95,7 +95,7 @@
     "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
     "scratch-svg-renderer": "^2.3.85",
-    "scratch-vm": "^4.2.0",
+    "scratch-vm": "^4.5.314",
     "startaudiocontext": "^1.2.1",
     "style-loader": "^0.23.0",
     "text-encoding": "^0.7.0",
