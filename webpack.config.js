@@ -72,5 +72,8 @@ module.exports = {
         allowedHosts: 'all',
         hot: true,
         liveReload: true
+    },
+    stats: {
+        errorDetails: true
     }
 };
