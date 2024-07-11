@@ -6,7 +6,8 @@ module.exports = {
         alias: {
             'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src'),
             'css': path.resolve(__dirname, 'src/css')
-        }
+        },
+        extensions: ['.js', '.jsx', '.scss'] // Add .scss to extensions
     },
     module: {
         rules: [
@@ -40,6 +41,17 @@ module.exports = {
                         ]
                     },
                     {
+                        test: /\.css$/,
+                        exclude: path.resolve(__dirname, 'node_modules/scratch-paint'),
+                        use: [
+                            'style-loader',
+                            'css-loader',
+                            'postcss-loader' // Add postcss-loader to handle @import statements in CSS files
+                        ]
+                    },
+                    {
+                        test: /\.scss$/,
+                        exclude: path.resolve(__dirname, 'node_modules/scratch-paint'),
                         use: [
                             'style-loader',
                             {
