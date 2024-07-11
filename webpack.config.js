@@ -37,6 +37,9 @@ const base = {
     },
     resolve: {
         symlinks: false,
+        alias: {
+            css: path.resolve(__dirname, 'src/css')
+        },
         fallback: {
             stream: require.resolve('stream-browserify'),
             url: require.resolve('url/')
