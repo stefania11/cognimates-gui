@@ -137,6 +137,9 @@ const base = {
                 {
                     loader: 'css-loader',
                     options: {
+                        modules: {
+                            localIdentName: '[name]_[local]_[hash:base64:5]'
+                        },
                         importLoaders: 1 // Ensure that only postcss-loader is applied before css-loader
                     }
                 },
