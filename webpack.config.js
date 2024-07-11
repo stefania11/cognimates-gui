@@ -18,7 +18,6 @@ const base = {
         host: '0.0.0.0',
         port: process.env.PORT || 8601,
         allowedHosts: ['.devinapps.com'],
-        publicPath: '/',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
