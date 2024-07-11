@@ -29,7 +29,7 @@ module.exports = {
                             sassOptions: {
                                 includePaths: [path.resolve(__dirname, 'src/css')]
                             },
-                            additionalData: `@import "colors.css"; @import "units.css"; @import "typography.css"; @import "z-index.css";`
+                            additionalData: `@import "css/colors.scss"; @import "css/units.scss"; @import "css/typography.scss"; @import "css/z-index.scss";`
                         }
                     }
                 ]
