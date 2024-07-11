@@ -22,17 +22,16 @@ module.exports = {
                         }
                     },
                     'postcss-loader',
-                    // Commenting out sass-loader to isolate the issue
-                    // {
-                    //     loader: 'sass-loader',
-                    //     options: {
-                    //         implementation: require('sass'),
-                    //         sassOptions: {
-                    //             includePaths: [path.resolve(__dirname, 'src/css')]
-                    //         },
-                    //         additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
-                    //     }
-                    // }
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'src/css')]
+                            },
+                            additionalData: '@import "css/colors.scss"; @import "css/units.scss"; @import "css/z-index.scss";'
+                        }
+                    }
                 ]
             },
             {
