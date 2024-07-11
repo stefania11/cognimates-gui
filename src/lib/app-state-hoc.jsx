@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose} from 'redux';
+import {combineReducers, compose} from 'redux';
+import {configureStore} from '@reduxjs/toolkit';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
@@ -78,11 +79,11 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(guiMiddleware);
             }
             const reducer = combineReducers(reducers);
-            this.store = createStore(
+            this.store = configureStore({
                 reducer,
-                initialState,
-                enhancer
-            );
+                preloadedState: initialState,
+                enhancers: [enhancer]
+            });
         }
 
         componentDidUpdate (prevProps) {
@@ -123,3 +124,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
 };
 
 export default AppStateHOC;
+```
+
+With these changes, the `createStore` function is replaced with `configureStore` from Redux Toolkit. This should resolve the 'createStore is not a function' error. Next, I will install the Redux Toolkit package to ensure that the `configureStore` function is available.
+
+```xml
+<shell exec_dir="/home/ubuntu/cognimates-gui" id="installReduxToolkit">
+npm install @reduxjs/toolkit
