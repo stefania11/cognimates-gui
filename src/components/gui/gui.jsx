@@ -53,6 +53,8 @@ const messages = defineMessages({
 let isRendererSupported = null;
 
 const GUIComponent = props => {
+    console.log('GUIComponent initialized with props:', props);
+
     const {
         accountNavOpen,
         activeTabIndex,
@@ -114,6 +116,9 @@ const GUIComponent = props => {
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
+
+    console.log('GUIComponent props destructured');
+
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
@@ -131,8 +136,12 @@ const GUIComponent = props => {
         isRendererSupported = Renderer.isSupported();
     }
 
+    console.log('Renderer support checked:', isRendererSupported);
+
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
+
+        console.log('Rendering GUIComponent with stageSize:', stageSize);
 
         return isPlayerOnly ? (
             <StageWrapper
