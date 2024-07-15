@@ -1,7 +1,6 @@
 module.exports = {
   plugins: [
-    require('autoprefixer'),
-    require('postcss-simple-vars')
-    // Add any other PostCSS plugins you need here
+    require('autoprefixer')
+    // postcss-simple-vars has been removed to allow SCSS variables to be processed correctly by sass-loader.
   ]
 };
