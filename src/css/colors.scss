@@ -1,68 +1,61 @@
-// Define global Sass variables
-
 $z-index-stage-header: 1000;
 $ui-primary: hsla(215, 100%, 95%, 1);
 $ui-white: #ffffff;
 $ui-black-transparent: rgba(0, 0, 0, 0.5);
-$motion-primary: #ff4500; // Updated value
-$text-primary: #333333; // Updated value
-$space: 8px; // Updated value
-$motion-transparent: rgba(255, 69, 0, 0.5); // Updated value
-$ui-secondary: hsla(215, 90%, 85%, 1); // Updated value
-$stage-menu-height: 45px; // Updated value
-$ui-white-transparent: rgba(255, 255, 255, 0.7); // Updated value
-$sprites-per-row: 5; // Updated value
-$form-radius: 5px; // Updated value
-$extensions-transparent: rgba(0, 0, 255, 0.3); // Updated value
-$extensions-primary: #1e90ff; // Updated value
-$error-transparent: rgba(255, 0, 0, 0.3); // Updated value
-$error-primary: #dc143c; // Updated value
-$text-primary-transparent: rgba(51, 51, 51, 0.5); // Updated value
-$z-index-monitor: 1500; // Updated value
-$red-primary: #b22222; // Updated value
-$z-index-monitor-dragging: 2500; // Updated value
-$red-tertiary: #ff6347; // Updated value
-$menu-bar-button-size: 35px; // Updated value
-$z-index-modal: 4000; // Updated value
-$sprite-info-height: 90px; // Updated value
-$data-primary: #32cd32; // Updated value
-$ui-modal-overlay: rgba(0, 0, 0, 0.6); // Updated value
-$drop-highlight: #ffa500; // Updated value
-$menu-bar-height: 55px; // Updated value
-$ui-transparent: rgba(255, 255, 255, 0.4); // Updated value
-$library-header-height: 65px; // Updated value
-$z-index-loader: 3500; // Updated value
-$menu-bar-item-max-width: 180px; // Updated value
-$menu-bar-standard-font-size: 13px; // Updated value
-$z-index-stage-wrapper-overlay: 4200; // Updated value
-$menu-bar-large-font-size: 15px; // Updated value
-$language-selector-width: 140px; // Updated value
-$z-index-menu-bar: 90; // Updated value
-$library-filter-bar-height: 25px; // Updated value
-$ui-tertiary: #d3d3d3; // Updated value
-$pen-primary: #4169e1; // Updated value
-$pen-transparent: rgba(65, 105, 225, 0.5); // New value
-$z-index-extension-button: 5500; // Updated value
-$z-index-context-menu: 6500; // Updated value
-$z-index-drag-layer: 7500; // Updated value
-$z-index-alerts: 8500; // Updated value
-$motion-light-transparent: rgba(255, 255, 255, 0.6); // Updated value
-
-// Add other necessary global variables as needed
-
-$control-primary: #007bff; // Example value, replace with actual value if known
-$z-index-card: 1100; // Example value, replace with actual value if known
-$z-index-tooltip: 1200; // Example value, replace with actual value if known
-
-// New variable definitions
-$ui-white-dim: rgba(255, 255, 255, 0.5); // Placeholder value
-$full-size-paint: 1024px; // Placeholder value
-$trim-handle-width: 10px; // Placeholder value
-$extensions-tertiary: #add8e6; // Placeholder value
-$sound-tertiary: #9370db; // New value
-$grid-unit: 8px; // New value
-$ui-pane-border: #cccccc; // New value
-$looks-secondary: #ffcc00; // New value
-$error-light: #ff6666; // New value
-$form-border: #dddddd; // New value
-$looks-transparent: rgba(255, 204, 0, 0.5); // New value
+$motion-primary: #ff4500;
+$text-primary: #333333;
+$space: 8px;
+$motion-transparent: rgba(255, 69, 0, 0.5);
+$ui-secondary: hsla(215, 90%, 85%, 1);
+$stage-menu-height: 45px;
+$ui-white-transparent: rgba(255, 255, 255, 0.7);
+$sprites-per-row: 5;
+$form-radius: 5px;
+$extensions-transparent: rgba(0, 0, 255, 0.3);
+$extensions-primary: #1e90ff;
+$error-transparent: rgba(255, 0, 0, 0.3);
+$error-primary: #dc143c;
+$text-primary-transparent: rgba(51, 51, 51, 0.5);
+$z-index-monitor: 1500;
+$red-primary: #b22222;
+$z-index-monitor-dragging: 2500;
+$red-tertiary: #ff6347;
+$menu-bar-button-size: 35px;
+$z-index-modal: 4000;
+$sprite-info-height: 90px;
+$data-primary: #32cd32;
+$ui-modal-overlay: rgba(0, 0, 0, 0.6);
+$drop-highlight: #ffa500;
+$menu-bar-height: 55px;
+$ui-transparent: rgba(255, 255, 255, 0.4);
+$library-header-height: 65px;
+$z-index-loader: 3500;
+$menu-bar-item-max-width: 180px;
+$menu-bar-standard-font-size: 13px;
+$z-index-stage-wrapper-overlay: 4200;
+$menu-bar-large-font-size: 15px;
+$language-selector-width: 140px;
+$z-index-menu-bar: 90;
+$library-filter-bar-height: 25px;
+$ui-tertiary: #d3d3d3;
+$pen-primary: #4169e1;
+$pen-transparent: rgba(65, 105, 225, 0.5);
+$z-index-extension-button: 5500;
+$z-index-context-menu: 6500;
+$z-index-drag-layer: 7500;
+$z-index-alerts: 8500;
+$motion-light-transparent: rgba(255, 255, 255, 0.6);
+$control-primary: #007bff;
+$z-index-card: 1100;
+$z-index-tooltip: 1200;
+$ui-white-dim: rgba(255, 255, 255, 0.5);
+$full-size-paint: 1024px;
+$trim-handle-width: 10px;
+$extensions-tertiary: #add8e6;
+$sound-tertiary: #9370db;
+$grid-unit: 8px;
+$ui-pane-border: #cccccc;
+$looks-secondary: #ffcc00;
+$error-light: #ff6666;
+$form-border: #dddddd;
+$looks-transparent: rgba(255, 204, 0, 0.5);
