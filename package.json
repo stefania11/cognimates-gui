@@ -28,7 +28,8 @@
     "test:lint": "eslint . --ext .js,.jsx",
     "test:unit": "jest test[\\\\/]unit",
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "prepublish": "node scripts/prepublish.mjs"
   },
   "config": {
     "commitizen": {
@@ -42,6 +43,7 @@
     "balance-text": "^3.3.1",
     "base64-loader": "^1.0.0",
     "bowser": "^1.9.4",
+    "buffer": "^6.0.3",
     "cat-blocks": "npm:scratch-blocks@0.1.0-prerelease.20220318143026",
     "classnames": "^2.2.6",
     "computed-style-to-inline-style": "^3.0.0",
@@ -71,23 +73,25 @@
     "prop-types": "^15.5.10",
     "query-string": "^5.1.1",
     "raw-loader": "^4.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-draggable": "^3.0.5",
+    "react-ga": "^2.5.3",
+    "react-intl": "^2.9.0",
     "react-modal": "^3.9.1",
     "react-popover": "^0.5.10",
-    "react-redux": "9.1.2",
+    "react-redux": "^5.0.7",
     "react-responsive": "^5.0.0",
     "react-style-proptype": "^3.2.2",
     "react-tabs": "^2.3.0",
     "react-tooltip": "^4.5.1",
     "react-virtualized": "^9.20.1",
-    "redux": "4.0.5",
+    "redux": "^3.7.2",
     "redux-throttle": "^0.1.1",
     "scratch-audio": "^1.0.0",
     "scratch-blocks": "^1.1.6",
     "scratch-l10n": "^3.18.215",
-    "scratch-paint": "0.1.0-prerelease.20171016153224",
+    "scratch-paint": "^2.2.151",
     "scratch-render": "^1.0.0",
     "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
@@ -141,5 +145,9 @@
     "webpack-cli": "5.1.4",
     "webpack-dev-server": "5.0.4",
     "yauzl": "2.10.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }
