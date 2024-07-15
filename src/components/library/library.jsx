@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 
 import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
@@ -29,168 +28,165 @@ const messages = defineMessages({
 const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
 const tagListPrefix = [ALL_TAG];
 
-class LibraryComponent extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleClose',
-            'handleFilterChange',
-            'handleFilterClear',
-            'handleMouseEnter',
-            'handleMouseLeave',
-            'handleSelect',
-            'handleTagClick',
-            'setFilteredDataRef'
-        ]);
-        this.state = {
-            selectedItem: null,
-            filterQuery: '',
-            selectedTag: ALL_TAG.tag
-        };
-    }
-    componentDidUpdate (prevProps, prevState) {
-        if (prevState.filterQuery !== this.state.filterQuery ||
-            prevState.selectedTag !== this.state.selectedTag) {
-            this.scrollToTop();
-        }
-    }
-    handleSelect (id) {
-        this.handleClose();
-        this.props.onItemSelected(this.getFilteredData()[id]);
-    }
-    handleClose () {
-        this.props.onRequestClose();
-        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
-    }
-    handleTagClick (tag) {
-        this.setState({
-            filterQuery: '',
-            selectedTag: tag.toLowerCase()
-        });
-    }
-    handleMouseEnter (id) {
-        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
-    }
-    handleMouseLeave (id) {
-        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
-    }
-    handleFilterChange (event) {
-        this.setState({
-            filterQuery: event.target.value,
-            selectedTag: ALL_TAG.tag
-        });
-    }
-    handleFilterClear () {
-        this.setState({filterQuery: ''});
-    }
-    getFilteredData () {
-        if (this.state.selectedTag === 'all') {
-            if (!this.state.filterQuery) return this.props.data;
-            return this.props.data.filter(dataItem => (
+const LibraryComponent = props => {
+    const intl = useIntl();
+    const [selectedItem, setSelectedItem] = React.useState(null);
+    const [filterQuery, setFilterQuery] = React.useState('');
+    const [selectedTag, setSelectedTag] = React.useState(ALL_TAG.tag);
+
+    const handleClose = () => {
+        props.onRequestClose();
+        analytics.pageview(`/${props.id}/search?q=${filterQuery}`);
+    };
+
+    const handleFilterChange = event => {
+        setFilterQuery(event.target.value);
+        setSelectedTag(ALL_TAG.tag);
+    };
+
+    const handleFilterClear = () => {
+        setFilterQuery('');
+    };
+
+    const handleMouseEnter = id => {
+        if (props.onItemMouseEnter) props.onItemMouseEnter(getFilteredData()[id]);
+    };
+
+    const handleMouseLeave = id => {
+        if (props.onItemMouseLeave) props.onItemMouseLeave(getFilteredData()[id]);
+    };
+
+    const handleSelect = id => {
+        handleClose();
+        props.onItemSelected(getFilteredData()[id]);
+    };
+
+    const handleTagClick = tag => {
+        setFilterQuery('');
+        setSelectedTag(tag.toLowerCase());
+    };
+
+    const getFilteredData = () => {
+        if (selectedTag === 'all') {
+            if (!filterQuery) return props.data;
+            return props.data.filter(dataItem => (
                 (dataItem.tags || [])
-                    // Second argument to map sets `this`
                     .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
                     .concat(dataItem.name ?
                         (typeof dataItem.name === 'string' ?
-                        // Use the name if it is a string, else use formatMessage to get the translated name
-                            dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
+                            dataItem.name : intl.formatMessage(dataItem.name.props)
                         ).toLowerCase() :
                         null)
-                    .join('\n') // unlikely to partially match newlines
-                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1
+                    .join('\n')
+                    .indexOf(filterQuery.toLowerCase()) !== -1
             ));
         }
-        return this.props.data.filter(dataItem => (
+        return props.data.filter(dataItem => (
             dataItem.tags &&
             dataItem.tags
                 .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                .indexOf(this.state.selectedTag) !== -1
+                .indexOf(selectedTag) !== -1
         ));
-    }
-    scrollToTop () {
-        this.filteredDataRef.scrollTop = 0;
-    }
-    setFilteredDataRef (ref) {
-        this.filteredDataRef = ref;
-    }
-    render () {
-        return (
-            <Modal
-                fullScreen
-                contentLabel={this.props.title}
-                id={this.props.id}
-                onRequestClose={this.handleClose}
-            >
-                {(this.props.filterable || this.props.tags) && (
-                    <div className={styles.filterBar}>
-                        {this.props.filterable && (
-                            <Filter
-                                className={classNames(
-                                    styles.filterBarItem,
-                                    styles.filter
-                                )}
-                                filterQuery={this.state.filterQuery}
-                                inputClassName={styles.filterInput}
-                                placeholderText={this.props.intl.formatMessage(messages.filterPlaceholder)}
-                                onChange={this.handleFilterChange}
-                                onClear={this.handleFilterClear}
-                            />
-                        )}
-                        {this.props.filterable && this.props.tags && (
-                            <Divider className={classNames(styles.filterBarItem, styles.divider)} />
-                        )}
-                        {this.props.tags &&
-                            <div className={styles.tagWrapper}>
-                                {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
-                                    <TagButton
-                                        active={this.state.selectedTag === tagProps.tag.toLowerCase()}
-                                        className={classNames(
-                                            styles.filterBarItem,
-                                            styles.tagButton,
-                                            tagProps.className
-                                        )}
-                                        key={`tag-button-${id}`}
-                                        onClick={this.handleTagClick}
-                                        {...tagProps}
-                                    />
-                                ))}
-                            </div>
-                        }
-                    </div>
-                )}
-                <div
-                    className={classNames(styles.libraryScrollGrid, {
-                        [styles.withFilterBar]: this.props.filterable || this.props.tags
-                    })}
-                    ref={this.setFilteredDataRef}
-                >
-                    {this.getFilteredData().map((dataItem, index) => (
-                        <LibraryItem
-                            bluetoothRequired={dataItem.bluetoothRequired}
-                            collaborator={dataItem.collaborator}
-                            description={dataItem.description}
-                            disabled={dataItem.disabled}
-                            extensionId={dataItem.extensionId}
-                            featured={dataItem.featured}
-                            hidden={dataItem.hidden}
-                            iconMd5={dataItem.md5}
-                            iconRawURL={dataItem.rawURL}
-                            icons={dataItem.json && dataItem.json.costumes}
-                            id={index}
-                            insetIconURL={dataItem.insetIconURL}
-                            internetConnectionRequired={dataItem.internetConnectionRequired}
-                            key={`item_${index}`}
-                            name={dataItem.name}
-                            onMouseEnter={this.handleMouseEnter}
-                            onMouseLeave={this.handleMouseLeave}
-                            onSelect={this.handleSelect}
+    };
+
+    const scrollToTop = () => {
+        if (filteredDataRef.current) {
+            filteredDataRef.current.scrollTop = 0;
+        }
+    };
+
+    const filteredDataRef = React.useRef(null);
+
+    React.useEffect(() => {
+        scrollToTop();
+    }, [filterQuery, selectedTag]);
+
+    React.useEffect(() => {
+        if (props.onItemMouseEnter) {
+            const handleMouseEnter = id => props.onItemMouseEnter(getFilteredData()[id]);
+            props.onItemMouseEnter = handleMouseEnter;
+        }
+        if (props.onItemMouseLeave) {
+            const handleMouseLeave = id => props.onItemMouseLeave(getFilteredData()[id]);
+            props.onItemMouseLeave = handleMouseLeave;
+        }
+    }, [props.onItemMouseEnter, props.onItemMouseLeave, getFilteredData]);
+    return (
+        <Modal
+            fullScreen
+            contentLabel={props.title}
+            id={props.id}
+            onRequestClose={handleClose}
+        >
+            {(props.filterable || props.tags) && (
+                <div className={styles.filterBar}>
+                    {props.filterable && (
+                        <Filter
+                            className={classNames(
+                                styles.filterBarItem,
+                                styles.filter
+                            )}
+                            filterQuery={filterQuery}
+                            inputClassName={styles.filterInput}
+                            placeholderText={intl.formatMessage(messages.filterPlaceholder)}
+                            onChange={handleFilterChange}
+                            onClear={handleFilterClear}
                         />
-                    ))}
+                    )}
+                    {props.filterable && props.tags && (
+                        <Divider className={classNames(styles.filterBarItem, styles.divider)} />
+                    )}
+                    {props.tags &&
+                        <div className={styles.tagWrapper}>
+                            {tagListPrefix.concat(props.tags).map((tagProps, id) => (
+                                <TagButton
+                                    active={selectedTag === tagProps.tag.toLowerCase()}
+                                    className={classNames(
+                                        styles.filterBarItem,
+                                        styles.tagButton,
+                                        tagProps.className
+                                    )}
+                                    key={`tag-button-${id}`}
+                                    onClick={handleTagClick}
+                                    {...tagProps}
+                                />
+                            ))}
+                        </div>
+                    }
                 </div>
-            </Modal>
-        );
-    }
-}
+            )}
+            <div
+                className={classNames(styles.libraryScrollGrid, {
+                    [styles.withFilterBar]: props.filterable || props.tags
+                })}
+                ref={filteredDataRef}
+            >
+                {getFilteredData().map((dataItem, index) => (
+                    <LibraryItem
+                        bluetoothRequired={dataItem.bluetoothRequired}
+                        collaborator={dataItem.collaborator}
+                        description={dataItem.description}
+                        disabled={dataItem.disabled}
+                        extensionId={dataItem.extensionId}
+                        featured={dataItem.featured}
+                        hidden={dataItem.hidden}
+                        iconMd5={dataItem.md5}
+                        iconRawURL={dataItem.rawURL}
+                        icons={dataItem.json && dataItem.json.costumes}
+                        id={index}
+                        insetIconURL={dataItem.insetIconURL}
+                        internetConnectionRequired={dataItem.internetConnectionRequired}
+                        key={`item_${index}`}
+                        name={dataItem.name}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onSelect={handleSelect}
+                    />
+                ))}
+            </div>
+        </Modal>
+    );
+};
 
 LibraryComponent.propTypes = {
     data: PropTypes.arrayOf(
@@ -209,7 +205,6 @@ LibraryComponent.propTypes = {
     ),
     filterable: PropTypes.bool,
     id: PropTypes.string.isRequired,
-    intl: intlShape.isRequired,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
@@ -221,5 +216,4 @@ LibraryComponent.propTypes = {
 LibraryComponent.defaultProps = {
     filterable: true
 };
-
-export default injectIntl(LibraryComponent);
+export default LibraryComponent;
