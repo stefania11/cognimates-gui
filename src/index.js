@@ -8,9 +8,9 @@ import {remixProject} from './reducers/project-state';
 import {setAppElement} from 'react-modal';
 
 // Import global SCSS files
-import '../css/colors.scss';
-import '../css/units.scss';
-import '../css/z-index.scss';
+import './css/colors.scss';
+import './css/units.scss';
+import './css/z-index.scss';
 
 console.log('Initializing application...');
 
