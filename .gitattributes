@@ -5,13 +5,15 @@
 # People who (for example) rsync between Windows and Linux need this.
 
 # File types which we know are binary
+*.sb2 binary
+*.svg binary
 
 # Treat SVG files as binary so that their contents don't change due to line
 # endings. The contents of SVGs must not change from the way they're stored
 # on assets.scratch.mit.edu so that MD5 calculations don't change.
-*.svg binary
 
 # Prefer LF for most file types
+*.css text eol=lf
 *.frag text eol=lf
 *.htm text eol=lf
 *.html text eol=lf
@@ -19,6 +21,7 @@
 *.js text eol=lf
 *.js.map text eol=lf
 *.json text eol=lf
+*.json5 text eol=lf
 *.jsx text eol=lf
 *.md text eol=lf
 *.vert text eol=lf
@@ -27,10 +30,12 @@
 
 # Prefer LF for these files
 .editorconfig text eol=lf
+.eslintignore text eol=lf
 .eslintrc text eol=lf
 .gitattributes text eol=lf
 .gitignore text eol=lf
 .gitmodules text eol=lf
+.npmignore text eol=lf
 LICENSE text eol=lf
 Makefile text eol=lf
 README text eol=lf

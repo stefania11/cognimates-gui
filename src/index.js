@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import GUI from './containers/gui.jsx';
 import AppStateHOC from './lib/app-state-hoc.jsx';
 import GuiReducer, {guiInitialState, guiMiddleware, initEmbedded, initFullScreen, initPlayer} from './reducers/gui';
@@ -46,3 +47,13 @@ export {
 };
 
 console.log('Application setup complete.');
+||||||| empty tree
+=======
+import PaintEditor from './containers/paint-editor.jsx';
+import ScratchPaintReducer from './reducers/scratch-paint-reducer';
+
+export {
+    PaintEditor as default,
+    ScratchPaintReducer
+};
+>>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917

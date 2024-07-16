@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mac OS
 .DS_Store
 
@@ -21,3 +22,27 @@ npm-*
 
 # Error logs
 /error-log.txt
+||||||| empty tree
+=======
+# Mac OS
+.DS_Store
+
+# NPM
+/node_modules
+npm-*
+
+# Build
+playground/*
+dist/*
+
+# Editors
+/#*
+*~
+
+# generated translation files
+/translations
+/locale
+
+# tests
+/test/results/*
+>>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917

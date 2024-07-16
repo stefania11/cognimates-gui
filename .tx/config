@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [main]
 host = https://www.transifex.com
 
@@ -6,3 +7,14 @@ file_filter = translations/<lang>.json
 source_file = translations/en.json
 source_lang = en
 type = CHROME
+||||||| empty tree
+=======
+[main]
+host = https://www.transifex.com
+
+[scratch-editor.paint-editor]
+file_filter = translations/<lang>.json
+source_file = translations/en.json
+source_lang = en
+type = CHROME
+>>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917

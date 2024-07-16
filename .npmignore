@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mac OS
 .DS_Store
 
@@ -16,3 +17,25 @@ npm-*
 
 # generated translation files
 /translations
+||||||| empty tree
+=======
+# Mac OS
+.DS_Store
+
+# Testing
+/test
+
+# NPM
+/node_modules
+npm-*
+
+# Build
+playground/*
+
+# Editors
+/#*
+*~
+
+# generated translation files
+/translations
+>>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917
