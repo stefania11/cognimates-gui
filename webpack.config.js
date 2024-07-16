@@ -134,6 +134,7 @@ module.exports = {
         },
         compress: true,
         port: 8601,
+        host: '0.0.0.0',
         allowedHosts: 'all',
         hot: true,
         liveReload: true
