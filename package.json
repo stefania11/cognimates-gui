@@ -41,6 +41,7 @@
   "dependencies": {
     "@microbit/microbit-universal-hex": "^0.2.2",
     "@reduxjs/toolkit": "^2.2.6",
+    "@szhsin/react-menu": "^4.1.0",
     "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^10.4.19",
     "balance-text": "^3.3.1",
