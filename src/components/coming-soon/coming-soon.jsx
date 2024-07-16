@@ -1,8 +1,8 @@
 import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, useIntl, FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import styles from './coming-soon.css';
@@ -28,26 +28,20 @@ const messages = defineMessages({
     }
 });
 
-class ComingSoonContent extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'setHide',
-            'setShow',
-            'getRandomMessage'
-        ]);
-        this.state = {
-            isShowing: false
-        };
-    }
-    setShow () {
+const ComingSoonContent = props => {
+    const intl = useIntl();
+    const [isShowing, setIsShowing] = useState(false);
+
+    const setShow = () => {
         // needed to set the opacity to 1, since the default is .9 on show
-        this.setState({isShowing: true});
-    }
-    setHide () {
-        this.setState({isShowing: false});
-    }
-    getRandomMessage () {
+        setIsShowing(true);
+    };
+
+    const setHide = () => {
+        setIsShowing(false);
+    };
+
+    const getRandomMessage = () => {
         // randomly chooses a messages from `messages` to display in the tooltip.
         const images = [awwCatIcon, coolCatIcon];
         const messageNumber = Math.floor(Math.random() * Object.keys(messages).length) + 1;
@@ -65,33 +59,31 @@ class ComingSoonContent extends React.Component {
                 }}
             />
         );
-    }
-    render () {
-        return (
-            <ReactTooltip
-                afterHide={this.setHide}
-                afterShow={this.setShow}
-                className={classNames(
-                    styles.comingSoon,
-                    this.props.className,
-                    {
-                        [styles.show]: (this.state.isShowing),
-                        [styles.left]: (this.props.place === 'left'),
-                        [styles.right]: (this.props.place === 'right'),
-                        [styles.top]: (this.props.place === 'top'),
-                        [styles.bottom]: (this.props.place === 'bottom')
-                    }
-                )}
-                getContent={this.getRandomMessage}
-                id={this.props.tooltipId}
-            />
-        );
-    }
-}
+    };
+
+    return (
+        <ReactTooltip
+            afterHide={setHide}
+            afterShow={setShow}
+            className={classNames(
+                styles.comingSoon,
+                props.className,
+                {
+                    [styles.show]: isShowing,
+                    [styles.left]: (props.place === 'left'),
+                    [styles.right]: (props.place === 'right'),
+                    [styles.top]: (props.place === 'top'),
+                    [styles.bottom]: (props.place === 'bottom')
+                }
+            )}
+            getContent={getRandomMessage}
+            id={props.tooltipId}
+        />
+    );
+};
 
 ComingSoonContent.propTypes = {
     className: PropTypes.string,
-    intl: intlShape,
     place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     tooltipId: PropTypes.string.isRequired
 };
@@ -100,7 +92,7 @@ ComingSoonContent.defaultProps = {
     place: 'bottom'
 };
 
-const ComingSoon = injectIntl(ComingSoonContent);
+const ComingSoon = ComingSoonContent;
 
 const ComingSoonTooltip = props => (
     <div className={props.className}>
