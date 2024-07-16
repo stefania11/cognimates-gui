@@ -94,7 +94,7 @@
     "scratch-audio": "^1.0.177",
     "scratch-blocks": "^1.1.185",
     "scratch-l10n": "^3.18.215",
-    "scratch-paint": "github:scratchfoundation/scratch-paint#7851d771cceb2877cdb991dffa0a603647758538",
+    "scratch-paint": "github:stefania11/scratch-paint#update-intl",
     "scratch-render": "^1.0.213",
     "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
