@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import keyMirror from 'keymirror';
 
 /**
@@ -47,7 +46,8 @@ export default {
     standardStageWidth: 480,
     standardStageHeight: 360,
     fullSizeMinWidth: 1096,
-    fullSizePaintMinWidth: 1250
+    fullSizePaintMinWidth: 1250,
+    fullSizeEditorMinWidth: 1274
 };
 
 export {
@@ -55,9 +55,3 @@ export {
     STAGE_DISPLAY_SIZES,
     STAGE_SIZE_MODES
 };
-||||||| empty tree
-=======
-export default {
-    fullSizeEditorMinWidth: 1274
-};
->>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917
