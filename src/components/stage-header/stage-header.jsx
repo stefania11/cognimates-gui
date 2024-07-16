@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
@@ -48,6 +48,7 @@ const messages = defineMessages({
 });
 
 const StageHeaderComponent = function (props) {
+    const intl = useIntl();
     console.log("StageHeaderComponent is being processed");
     const {
         isFullScreen,
@@ -86,11 +87,11 @@ const StageHeaderComponent = function (props) {
                 onKeyPress={onKeyPress}
             >
                 <img
-                    alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
+                    alt={intl.formatMessage(messages.unFullStageSizeMessage)}
                     className={styles.stageButtonIcon}
                     draggable={false}
                     src={unFullScreenIcon}
-                    title={props.intl.formatMessage(messages.fullscreenControl)}
+                    title={intl.formatMessage(messages.fullscreenControl)}
                 />
             </Button>
         );
@@ -121,7 +122,7 @@ const StageHeaderComponent = function (props) {
                             onClick={onSetStageSmall}
                         >
                             <img
-                                alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
+                                alt={intl.formatMessage(messages.smallStageSizeMessage)}
                                 className={styles.stageButtonIcon}
                                 draggable={false}
                                 src={smallStageIcon}
@@ -138,7 +139,7 @@ const StageHeaderComponent = function (props) {
                             onClick={onSetStageLarge}
                         >
                             <img
-                                alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
+                                alt={intl.formatMessage(messages.largeStageSizeMessage)}
                                 className={styles.stageButtonIcon}
                                 draggable={false}
                                 src={largeStageIcon}
@@ -159,11 +160,11 @@ const StageHeaderComponent = function (props) {
                                 onClick={onSetStageFull}
                             >
                                 <img
-                                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
+                                    alt={intl.formatMessage(messages.fullStageSizeMessage)}
                                     className={styles.stageButtonIcon}
                                     draggable={false}
                                     src={fullScreenIcon}
-                                    title={props.intl.formatMessage(messages.fullscreenControl)}
+                                    title={intl.formatMessage(messages.fullscreenControl)}
                                 />
                             </Button>
                         </div>
@@ -182,7 +183,6 @@ const mapStateToProps = state => ({
 });
 
 StageHeaderComponent.propTypes = {
-    intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
     isPlayerOnly: PropTypes.bool.isRequired,
     onKeyPress: PropTypes.func.isRequired,
@@ -199,6 +199,6 @@ StageHeaderComponent.defaultProps = {
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 
-export default injectIntl(connect(
+export default connect(
     mapStateToProps
-)(StageHeaderComponent));
+)(StageHeaderComponent);

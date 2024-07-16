@@ -1,11 +1,11 @@
 import React from 'react';
-import {ContextMenu, MenuItem} from 'react-contextmenu';
+import {Menu, MenuItem} from '@szhsin/react-menu';
 import classNames from 'classnames';
 
 import styles from './context-menu.css';
 
 const StyledContextMenu = props => (
-    <ContextMenu
+    <Menu
         {...props}
         className={styles.contextMenu}
     />
@@ -14,14 +14,14 @@ const StyledContextMenu = props => (
 const StyledMenuItem = props => (
     <MenuItem
         {...props}
-        attributes={{className: styles.menuItem}}
+        className={styles.menuItem}
     />
 );
 
 const BorderedMenuItem = props => (
     <MenuItem
         {...props}
-        attributes={{className: classNames(styles.menuItem, styles.menuItemBordered)}}
+        className={classNames(styles.menuItem, styles.menuItemBordered)}
     />
 );
 
