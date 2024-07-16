@@ -92,7 +92,7 @@
     "react-virtualized": "^9.20.1",
     "redux": "^5.0.1",
     "redux-throttle": "^0.1.1",
-    "scratch-audio": "^2.0.0",
+    "scratch-audio": "^1.0.177",
     "scratch-blocks": "^2.0.0",
     "scratch-l10n": "^3.18.215",
     "scratch-paint": "github:stefania11/scratch-paint#update-intl",
