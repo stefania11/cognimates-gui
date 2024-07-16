@@ -8,7 +8,7 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import DirectionPicker from '../../containers/direction-picker.jsx';
 
-import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
+import {useIntl, defineMessages, FormattedMessage} from 'react-intl';
 
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {isWideLocale} from '../../lib/locale-utils.js';
@@ -30,234 +30,220 @@ const messages = defineMessages({
     }
 });
 
-class SpriteInfo extends React.Component {
-    shouldComponentUpdate (nextProps) {
-        return (
-            this.props.rotationStyle !== nextProps.rotationStyle ||
-            this.props.disabled !== nextProps.disabled ||
-            this.props.name !== nextProps.name ||
-            this.props.stageSize !== nextProps.stageSize ||
-            this.props.visible !== nextProps.visible ||
-            // Only update these if rounded value has changed
-            Math.round(this.props.direction) !== Math.round(nextProps.direction) ||
-            Math.round(this.props.size) !== Math.round(nextProps.size) ||
-            Math.round(this.props.x) !== Math.round(nextProps.x) ||
-            Math.round(this.props.y) !== Math.round(nextProps.y)
-        );
-    }
-    render () {
-        const {
-            stageSize
-        } = this.props;
+const SpriteInfo = props => {
+    const intl = useIntl();
 
-        const sprite = (
-            <FormattedMessage
-                defaultMessage="Sprite"
-                description="Sprite info label"
-                id="gui.SpriteInfo.sprite"
-            />
-        );
-        const showLabel = (
-            <FormattedMessage
-                defaultMessage="Show"
-                description="Sprite info show label"
-                id="gui.SpriteInfo.show"
-            />
-        );
-        const sizeLabel = (
-            <FormattedMessage
-                defaultMessage="Size"
-                description="Sprite info size label"
-                id="gui.SpriteInfo.size"
-            />
-        );
+    const {
+        stageSize
+    } = props;
 
-        const labelAbove = isWideLocale(this.props.intl.locale);
+    const sprite = (
+        <FormattedMessage
+            defaultMessage="Sprite"
+            description="Sprite info label"
+            id="gui.SpriteInfo.sprite"
+        />
+    );
+    const showLabel = (
+        <FormattedMessage
+            defaultMessage="Show"
+            description="Sprite info show label"
+            id="gui.SpriteInfo.show"
+        />
+    );
+    const sizeLabel = (
+        <FormattedMessage
+            defaultMessage="Size"
+            description="Sprite info size label"
+            id="gui.SpriteInfo.size"
+        />
+    );
 
-        const spriteNameInput = (
-            <BufferedInput
-                className={classNames(
-                    styles.spriteInput,
-                    {
-                        [styles.columnInput]: labelAbove
-                    }
-                )}
-                disabled={this.props.disabled}
-                placeholder={this.props.intl.formatMessage(messages.spritePlaceholder)}
-                tabIndex="0"
-                type="text"
-                value={this.props.disabled ? '' : this.props.name}
-                onSubmit={this.props.onChangeName}
-            />
-        );
+    const labelAbove = isWideLocale(intl.locale);
 
-        const xPosition = (
-            <div className={styles.group}>
+    const spriteNameInput = (
+        <BufferedInput
+            className={classNames(
+                styles.spriteInput,
                 {
-                    (stageSize === STAGE_DISPLAY_SIZES.large) ?
-                        <div className={styles.iconWrapper}>
-                            <img
-                                aria-hidden="true"
-                                className={classNames(styles.xIcon, styles.icon)}
-                                src={xIcon}
-                            />
-                        </div> :
-                        null
+                    [styles.columnInput]: labelAbove
                 }
-                <Label text="x">
-                    <BufferedInput
-                        small
-                        disabled={this.props.disabled}
-                        placeholder="x"
-                        tabIndex="0"
-                        type="text"
-                        value={this.props.disabled ? '' : Math.round(this.props.x)}
-                        onSubmit={this.props.onChangeX}
-                    />
-                </Label>
-            </div>
-        );
+            )}
+            disabled={props.disabled}
+            placeholder={intl.formatMessage(messages.spritePlaceholder)}
+            tabIndex="0"
+            type="text"
+            value={props.disabled ? '' : props.name}
+            onSubmit={props.onChangeName}
+        />
+    );
 
-        const yPosition = (
-            <div className={styles.group}>
-                {
-                    (stageSize === STAGE_DISPLAY_SIZES.large) ?
-                        <div className={styles.iconWrapper}>
-                            <img
-                                aria-hidden="true"
-                                className={classNames(styles.yIcon, styles.icon)}
-                                src={yIcon}
-                            />
-                        </div> :
-                        null
-                }
-                <Label text="y">
-                    <BufferedInput
-                        small
-                        disabled={this.props.disabled}
-                        placeholder="y"
-                        tabIndex="0"
-                        type="text"
-                        value={this.props.disabled ? '' : Math.round(this.props.y)}
-                        onSubmit={this.props.onChangeY}
-                    />
-                </Label>
-            </div>
-        );
+    const xPosition = (
+        <div className={styles.group}>
+            {
+                (stageSize === STAGE_DISPLAY_SIZES.large) ?
+                    <div className={styles.iconWrapper}>
+                        <img
+                            aria-hidden="true"
+                            className={classNames(styles.xIcon, styles.icon)}
+                            src={xIcon}
+                        />
+                    </div> :
+                    null
+            }
+            <Label text="x">
+                <BufferedInput
+                    small
+                    disabled={props.disabled}
+                    placeholder="x"
+                    tabIndex="0"
+                    type="text"
+                    value={props.disabled ? '' : Math.round(props.x)}
+                    onSubmit={props.onChangeX}
+                />
+            </Label>
+        </div>
+    );
 
-        if (stageSize === STAGE_DISPLAY_SIZES.small) {
-            return (
-                <Box className={styles.spriteInfo}>
-                    <div className={classNames(styles.row, styles.rowPrimary)}>
-                        <div className={styles.group}>
-                            {spriteNameInput}
-                        </div>
-                    </div>
-                    <div className={classNames(styles.row, styles.rowSecondary)}>
-                        {xPosition}
-                        {yPosition}
-                    </div>
-                </Box>
-            );
-        }
+    const yPosition = (
+        <div className={styles.group}>
+            {
+                (stageSize === STAGE_DISPLAY_SIZES.large) ?
+                    <div className={styles.iconWrapper}>
+                        <img
+                            aria-hidden="true"
+                            className={classNames(styles.yIcon, styles.icon)}
+                            src={yIcon}
+                        />
+                    </div> :
+                    null
+            }
+            <Label text="y">
+                <BufferedInput
+                    small
+                    disabled={props.disabled}
+                    placeholder="y"
+                    tabIndex="0"
+                    type="text"
+                    value={props.disabled ? '' : Math.round(props.y)}
+                    onSubmit={props.onChangeY}
+                />
+            </Label>
+        </div>
+    );
 
+    if (stageSize === STAGE_DISPLAY_SIZES.small) {
         return (
             <Box className={styles.spriteInfo}>
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <Label
-                            above={labelAbove}
-                            text={sprite}
-                        >
-                            {spriteNameInput}
-                        </Label>
+                        {spriteNameInput}
                     </div>
-                    {xPosition}
-                    {yPosition}
                 </div>
                 <div className={classNames(styles.row, styles.rowSecondary)}>
-                    <div className={labelAbove ? styles.column : styles.group}>
-                        {
-                            stageSize === STAGE_DISPLAY_SIZES.large ?
-                                <Label
-                                    secondary
-                                    text={showLabel}
-                                /> :
-                                null
-                        }
-                        <div className={styles.radioWrapper}>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioFirst,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="0"
-                                onClick={this.props.onClickVisible}
-                                onKeyPress={this.props.onPressVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={showIcon}
-                                />
-                            </div>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioLast,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="0"
-                                onClick={this.props.onClickNotVisible}
-                                onKeyPress={this.props.onPressNotVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={hideIcon}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
-                        <Label
-                            secondary
-                            above={labelAbove}
-                            text={sizeLabel}
-                        >
-                            <BufferedInput
-                                small
-                                disabled={this.props.disabled}
-                                label={sizeLabel}
-                                tabIndex="0"
-                                type="text"
-                                value={this.props.disabled ? '' : Math.round(this.props.size)}
-                                onSubmit={this.props.onChangeSize}
-                            />
-                        </Label>
-                    </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
-                        <DirectionPicker
-                            direction={Math.round(this.props.direction)}
-                            disabled={this.props.disabled}
-                            labelAbove={labelAbove}
-                            rotationStyle={this.props.rotationStyle}
-                            onChangeDirection={this.props.onChangeDirection}
-                            onChangeRotationStyle={this.props.onChangeRotationStyle}
-                        />
-                    </div>
+                    {xPosition}
+                    {yPosition}
                 </div>
             </Box>
         );
     }
-}
+
+    return (
+        <Box className={styles.spriteInfo}>
+            <div className={classNames(styles.row, styles.rowPrimary)}>
+                <div className={styles.group}>
+                    <Label
+                        above={labelAbove}
+                        text={sprite}
+                    >
+                        {spriteNameInput}
+                    </Label>
+                </div>
+                {xPosition}
+                {yPosition}
+            </div>
+            <div className={classNames(styles.row, styles.rowSecondary)}>
+                <div className={labelAbove ? styles.column : styles.group}>
+                    {
+                        stageSize === STAGE_DISPLAY_SIZES.large ?
+                            <Label
+                                secondary
+                                text={showLabel}
+                            /> :
+                            null
+                    }
+                    <div className={styles.radioWrapper}>
+                        <div
+                            className={classNames(
+                                styles.radio,
+                                styles.radioFirst,
+                                styles.iconWrapper,
+                                {
+                                    [styles.isActive]: props.visible && !props.disabled,
+                                    [styles.isDisabled]: props.disabled
+                                }
+                            )}
+                            tabIndex="0"
+                            onClick={props.onClickVisible}
+                            onKeyPress={props.onPressVisible}
+                        >
+                            <img
+                                className={styles.icon}
+                                src={showIcon}
+                            />
+                        </div>
+                        <div
+                            className={classNames(
+                                styles.radio,
+                                styles.radioLast,
+                                styles.iconWrapper,
+                                {
+                                    [styles.isActive]: !props.visible && !props.disabled,
+                                    [styles.isDisabled]: props.disabled
+                                }
+                            )}
+                            tabIndex="0"
+                            onClick={props.onClickNotVisible}
+                            onKeyPress={props.onPressNotVisible}
+                        >
+                            <img
+                                className={styles.icon}
+                                src={hideIcon}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className={classNames(styles.group, styles.largerInput)}>
+                    <Label
+                        secondary
+                        above={labelAbove}
+                        text={sizeLabel}
+                    >
+                        <BufferedInput
+                            small
+                            disabled={props.disabled}
+                            label={sizeLabel}
+                            tabIndex="0"
+                            type="text"
+                            value={props.disabled ? '' : Math.round(props.size)}
+                            onSubmit={props.onChangeSize}
+                        />
+                    </Label>
+                </div>
+                <div className={classNames(styles.group, styles.largerInput)}>
+                    <DirectionPicker
+                        direction={Math.round(props.direction)}
+                        disabled={props.disabled}
+                        labelAbove={labelAbove}
+                        rotationStyle={props.rotationStyle}
+                        onChangeDirection={props.onChangeDirection}
+                        onChangeRotationStyle={props.onChangeRotationStyle}
+                    />
+                </div>
+            </div>
+        </Box>
+    );
+};
 
 SpriteInfo.propTypes = {
     direction: PropTypes.oneOfType([
@@ -265,7 +251,6 @@ SpriteInfo.propTypes = {
         PropTypes.number
     ]),
     disabled: PropTypes.bool,
-    intl: intlShape,
     name: PropTypes.string,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
@@ -294,4 +279,4 @@ SpriteInfo.propTypes = {
     ])
 };
 
-export default injectIntl(SpriteInfo);
+export default SpriteInfo;
