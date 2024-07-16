@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import bindAll from 'lodash.bindall';
 import RecordingStepComponent from '../components/record-modal/recording-step.jsx';
 import AudioRecorder from '../lib/audio/audio-recorder.js';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import { defineMessages, useIntl } from 'react-intl';
 
 const messages = defineMessages({
     alertMsg: {
@@ -13,76 +12,66 @@ const messages = defineMessages({
     }
 });
 
-class RecordingStep extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleRecord',
-            'handleStopRecording',
-            'handleStarted',
-            'handleLevelUpdate',
-            'handleRecordingError'
-        ]);
+const RecordingStep = ({ onRecord, onStopRecording, recording, ...componentProps }) => {
+    const intl = useIntl();
+    const [listening, setListening] = useState(false);
+    const [level, setLevel] = useState(0);
+    const [levels, setLevels] = useState(null);
+    const [audioRecorder, setAudioRecorder] = useState(null);
 
-        this.state = {
-            listening: false,
-            level: 0,
-            levels: null
-        };
-    }
-    componentDidMount () {
-        this.audioRecorder = new AudioRecorder();
-        window.audioRecorderInstance = this.audioRecorder; // Set the global audioRecorderInstance
-        this.audioRecorder.startListening(this.handleStarted, this.handleLevelUpdate, this.handleRecordingError);
-    }
-    componentWillUnmount () {
-        this.audioRecorder.dispose();
-        window.audioRecorderInstance = null; // Clean up the global audioRecorderInstance
-    }
-    handleStarted () {
-        this.setState({listening: true});
-    }
-    handleRecordingError () {
-        alert(this.props.intl.formatMessage(messages.alertMsg)); // eslint-disable-line no-alert
-    }
-    handleLevelUpdate (level) {
-        this.setState({level});
-        if (this.props.recording) {
-            this.setState({levels: (this.state.levels || []).concat([level])});
+    const handleStarted = useCallback(() => {
+        setListening(true);
+    }, []);
+
+    const handleRecordingError = useCallback(() => {
+        alert(intl.formatMessage(messages.alertMsg)); // eslint-disable-line no-alert
+    }, [intl]);
+
+    const handleLevelUpdate = useCallback((newLevel) => {
+        setLevel(newLevel);
+        if (recording) {
+            setLevels((prevLevels) => (prevLevels || []).concat([newLevel]));
         }
-    }
-    handleRecord () {
-        this.audioRecorder.startRecording();
-        this.props.onRecord();
-    }
-    handleStopRecording () {
-        const {samples, sampleRate, levels, trimStart, trimEnd} = this.audioRecorder.stop();
-        this.props.onStopRecording(samples, sampleRate, levels, trimStart, trimEnd);
-    }
-    render () {
-        const {
-            onRecord, // eslint-disable-line no-unused-vars
-            onStopRecording, // eslint-disable-line no-unused-vars
-            ...componentProps
-        } = this.props;
-        return (
-            <RecordingStepComponent
-                level={this.state.level}
-                levels={this.state.levels}
-                listening={this.state.listening}
-                onRecord={this.handleRecord}
-                onStopRecording={this.handleStopRecording}
-                {...componentProps}
-            />
-        );
-    }
-}
+    }, [recording]);
+
+    const handleRecord = useCallback(() => {
+        audioRecorder.startRecording();
+        onRecord();
+    }, [audioRecorder, onRecord]);
+
+    const handleStopRecording = useCallback(() => {
+        const { samples, sampleRate, levels: recordedLevels, trimStart, trimEnd } = audioRecorder.stop();
+        onStopRecording(samples, sampleRate, recordedLevels, trimStart, trimEnd);
+    }, [audioRecorder, onStopRecording]);
+
+    useEffect(() => {
+        const newAudioRecorder = new AudioRecorder();
+        setAudioRecorder(newAudioRecorder);
+        window.audioRecorderInstance = newAudioRecorder; // Set the global audioRecorderInstance
+        newAudioRecorder.startListening(handleStarted, handleLevelUpdate, handleRecordingError);
+
+        return () => {
+            newAudioRecorder.dispose();
+            window.audioRecorderInstance = null; // Clean up the global audioRecorderInstance
+        };
+    }, [handleStarted, handleLevelUpdate, handleRecordingError]);
+
+    return (
+        <RecordingStepComponent
+            level={level}
+            levels={levels}
+            listening={listening}
+            onRecord={handleRecord}
+            onStopRecording={handleStopRecording}
+            {...componentProps}
+        />
+    );
+};
 
 RecordingStep.propTypes = {
-    intl: intlShape.isRequired,
     onRecord: PropTypes.func.isRequired,
     onStopRecording: PropTypes.func.isRequired,
     recording: PropTypes.bool
 };
 
-export default injectIntl(RecordingStep);
+export default RecordingStep;
