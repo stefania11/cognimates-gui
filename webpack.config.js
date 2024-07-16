@@ -9,7 +9,8 @@ module.exports = {
             'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src'),
             'css': path.resolve(__dirname, 'src/css')
         },
-        extensions: ['.js', '.jsx', '.scss'] // Add .scss to extensions
+        extensions: ['.js', '.jsx', '.scss'], // Add .scss to extensions
+        modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
     },
     module: {
         rules: [
@@ -75,6 +76,20 @@ module.exports = {
                                 }
                             },
                             'postcss-loader' // Move postcss-loader after sass-loader
+                        ]
+                    },
+                    {
+                        test: /\.scss$/,
+                        include: path.resolve(__dirname, 'node_modules'),
+                        use: [
+                            'style-loader',
+                            'css-loader',
+                            {
+                                loader: 'sass-loader',
+                                options: {
+                                    implementation: require('sass')
+                                }
+                            }
                         ]
                     }
                 ]
