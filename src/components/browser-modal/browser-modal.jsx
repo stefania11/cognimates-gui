@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactModal from 'react-modal';
 import Box from '../box/box.jsx';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, useIntl, FormattedMessage} from 'react-intl';
 
 import styles from './browser-modal.css';
 import unhappyBrowser from './unsupported-browser.svg';
@@ -20,7 +20,8 @@ const messages = defineMessages({
     }
 });
 
-const BrowserModal = ({intl, ...props}) => {
+const BrowserModal = props => {
+    const intl = useIntl();
     const label = props.error ? messages.error : messages.label;
     return (
         <ReactModal
@@ -97,7 +98,6 @@ const BrowserModal = ({intl, ...props}) => {
 
 BrowserModal.propTypes = {
     error: PropTypes.bool,
-    intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
     onBack: PropTypes.func.isRequired
 };
@@ -106,8 +106,6 @@ BrowserModal.defaultProps = {
     error: false
 };
 
-const WrappedBrowserModal = injectIntl(BrowserModal);
+BrowserModal.setAppElement = ReactModal.setAppElement;
 
-WrappedBrowserModal.setAppElement = ReactModal.setAppElement;
-
-export default WrappedBrowserModal;
+export default BrowserModal;
