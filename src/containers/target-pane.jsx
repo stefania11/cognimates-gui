@@ -101,11 +101,10 @@ const TargetPane = props => {
     };
 
     const handlePaintSpriteClick = () => {
-        const formatMessage = intl.formatMessage;
         const emptyItem = emptySprite(
-            formatMessage(sharedMessages.sprite, {index: 1}),
-            formatMessage(sharedMessages.pop),
-            formatMessage(sharedMessages.costume, {index: 1})
+            intl.formatMessage(sharedMessages.sprite, {index: 1}),
+            intl.formatMessage(sharedMessages.pop),
+            intl.formatMessage(sharedMessages.costume, {index: 1})
         );
         props.vm.addSprite(JSON.stringify(emptyItem)).then(() => {
             setTimeout(() => { // Wait for targets update to propagate before tab switching
