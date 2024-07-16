@@ -1,7 +1,6 @@
-import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, useIntl, FormattedMessage} from 'react-intl';
 import ReactModal from 'react-modal';
 
 import Box from '../box/box.jsx';
@@ -55,42 +54,45 @@ const messages = defineMessages({
     }
 });
 
-class TelemetryModal extends React.PureComponent {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleCancel',
-            'handleOptIn',
-            'handleOptOut'
-        ]);
-    }
-    handleCancel () {
-        this.props.onRequestClose();
-        if (this.props.onCancel) {
-            this.props.onCancel();
+const TelemetryModal = ({
+    isRtl,
+    onCancel,
+    onOptIn,
+    onOptOut,
+    onRequestClose
+}) => {
+    const intl = useIntl();
+
+    const handleCancel = () => {
+        onRequestClose();
+        if (onCancel) {
+            onCancel();
         }
-    }
-    handleOptIn () {
-        this.props.onRequestClose();
-        if (this.props.onOptIn) {
-            this.props.onOptIn();
+    };
+
+    const handleOptIn = () => {
+        onRequestClose();
+        if (onOptIn) {
+            onOptIn();
         }
-    }
-    handleOptOut () {
-        this.props.onRequestClose();
-        if (this.props.onOptOut) {
-            this.props.onOptOut();
+    };
+
+    const handleOptOut = () => {
+        onRequestClose();
+        if (onOptOut) {
+            onOptOut();
         }
-    }
-    render () {
-        return (<ReactModal
+    };
+
+    return (
+        <ReactModal
             isOpen
             className={styles.modalContent}
-            contentLabel={this.props.intl.formatMessage(messages.label)}
+            contentLabel={intl.formatMessage(messages.label)}
             overlayClassName={styles.modalOverlay}
-            onRequestClose={this.handleCancel}
+            onRequestClose={handleCancel}
         >
-            <div dir={this.props.isRtl ? 'rtl' : 'ltr'} >
+            <div dir={isRtl ? 'rtl' : 'ltr'} >
                 <Box className={styles.illustration} />
 
                 <Box className={styles.body}>
@@ -98,38 +100,39 @@ class TelemetryModal extends React.PureComponent {
                     <p><FormattedMessage
                         {...messages.bodyText2}
                         values={{
-                            privacyPolicyLink: (<a
-                                className={styles.privacyPolicyLink}
-                                href="https://scratch.mit.edu/privacy_policy/"
-                            >
-                                <FormattedMessage {...messages.privacyPolicyLink} />
-                            </a>)
+                            privacyPolicyLink: (
+                                <a
+                                    className={styles.privacyPolicyLink}
+                                    href="https://scratch.mit.edu/privacy_policy/"
+                                >
+                                    <FormattedMessage {...messages.privacyPolicyLink} />
+                                </a>
+                            )
                         }}
                     /></p>
                     <Box className={styles.buttonRow}>
                         <button
                             className={styles.optOut}
-                            title={this.props.intl.formatMessage(messages.noTooltip)}
-                            onClick={this.handleOptOut}
+                            title={intl.formatMessage(messages.noTooltip)}
+                            onClick={handleOptOut}
                         >
                             <FormattedMessage {...messages.noButton} />
                         </button>
                         <button
                             className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.yesTooltip)}
-                            onClick={this.handleOptIn}
+                            title={intl.formatMessage(messages.yesTooltip)}
+                            onClick={handleOptIn}
                         >
                             <FormattedMessage {...messages.yesButton} />
                         </button>
                     </Box>
                 </Box>
             </div>
-        </ReactModal>);
-    }
-}
+        </ReactModal>
+    );
+};
 
 TelemetryModal.propTypes = {
-    intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
     onCancel: PropTypes.func,
     onOptIn: PropTypes.func.isRequired,
@@ -137,4 +140,4 @@ TelemetryModal.propTypes = {
     onRequestClose: PropTypes.func
 };
 
-export default injectIntl(TelemetryModal);
+export default TelemetryModal;
