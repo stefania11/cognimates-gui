@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Popover from 'react-popover';
-import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
+import {useIntl, defineMessages, FormattedMessage} from 'react-intl';
 
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
@@ -49,82 +49,83 @@ const messages = defineMessages({
     }
 });
 
-const DirectionPicker = props => (
-    <Label
-        secondary
-        above={props.labelAbove}
-        text={directionLabel}
-    >
-        <Popover
-            body={
-                <div>
-                    <Dial
-                        direction={props.direction}
-                        onChange={props.onChangeDirection}
-                    />
-                    <div className={styles.buttonRow}>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.ALL_AROUND
-                            })}
-                            title={props.intl.formatMessage(messages.allAround)}
-                            onClick={props.onClickAllAround}
-                        >
-                            <img
-                                draggable={false}
-                                src={allAroundIcon}
-                            />
-                        </button>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.LEFT_RIGHT
-                            })}
-                            title={props.intl.formatMessage(messages.leftRight)}
-                            onClick={props.onClickLeftRight}
-                        >
-                            <img
-                                draggable={false}
-                                src={leftRightIcon}
-                            />
-                        </button>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.DONT_ROTATE
-                            })}
-                            title={props.intl.formatMessage(messages.dontRotate)}
-                            onClick={props.onClickDontRotate}
-                        >
-                            <img
-                                draggable={false}
-                                src={dontRotateIcon}
-                            />
-                        </button>
-                    </div>
-                </div>
-            }
-            isOpen={props.popoverOpen}
-            preferPlace="above"
-            onOuterAction={props.onClosePopover}
+const DirectionPicker = props => {
+    const intl = useIntl();
+    return (
+        <Label
+            secondary
+            above={props.labelAbove}
+            text={directionLabel}
         >
-            <BufferedInput
-                small
-                disabled={props.disabled}
-                label={directionLabel}
-                tabIndex="0"
-                type="text"
-                value={props.disabled ? '' : props.direction}
-                onFocus={props.onOpenPopover}
-                onSubmit={props.onChangeDirection}
-            />
-        </Popover>
-    </Label>
-
-);
+            <Popover
+                body={
+                    <div>
+                        <Dial
+                            direction={props.direction}
+                            onChange={props.onChangeDirection}
+                        />
+                        <div className={styles.buttonRow}>
+                            <button
+                                className={classNames(styles.iconButton, {
+                                    [styles.active]: props.rotationStyle === RotationStyles.ALL_AROUND
+                                })}
+                                title={intl.formatMessage(messages.allAround)}
+                                onClick={props.onClickAllAround}
+                            >
+                                <img
+                                    draggable={false}
+                                    src={allAroundIcon}
+                                />
+                            </button>
+                            <button
+                                className={classNames(styles.iconButton, {
+                                    [styles.active]: props.rotationStyle === RotationStyles.LEFT_RIGHT
+                                })}
+                                title={intl.formatMessage(messages.leftRight)}
+                                onClick={props.onClickLeftRight}
+                            >
+                                <img
+                                    draggable={false}
+                                    src={leftRightIcon}
+                                />
+                            </button>
+                            <button
+                                className={classNames(styles.iconButton, {
+                                    [styles.active]: props.rotationStyle === RotationStyles.DONT_ROTATE
+                                })}
+                                title={intl.formatMessage(messages.dontRotate)}
+                                onClick={props.onClickDontRotate}
+                            >
+                                <img
+                                    draggable={false}
+                                    src={dontRotateIcon}
+                                />
+                            </button>
+                        </div>
+                    </div>
+                }
+                isOpen={props.popoverOpen}
+                preferPlace="above"
+                onOuterAction={props.onClosePopover}
+            >
+                <BufferedInput
+                    small
+                    disabled={props.disabled}
+                    label={directionLabel}
+                    tabIndex="0"
+                    type="text"
+                    value={props.disabled ? '' : props.direction}
+                    onFocus={props.onOpenPopover}
+                    onSubmit={props.onChangeDirection}
+                />
+            </Popover>
+        </Label>
+    );
+};
 
 DirectionPicker.propTypes = {
     direction: PropTypes.number,
     disabled: PropTypes.bool.isRequired,
-    intl: intlShape,
     labelAbove: PropTypes.bool,
     onChangeDirection: PropTypes.func.isRequired,
     onClickAllAround: PropTypes.func.isRequired,
@@ -140,9 +141,7 @@ DirectionPicker.defaultProps = {
     labelAbove: false
 };
 
-const WrappedDirectionPicker = injectIntl(DirectionPicker);
-
 export {
-    WrappedDirectionPicker as default,
+    DirectionPicker as default,
     RotationStyles
 };
