@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/index.js', // Define the entry point
     resolve: {
         alias: {
-            'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/dist/scratch-paint.js'),
+            'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src/index.js'),
             'css': path.resolve(__dirname, 'src/css')
         },
         extensions: ['.js', '.jsx', '.scss'], // Add .scss to extensions
