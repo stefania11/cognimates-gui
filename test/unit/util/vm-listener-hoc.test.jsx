@@ -1,6 +1,7 @@
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import {mount} from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import VM from 'scratch-vm';
 
 import vmListenerHOC from '../../../src/lib/vm-listener-hoc.jsx';
@@ -22,10 +23,10 @@ describe('VMListenerHOC', () => {
     });
 
     test('vm green flag event is bound to the passed in prop callback', () => {
-        const Component = () => (<div />);
+        const Component = () => (<div data-testid="component" />);
         const WrappedComponent = vmListenerHOC(Component);
         const onGreenFlag = jest.fn();
-        mount(
+        render(
             <WrappedComponent
                 store={store}
                 vm={vm}
@@ -33,28 +34,30 @@ describe('VMListenerHOC', () => {
             />
         );
         expect(onGreenFlag).not.toHaveBeenCalled();
-        vm.emit('PROJECT_START');
+        act(() => {
+            vm.emit('PROJECT_START');
+        });
         expect(onGreenFlag).toHaveBeenCalled();
     });
 
     test('onGreenFlag is not passed to the children', () => {
-        const Component = () => (<div />);
+        const Component = () => (<div data-testid="component" />);
         const WrappedComponent = vmListenerHOC(Component);
-        const wrapper = mount(
+        render(
             <WrappedComponent
                 store={store}
                 vm={vm}
                 onGreenFlag={jest.fn()}
             />
         );
-        const child = wrapper.find(Component);
-        expect(child.props().onGreenFlag).toBeUndefined();
+        const child = screen.getByTestId('component');
+        expect(child.props.onGreenFlag).toBeUndefined();
     });
 
     test('targetsUpdate event from vm triggers targets update action', () => {
         const Component = () => (<div />);
         const WrappedComponent = vmListenerHOC(Component);
-        mount(
+        render(
             <WrappedComponent
                 store={store}
                 vm={vm}
@@ -62,7 +65,9 @@ describe('VMListenerHOC', () => {
         );
         const targetList = [];
         const editingTarget = 'id';
-        vm.emit('targetsUpdate', {targetList, editingTarget});
+        act(() => {
+            vm.emit('targetsUpdate', {targetList, editingTarget});
+        });
         const actions = store.getActions();
         expect(actions[0].type).toEqual('scratch-gui/targets/UPDATE_TARGET_LIST');
         expect(actions[0].targets).toEqual(targetList);
@@ -79,7 +84,7 @@ describe('VMListenerHOC', () => {
                 vm: vm
             }
         });
-        mount(
+        render(
             <WrappedComponent
                 store={store}
                 vm={vm}
@@ -87,7 +92,9 @@ describe('VMListenerHOC', () => {
         );
         const targetList = [];
         const editingTarget = 'id';
-        vm.emit('targetsUpdate', {targetList, editingTarget});
+        act(() => {
+            vm.emit('targetsUpdate', {targetList, editingTarget});
+        });
         const actions = store.getActions();
         expect(actions.length).toEqual(0);
     });
