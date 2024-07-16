@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, useIntl, FormattedMessage} from 'react-intl';
 
 import analytics from '../lib/analytics';
 import log from '../lib/log';
@@ -48,135 +48,117 @@ const messages = defineMessages({
     }
 });
 
-class SBFileUploader extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'getProjectTitleFromFilename',
-            'renderFileInput',
-            'setFileInput',
-            'handleChange',
-            'handleClick',
-            'onload',
-            'resetFileInput'
-        ]);
-    }
-    componentWillMount () {
-        this.reader = new FileReader();
-        this.reader.onload = this.onload;
-        this.resetFileInput();
-    }
-    componentDidUpdate (prevProps) {
-        if (this.props.isLoadingUpload && !prevProps.isLoadingUpload && this.fileToUpload && this.reader) {
-            this.reader.readAsArrayBuffer(this.fileToUpload);
+const SBFileUploader = props => {
+    const intl = useIntl();
+    const [reader, setReader] = React.useState(null);
+    const [fileToUpload, setFileToUpload] = React.useState(null);
+    const fileInputRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const newReader = new FileReader();
+        newReader.onload = onload;
+        setReader(newReader);
+        return () => {
+            setReader(null);
+            resetFileInput();
+        };
+    }, []);
+
+    React.useEffect(() => {
+        if (props.isLoadingUpload && fileToUpload && reader) {
+            reader.readAsArrayBuffer(fileToUpload);
         }
-    }
-    componentWillUnmount () {
-        this.reader = null;
-        this.resetFileInput();
-    }
-    resetFileInput () {
-        this.fileToUpload = null;
-        if (this.fileInput) {
-            this.fileInput.value = null;
+    }, [props.isLoadingUpload, fileToUpload, reader]);
+
+    const resetFileInput = () => {
+        setFileToUpload(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = null;
         }
-    }
-    getProjectTitleFromFilename (fileInputFilename) {
+    };
+
+    const getProjectTitleFromFilename = fileInputFilename => {
         if (!fileInputFilename) return '';
-        // only parse title with valid scratch project extensions
-        // (.sb, .sb2, and .sb3)
         const matches = fileInputFilename.match(/^(.*)\.sb[23]?$/);
         if (!matches) return '';
-        return matches[1].substring(0, 100); // truncate project title to max 100 chars
-    }
-    // called when user has finished selecting a file to upload
-    handleChange (e) {
+        return matches[1].substring(0, 100);
+    };
+
+    const handleChange = e => {
         const {
-            intl,
             isShowingWithoutId,
             loadingState,
             projectChanged
-        } = this.props;
+        } = props;
 
         const thisFileInput = e.target;
-        if (thisFileInput.files) { // Don't attempt to load if no file was selected
-            this.fileToUpload = thisFileInput.files[0];
+        if (thisFileInput.files) {
+            const newFileToUpload = thisFileInput.files[0];
+            setFileToUpload(newFileToUpload);
 
-            // Allow upload to continue only after confirmation if the project
-            // has changed and is not showing with ID. If it has an ID, this operation
-            // does not currently overwrite that project, so it is safe to do without confirmation.
             const uploadAllowed = (isShowingWithoutId && projectChanged) ?
-                confirm(intl.formatMessage(sharedMessages.replaceProjectWarning)) : // eslint-disable-line no-alert
+                confirm(intl.formatMessage(sharedMessages.replaceProjectWarning)) :
                 true;
 
-            if (uploadAllowed) this.props.requestProjectUpload(loadingState);
+            if (uploadAllowed) props.requestProjectUpload(loadingState);
         }
-    }
-    // called when file upload raw data is available in the reader
-    onload () {
-        if (this.reader) {
-            this.props.onLoadingStarted();
-            const filename = this.fileToUpload && this.fileToUpload.name;
-            this.props.vm.loadProject(this.reader.result)
+    };
+
+    const onload = () => {
+        if (reader) {
+            props.onLoadingStarted();
+            const filename = fileToUpload && fileToUpload.name;
+            props.vm.loadProject(reader.result)
                 .then(() => {
                     analytics.event({
                         category: 'project',
                         action: 'Import Project File',
                         nonInteraction: true
                     });
-                    // Remove the hash if any (without triggering a hash change event or a reload)
-                    try { // Can fail e.g. when GUI is loaded from static file (integration tests)
+                    try {
                         history.replaceState({}, document.title, '.');
                     } catch {
                         // No fallback, just do not trigger promise catch below
                     }
-                    this.props.onLoadingFinished(this.props.loadingState, true);
-                    // Reset the file input after project is loaded
-                    // This is necessary in case the user wants to reload a project
+                    props.onLoadingFinished(props.loadingState, true);
                     if (filename) {
-                        const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
-                        this.props.onUpdateProjectTitle(uploadedProjectTitle);
+                        const uploadedProjectTitle = getProjectTitleFromFilename(filename);
+                        props.onUpdateProjectTitle(uploadedProjectTitle);
                     }
-                    this.resetFileInput();
+                    resetFileInput();
                 })
                 .catch(error => {
                     log.warn(error);
-                    alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
-                    this.props.onLoadingFinished(this.props.loadingState, false);
-                    // Reset the file input after project is loaded
-                    // This is necessary in case the user wants to reload a project
-                    this.resetFileInput();
+                    alert(intl.formatMessage(messages.loadError));
+                    props.onLoadingFinished(props.loadingState, false);
+                    resetFileInput();
                 });
         }
-    }
-    handleClick () {
-        // open filesystem browsing window
-        this.fileInput.click();
-    }
-    setFileInput (input) {
-        this.fileInput = input;
-    }
-    renderFileInput () {
+    };
+
+    const handleClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const renderFileInput = () => {
         return (
             <input
                 accept=".sb,.sb2,.sb3"
-                ref={this.setFileInput}
+                ref={fileInputRef}
                 style={{display: 'none'}}
                 type="file"
-                onChange={this.handleChange}
+                onChange={handleChange}
             />
         );
-    }
-    render () {
-        return this.props.children(this.props.className, this.renderFileInput, this.handleClick);
-    }
-}
+    };
+
+    return props.children(props.className, renderFileInput, handleClick);
+};
 
 SBFileUploader.propTypes = {
     canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
     className: PropTypes.string,
-    intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
     isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
@@ -222,4 +204,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps,
     mergeProps
-)(injectIntl(SBFileUploader));
+)(SBFileUploader);
