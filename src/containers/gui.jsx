@@ -4,7 +4,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import VM from 'scratch-vm';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {
@@ -47,75 +47,82 @@ const messages = defineMessages({
     }
 });
 
-class GUI extends React.Component {
-    componentDidMount () {
-        console.log('componentDidMount: Initializing Scratch Desktop setting and storage');
-        setIsScratchDesktop(this.props.isScratchDesktop);
-        this.setReduxTitle(this.props.projectTitle);
-        this.props.onStorageInit(storage);
-    }
-    componentDidUpdate (prevProps) {
-        console.log('componentDidUpdate: Checking for prop changes');
-        if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
-            console.log('componentDidUpdate: Project ID changed', this.props.projectId);
-            this.props.onUpdateProjectId(this.props.projectId);
-        }
-        if (this.props.projectTitle !== prevProps.projectTitle) {
-            console.log('componentDidUpdate: Project title changed', this.props.projectTitle);
-            this.setReduxTitle(this.props.projectTitle);
-        }
-        if (this.props.isShowingProject && !prevProps.isShowingProject) {
-            console.log('componentDidUpdate: Project is now showing');
-            this.props.onProjectLoaded();
-        }
-    }
-    setReduxTitle (newTitle) {
+const GUI = props => {
+    const intl = useIntl();
+
+    const setReduxTitle = newTitle => {
         if (newTitle === null || typeof newTitle === 'undefined') {
-            this.props.onUpdateReduxProjectTitle(
-                this.props.intl.formatMessage(messages.defaultProjectTitle)
+            props.onUpdateReduxProjectTitle(
+                intl.formatMessage(messages.defaultProjectTitle)
             );
         } else {
-            this.props.onUpdateReduxProjectTitle(newTitle);
+            props.onUpdateReduxProjectTitle(newTitle);
         }
-    }
-    render () {
-        console.log('render: Rendering GUI component');
-        if (this.props.isError) {
-            throw new Error(
-                `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
+    };
+
+    React.useEffect(() => {
+        console.log('useEffect: Initializing Scratch Desktop setting and storage');
+        setIsScratchDesktop(props.isScratchDesktop);
+        setReduxTitle(props.projectTitle);
+        props.onStorageInit(storage);
+    }, []);
+
+    React.useEffect(() => {
+        console.log('useEffect: Checking for prop changes');
+        if (props.projectId !== null) {
+            console.log('useEffect: Project ID changed', props.projectId);
+            props.onUpdateProjectId(props.projectId);
         }
-        const {
-            /* eslint-disable no-unused-vars */
-            assetHost,
-            cloudHost,
-            error,
-            isError,
-            isScratchDesktop,
-            isShowingProject,
-            onProjectLoaded,
-            onStorageInit,
-            onUpdateProjectId,
-            onUpdateReduxProjectTitle,
-            projectHost,
-            projectId,
-            projectTitle,
-            /* eslint-enable no-unused-vars */
-            children,
-            fetchingProject,
-            isLoading,
-            loadingStateVisible,
-            ...componentProps
-        } = this.props;
-        return (
-            <GUIComponent
-                loading={fetchingProject || isLoading || loadingStateVisible}
-                {...componentProps}
-            >
-                {children}
-            </GUIComponent>
-        );
+    }, [props.projectId]);
+
+    React.useEffect(() => {
+        console.log('useEffect: Project title changed', props.projectTitle);
+        setReduxTitle(props.projectTitle);
+    }, [props.projectTitle]);
+
+    React.useEffect(() => {
+        if (props.isShowingProject) {
+            console.log('useEffect: Project is now showing');
+            props.onProjectLoaded();
+        }
+    }, [props.isShowingProject]);
+
+    console.log('render: Rendering GUI component');
+    if (props.isError) {
+        throw new Error(
+            `Error in Scratch GUI [location=${window.location}]: ${props.error}`);
     }
-}
+    const {
+        /* eslint-disable no-unused-vars */
+        assetHost,
+        cloudHost,
+        error,
+        isError,
+        isScratchDesktop,
+        isShowingProject,
+        onProjectLoaded,
+        onStorageInit,
+        onUpdateProjectId,
+        onUpdateReduxProjectTitle,
+        projectHost,
+        projectId,
+        projectTitle,
+        /* eslint-enable no-unused-vars */
+        children,
+        fetchingProject,
+        isLoading,
+        loadingStateVisible,
+        ...componentProps
+    } = props;
+    return (
+        <GUIComponent
+            loading={fetchingProject || isLoading || loadingStateVisible}
+            {...componentProps}
+        >
+            {children}
+        </GUIComponent>
+    );
+};
 
 GUI.propTypes = {
     assetHost: PropTypes.string,
@@ -123,7 +130,6 @@ GUI.propTypes = {
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
-    intl: intlShape,
     isError: PropTypes.bool,
     isLoading: PropTypes.bool,
     isScratchDesktop: PropTypes.bool,
@@ -190,10 +196,10 @@ const mapDispatchToProps = dispatch => ({
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
-const ConnectedGUI = injectIntl(connect(
+const ConnectedGUI = connect(
     mapStateToProps,
-    mapDispatchToProps,
-)(GUI));
+    mapDispatchToProps
+)(GUI);
 
 // note that redux's 'compose' function is just being used as a general utility to make
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
