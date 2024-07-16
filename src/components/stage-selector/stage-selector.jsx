@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
+import {defineMessages, useIntl, FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
@@ -38,12 +38,12 @@ const messages = defineMessages({
 });
 
 const StageSelector = props => {
+    const intl = useIntl();
     const {
         backdropCount,
         containerRef,
         dragOver,
         fileInputRef,
-        intl,
         selected,
         raised,
         receivedBlocks,
@@ -134,7 +134,6 @@ StageSelector.propTypes = {
     containerRef: PropTypes.func,
     dragOver: PropTypes.bool,
     fileInputRef: PropTypes.func,
-    intl: intlShape.isRequired,
     onBackdropFileUpload: PropTypes.func,
     onBackdropFileUploadClick: PropTypes.func,
     onClick: PropTypes.func,
@@ -149,4 +148,4 @@ StageSelector.propTypes = {
     url: PropTypes.string
 };
 
-export default injectIntl(StageSelector);
+export default StageSelector;
