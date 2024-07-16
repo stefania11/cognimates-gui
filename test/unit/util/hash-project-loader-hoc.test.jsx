@@ -1,6 +1,7 @@
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import {mount} from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import HashParserHOC from '../../../src/lib/hash-parser-hoc.jsx';
 
@@ -23,13 +24,13 @@ describe('HashParserHOC', () => {
         const WrappedComponent = HashParserHOC(Component);
         window.location.hash = '#1234567';
         const mockSetProjectIdFunc = jest.fn();
-        mount(
+        render(
             <WrappedComponent
                 setProjectId={mockSetProjectIdFunc}
                 store={store}
             />
         );
-        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('1234567');
+        expect(mockSetProjectIdFunc).toHaveBeenCalledWith('1234567');
     });
 
     test('when there is no hash, it passes 0 as the projectId', () => {
@@ -37,13 +38,13 @@ describe('HashParserHOC', () => {
         const WrappedComponent = HashParserHOC(Component);
         window.location.hash = '';
         const mockSetProjectIdFunc = jest.fn();
-        mount(
+        render(
             <WrappedComponent
                 setProjectId={mockSetProjectIdFunc}
                 store={store}
             />
         );
-        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('0');
+        expect(mockSetProjectIdFunc).toHaveBeenCalledWith('0');
     });
 
     test('when the hash is not a number, it passes 0 as projectId', () => {
@@ -51,13 +52,13 @@ describe('HashParserHOC', () => {
         const WrappedComponent = HashParserHOC(Component);
         window.location.hash = '#winning';
         const mockSetProjectIdFunc = jest.fn();
-        mount(
+        render(
             <WrappedComponent
                 setProjectId={mockSetProjectIdFunc}
                 store={store}
             />
         );
-        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('0');
+        expect(mockSetProjectIdFunc).toHaveBeenCalledWith('0');
     });
 
     test('when hash change happens, the projectId state is changed', () => {
@@ -65,17 +66,17 @@ describe('HashParserHOC', () => {
         const WrappedComponent = HashParserHOC(Component);
         window.location.hash = '';
         const mockSetProjectIdFunc = jest.fn();
-        const mounted = mount(
+        const { container } = render(
             <WrappedComponent
                 setProjectId={mockSetProjectIdFunc}
                 store={store}
             />
         );
         window.location.hash = '#1234567';
-        mounted
-            .childAt(0)
-            .instance()
-            .handleHashChange();
-        expect(mockSetProjectIdFunc.mock.calls.length).toBe(2);
+        act(() => {
+            // Simulate hash change event
+            window.dispatchEvent(new HashChangeEvent('hashchange'));
+        });
+        expect(mockSetProjectIdFunc).toHaveBeenCalledTimes(2);
     });
 });
