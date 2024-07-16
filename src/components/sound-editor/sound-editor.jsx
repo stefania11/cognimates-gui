@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, FormattedMessage, useIntl} from 'react-intl';
 
 import Waveform from '../waveform/waveform.jsx';
 import Label from '../forms/label.jsx';
@@ -102,11 +102,13 @@ const messages = defineMessages({
     }
 });
 
-const SoundEditor = props => (
+const SoundEditor = props => {
+    const intl = useIntl();
+    return (
     <div className={styles.editorContainer}>
         <div className={styles.row}>
             <div className={styles.inputGroup}>
-                <Label text={props.intl.formatMessage(messages.sound)}>
+                <Label text={intl.formatMessage(messages.sound)}>
                     <BufferedInput
                         tabIndex="1"
                         type="text"
@@ -118,7 +120,7 @@ const SoundEditor = props => (
                     <button
                         className={styles.button}
                         disabled={!props.canUndo}
-                        title={props.intl.formatMessage(messages.undo)}
+                        title={intl.formatMessage(messages.undo)}
                         onClick={props.onUndo}
                     >
                         <img
@@ -130,7 +132,7 @@ const SoundEditor = props => (
                     <button
                         className={styles.button}
                         disabled={!props.canRedo}
-                        title={props.intl.formatMessage(messages.redo)}
+                        title={intl.formatMessage(messages.redo)}
                         onClick={props.onRedo}
                     >
                         <img
@@ -175,7 +177,7 @@ const SoundEditor = props => (
                 {props.playhead ? (
                     <button
                         className={classNames(styles.roundButton, styles.stopButtonn)}
-                        title={props.intl.formatMessage(messages.stop)}
+                        title={intl.formatMessage(messages.stop)}
                         onClick={props.onStop}
                     >
                         <img
@@ -186,7 +188,7 @@ const SoundEditor = props => (
                 ) : (
                     <button
                         className={classNames(styles.roundButton, styles.playButton)}
-                        title={props.intl.formatMessage(messages.play)}
+                        title={intl.formatMessage(messages.play)}
                         onClick={props.onPlay}
                     >
                         <img
@@ -240,13 +242,13 @@ const SoundEditor = props => (
             />
         </div>
     </div>
-);
+    );
+};
 
 SoundEditor.propTypes = {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
-    intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
     onChangeName: PropTypes.func.isRequired,
@@ -268,4 +270,4 @@ SoundEditor.propTypes = {
     trimStart: PropTypes.number
 };
 
-export default injectIntl(SoundEditor);
+export default SoundEditor;
