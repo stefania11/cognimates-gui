@@ -7,6 +7,7 @@ module.exports = {
     resolve: {
         alias: {
             'scratch-paint': path.resolve(__dirname, 'node_modules/scratch-paint/src/index.js'),
+            'scratch-svg-renderer': path.resolve(__dirname, 'node_modules/scratch-svg-renderer/src/index.js'),
             'css': path.resolve(__dirname, 'src/css')
         },
         extensions: ['.js', '.jsx', '.scss'], // Add .scss to extensions
