@@ -77,7 +77,6 @@
     "query-string": "^5.1.1",
     "raw-loader": "^4.0.0",
     "react": "^18.3.1",
-    "react-contextmenu": "^2.14.0",
     "react-dom": "^18.3.1",
     "react-draggable": "^3.0.5",
     "react-ga": "^3.3.1",
