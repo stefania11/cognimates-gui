@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 /* make sure to keep these in sync with other constants,
 e.g. STAGE_DIMENSION_DEFAULTS in lib/screen-utils.js */
 
 $space: 0.5rem;
+$grid-unit: 0.25rem;
 
 $sprites-per-row: 5;
 
@@ -11,7 +11,7 @@ $language-selector-width: 3rem;
 $sprite-info-height: 6rem;
 $stage-menu-height: 2.75rem;
 
-$library-header-height: 3.125rem;
+$library-header-height: 4.375rem;
 $library-filter-bar-height: 2.5rem;
 
 $stage-standard-border-width: 0.0625rem;
@@ -20,9 +20,9 @@ $stage-full-screen-stage-padding: 0.1875rem;
 
 $form-radius: calc($space / 2);
 
-/* layout contants from `layout-constants.js` */
+/* layout constants from `layout-constants.js` */
 $full-size: 1095px;
-$full-size-paint: 1249px;
+$full-size-paint: 1256px;
 
 $menu-bar-standard-font-size: 0.75rem;
 $menu-bar-large-font-size: 0.875rem;
@@ -30,34 +30,4 @@ $menu-bar-button-size: 2rem;
 
 $menu-bar-item-max-width: 12rem;
 
-/* Define the $grid-unit variable */
-$grid-unit: 1rem;
-||||||| empty tree
-=======
-/* DO NOT EDIT
-@todo This file is copied from GUI and should be pulled out into a shared library.
-See https://github.com/LLK/scratch-paint/issues/13 */
-
-/* ACTUALLY, THIS IS EDITED ;)
-THIS WAS CHANGED ON 10/25/2017 BY @mewtaylor TO ADD A VARIABLE FOR THE SMALLEST
-GRID UNITS.
-
-ALSO EDITED ON 11/13/2017 TO ADD IN CONTANTS FOR LAYOUT FROM `layout-contents.js`*/
-
-$space: 0.5rem;
-$grid-unit: .25rem;
-
-$sprites-per-row: 5;
-
-$menu-bar-height: 3rem;
-$sprite-info-height: 6rem;
-$stage-menu-height: 2.75rem;
-
-$library-header-height: 4.375rem;
-
-$form-radius: calc($space / 2);
-
-/* layout contants from `layout-constants.js`, minus 1px */
-$full-size: 1095px;
-$full-size-paint: 1256px;
->>>>>>> 44bfbedd623e6fb6bdaa93dd097bd29446df8917
+/* This file has been edited to combine the most up-to-date and relevant CSS rules from both versions */
