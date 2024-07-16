@@ -89,7 +89,7 @@
     "react-tabs": "^2.3.0",
     "react-tooltip": "^4.5.1",
     "react-virtualized": "^9.20.1",
-    "redux": "^3.7.2",
+    "redux": "^5.0.1",
     "redux-throttle": "^0.1.1",
     "scratch-audio": "^1.0.0",
     "scratch-blocks": "^1.1.6",
