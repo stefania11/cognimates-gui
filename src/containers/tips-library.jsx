@@ -1,7 +1,6 @@
-import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {injectIntl, intlShape, defineMessages} from 'react-intl';
+import {useIntl, defineMessages} from 'react-intl';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
 import tutorialTags from '../lib/libraries/tutorial-tags';
@@ -29,14 +28,10 @@ const messages = defineMessages({
     }
 });
 
-class TipsLibrary extends React.PureComponent {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleItemSelect'
-        ]);
-    }
-    handleItemSelect (item) {
+const TipsLibrary = ({onActivateDeck, onRequestClose, projectId, visible}) => {
+    const intl = useIntl();
+
+    const handleItemSelect = (item) => {
         analytics.event({
             category: 'library',
             action: 'Select How-to',
@@ -53,48 +48,46 @@ class TipsLibrary extends React.PureComponent {
             UPDATE well now Paul is wrapped into this as well. Sigh...
                 eventually we will find a solution that doesn't involve loading a whole project
         */
-        if (item.requiredProjectId && (item.requiredProjectId !== this.props.projectId)) {
+        if (item.requiredProjectId && (item.requiredProjectId !== projectId)) {
             const urlParams = `/projects/${item.requiredProjectId}/editor?tutorial=${item.urlId}`;
             return window.open(window.location.origin + urlParams, '_blank');
         }
 
-        this.props.onActivateDeck(item.id);
-    }
-    render () {
-        const decksLibraryThumbnailData = Object.keys(decksLibraryContent)
-            .filter(id =>
-                // Scratch Desktop doesn't want tutorials with `requiredProjectId`
-                notScratchDesktop() || !decksLibraryContent[id].hasOwnProperty('requiredProjectId')
-            )
-            .map(id => ({
-                rawURL: decksLibraryContent[id].img,
-                id: id,
-                name: decksLibraryContent[id].name,
-                featured: true,
-                tags: decksLibraryContent[id].tags,
-                urlId: decksLibraryContent[id].urlId,
-                requiredProjectId: decksLibraryContent[id].requiredProjectId,
-                hidden: decksLibraryContent[id].hidden || false
-            }));
+        onActivateDeck(item.id);
+    };
 
-        if (!this.props.visible) return null;
-        return (
-            <LibraryComponent
-                filterable
-                data={decksLibraryThumbnailData}
-                id="tipsLibrary"
-                tags={tutorialTags}
-                title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
-                visible={this.props.visible}
-                onItemSelected={this.handleItemSelect}
-                onRequestClose={this.props.onRequestClose}
-            />
-        );
-    }
-}
+    const decksLibraryThumbnailData = Object.keys(decksLibraryContent)
+        .filter(id =>
+            // Scratch Desktop doesn't want tutorials with `requiredProjectId`
+            notScratchDesktop() || !decksLibraryContent[id].hasOwnProperty('requiredProjectId')
+        )
+        .map(id => ({
+            rawURL: decksLibraryContent[id].img,
+            id: id,
+            name: decksLibraryContent[id].name,
+            featured: true,
+            tags: decksLibraryContent[id].tags,
+            urlId: decksLibraryContent[id].urlId,
+            requiredProjectId: decksLibraryContent[id].requiredProjectId,
+            hidden: decksLibraryContent[id].hidden || false
+        }));
+
+    if (!visible) return null;
+    return (
+        <LibraryComponent
+            filterable
+            data={decksLibraryThumbnailData}
+            id="tipsLibrary"
+            tags={tutorialTags}
+            title={intl.formatMessage(messages.tipsLibraryTitle)}
+            visible={visible}
+            onItemSelected={handleItemSelect}
+            onRequestClose={onRequestClose}
+        />
+    );
+};
 
 TipsLibrary.propTypes = {
-    intl: intlShape.isRequired,
     onActivateDeck: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -111,7 +104,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestClose: () => dispatch(closeTipsLibrary())
 });
 
-export default injectIntl(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TipsLibrary));
+)(TipsLibrary);
