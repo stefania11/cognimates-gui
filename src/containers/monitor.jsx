@@ -126,8 +126,7 @@ const Monitor = props => {
         }));
     };
 
-    // Removed setElement function as it's no longer needed with useState
-
+    // handleImport function remains unchanged
     const handleImport = () => {
         importCSV().then(rows => {
             const numberOfColumns = rows[0].length;
